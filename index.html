@@ -129,13 +129,14 @@
   .stopTime{font-size:11px;font-weight:700;color:var(--ink);background:var(--chip);padding:1px 6px;border-radius:999px;white-space:nowrap;flex:0 0 auto;height:fit-content;margin-top:1px}
   .bookTag{font-size:10.5px;font-weight:700;color:#b03a2e;background:rgba(176,58,46,.12);padding:1px 6px;border-radius:999px;white-space:nowrap;margin-left:4px}
   .optTag{font-size:10px;font-weight:700;color:var(--muted);border:1px dashed var(--muted);padding:0 5px;border-radius:999px;white-space:nowrap;margin-left:4px;opacity:.9}
+  .cutTag{font-size:10px;font-weight:700;color:#9a4d00;background:rgba(217,119,6,.14);border:1px dashed rgba(217,119,6,.55);padding:0 5px;border-radius:999px;white-space:nowrap;margin-left:4px}
   .mustTag{font-size:10px;font-weight:800;color:#1b6e3a;background:rgba(27,110,58,.12);padding:1px 6px;border-radius:999px;white-space:nowrap;margin-left:4px;letter-spacing:.02em}
   .loadTag{font-size:10px;font-weight:700;padding:1px 6px;border-radius:999px;white-space:nowrap;margin-left:5px}
   .load-Light{color:#1b6e3a;background:rgba(27,110,58,.11)}
   .load-Recovery{color:#0f7b6c;background:rgba(15,123,108,.13)}
   .load-Medium{color:#8a5a00;background:rgba(212,160,23,.16)}
   .load-Heavy{color:#b03a2e;background:rgba(176,58,46,.13)}
-  @media (prefers-color-scheme: dark){ .bookTag{color:#ff8a7a;background:rgba(255,138,122,.16)} .mustTag,.load-Light{color:#6ee79a;background:rgba(110,231,154,.16)} .load-Recovery{color:#5eead4;background:rgba(94,234,212,.15)} .load-Medium{color:#fcd34d;background:rgba(252,211,77,.16)} .load-Heavy{color:#ff8a7a;background:rgba(255,138,122,.16)} }
+  @media (prefers-color-scheme: dark){ .bookTag{color:#ff8a7a;background:rgba(255,138,122,.16)} .cutTag{color:#fbbf24;background:rgba(251,191,36,.15)} .mustTag,.load-Light{color:#6ee79a;background:rgba(110,231,154,.16)} .load-Recovery{color:#5eead4;background:rgba(94,234,212,.15)} .load-Medium{color:#fcd34d;background:rgba(252,211,77,.16)} .load-Heavy{color:#ff8a7a;background:rgba(255,138,122,.16)} }
   .stops li.is-opt{opacity:.78}
   .calEvent.is-opt{border-left-style:dashed;border-top:1px dashed var(--line);border-right:1px dashed var(--line);border-bottom:1px dashed var(--line);opacity:.82;background:var(--panel)}
   .agItem.is-opt{opacity:.82;background:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(128,128,128,.03) 8px,rgba(128,128,128,.03) 16px)}
@@ -298,50 +299,46 @@ var DAYS=[
   ["Asakusa (dinner area)",35.7117,139.7965,"Halal dinner + konbini run, early night",null,{start:"19:00",end:"20:45",book:false}]
 ]},
 {id:2,date:"Fri Nov 27",title:"East Tokyo — easy pace (jetlag day)",color:"#f58231",load:"Light",stops:[
-  ["Senso-ji, Asakusa",35.7148,139.7967,"Jetlag-friendly start right outside your Asakusa hotel — zero commute, skip any optional stops if tired",null,{start:"09:30",end:"11:00",book:false}],
+  ["Senso-ji, Asakusa",35.7148,139.7967,"Jetlag-friendly start right outside your Asakusa hotel — zero commute, skip optional stops if tired",null,{start:"09:30",end:"11:00",book:false}],
   ["Kappabashi Kitchen Street",35.7107,139.7886,"5 min from Senso-ji — chef knives, kitchenware & the famous food-sample shops",null,{start:"11:05",end:"12:00",book:false}],
   ["Sumida River walk",35.7105,139.8015,"Gentle ~30 min stroll toward Ueno",null,{start:"12:05",end:"12:40",book:false}],
   ["Ameyoko Market",35.7089,139.7741,"Lunch",null,{start:"12:45",end:"13:45",book:false}],
-  ["Tokyo National Museum, Ueno",35.7188,139.7763,"Only if energy allows, 1–2h",null,{start:"14:00",end:"15:30",book:false,opt:true}],
+  ["Tokyo National Museum, Ueno",35.7188,139.7763,"Likely cut if jetlagged — 1–2h museum",null,{start:"14:00",end:"15:30",book:false,opt:true,cut:true}],
   ["Akihabara",35.6984,139.7731,"Afternoon, only if energy remains — optional",null,{start:"15:45",end:"17:30",book:false,opt:true}],
-  ["Ikebukuro",35.7295,139.7109,"FLEX only — Pokémon Center / Animate, if energy remains",null,{start:"18:00",end:"19:45",book:false,opt:true}]
+  ["Ikebukuro",35.7295,139.7109,"Likely cut — across town on the west side; skip unless high energy",null,{start:"18:00",end:"19:45",book:false,opt:true,cut:true}]
 ]},
-{id:3,date:"Sat Nov 28",title:"Mt. Fuji / Kawaguchiko",color:"#3cb44b",load:"Heavy",stops:[
-  ["Busta Shinjuku",35.6886,139.7006,"07:05 highway bus — early departure beats weekend traffic; Sunday afterward is a sleep-in recovery day",null,{start:"07:05",end:"09:00",book:true,bookNote:"Book 07:05 highway bus Busta Shinjuku → Kawaguchiko"}],
-  ["Chureito Pagoda",35.5013,138.8014,"Fuji views",null,{start:"09:30",end:"11:30",book:false}],
-  ["Lake Kawaguchiko + Panoramic Ropeway",35.5045,138.7713,"Ropeway ride + return bus to Shinjuku",null,{start:"12:00",end:"16:30",book:true,bookNote:"Book return highway bus Kawaguchiko → Shinjuku (~16:30)"}],
-  ["Shinjuku-tei Shinjuku",35.6940,139.7015,"Evening — halal wagyu ramen in Shinjuku, after the bus back from Fuji","food",{start:"18:45",end:"19:45",book:false,opt:true}],
-  ["Golden Gai, Shinjuku",35.6938,139.7048,"Evening stroll after dinner",null,{start:"20:00",end:"21:00",book:false,opt:true}]
+{id:3,date:"Sat Nov 28",title:"The bay day",color:"#f032e6",load:"Medium",stops:[
+  ["Tsukiji Outer Market",35.6654,139.7707,"Saturday morning = full market open (unlike Sunday/Wednesday) — street-food crawl: tamagoyaki, tuna, grilled scallops. Stalls wind down by ~14:00","food",{start:"10:00",end:"12:00",book:false}],
+  ["⭐ Louis Vuitton Ginza + Le Café V (optional)",35.6695,139.7633,"Likely cut — optional luxury detour; 2nd chance in Osaka on Dec 6",null,{start:"12:15",end:"13:30",book:false,opt:true,cut:true}],
+  ["Tokyo Rinkai Disaster Prevention Park, Ariake",35.6378,139.7877,"Afternoon, free, 72h tour",null,{start:"14:15",end:"16:00",book:false}],
+  ["Unicorn Gundam — DiverCity Tokyo, Odaiba",35.6373,139.7755,"Life-size Unicorn Gundam outside DiverCity, ~10 min from the park",null,{start:"16:15",end:"17:45",book:false}],
+  ["teamLab Planets, Toyosu",35.6490,139.7898,"~19:00, barefoot",null,{start:"19:00",end:"20:45",book:true,bookNote:"Book ~19:00 timed entry ticket"}]
 ]},
-{id:4,date:"Sun Nov 29",title:"West Tokyo — sleep-in recovery",color:"#911eb4",load:"Recovery",stops:[
-  ["Meiji Shrine",35.6764,139.6993,"Sleep in after Mt. Fuji! 10:30 relaxed start — Sundays often feature traditional wedding processions at Meiji Shrine",null,{start:"10:30",end:"11:20",book:false}],
-  ["Harajuku / Takeshita St",35.6710,139.7030,"Easy stroll + Omotesando",null,{start:"11:25",end:"12:30",book:false}],
-  ["Tokyo Camii",35.6680,139.6760,"If time",null,{start:"12:40",end:"13:20",book:false,opt:true}],
+{id:4,date:"Sun Nov 29",title:"West Tokyo — easy start",color:"#911eb4",load:"Medium",stops:[
+  ["Meiji Shrine",35.6764,139.6993,"10:00 relaxed start — Sundays often feature traditional wedding processions at Meiji Shrine",null,{start:"10:00",end:"11:00",book:false}],
+  ["Harajuku / Takeshita St",35.6710,139.7030,"Easy stroll + Omotesando",null,{start:"11:05",end:"12:15",book:false}],
+  ["Tokyo Camii",35.6680,139.6760,"Likely cut — detour out to Yoyogi-Uehara if pressed for time",null,{start:"12:30",end:"13:15",book:false,opt:true,cut:true}],
   ["Shibuya Crossing + Hachiko",35.6595,139.7005,"",null,{start:"13:30",end:"14:00",book:false}],
   ["Nintendo Tokyo + Pokémon Center, Shibuya Parco",35.6621,139.6982,"Both on the 6th floor of Shibuya Parco, a few minutes from the crossing",null,{start:"14:05",end:"15:00",book:false}],
-  ["Shibuya Parco 10F rooftop park",35.6623,139.6984,"Free rooftop park on the 10th floor of Shibuya Parco — same building as Nintendo Tokyo and the Pokémon Center, an easy add-on while you're there",null,{start:"15:00",end:"15:20",book:false,opt:true}],
-  ["Starbucks Reserve Roastery Tokyo, Nakameguro",35.6493,139.6925,"Optional rec — the hidden Starbucks Reserve Roastery in Nakameguro, on the Meguro River. Only if time and energy allow after Parco",null,{start:"15:25",end:"15:45",book:false,opt:true}],
-  ["SHIBU NIWA — Shibuya Fukuras rooftop",35.6576,139.7003,"Free rooftop terrace, 17th floor of Shibuya Fukuras / Tokyu Plaza Shibuya — overlooks Shibuya Crossing",null,{start:"15:45",end:"16:00",book:false,opt:true}],
+  ["Shibuya Parco 10F rooftop park",35.6623,139.6984,"Free rooftop park on the 10th floor of Shibuya Parco — easy add-on while you're there",null,{start:"15:00",end:"15:20",book:false,opt:true}],
+  ["Starbucks Reserve Roastery Tokyo, Nakameguro",35.6493,139.6925,"Likely cut — 20-min detour south of Shibuya right before 16:00 Shibuya Sky",null,{start:"15:25",end:"15:45",book:false,opt:true,cut:true}],
+  ["SHIBU NIWA — Shibuya Fukuras rooftop",35.6576,139.7003,"Free rooftop terrace, 17th floor of Shibuya Fukuras — skips easily since you're doing Shibuya Sky",null,{start:"15:45",end:"16:00",book:false,opt:true,cut:true}],
   ["Shibuya Sky",35.6580,139.7020,"SUNSET slot ~16:00 — only fixed point today",null,{start:"16:00",end:"17:30",book:true,bookNote:"Book 16:00 sunset entry slot 4 weeks in advance"}],
   ["Gyumon Shibuya",35.6568,139.6970,"Evening — halal wagyu yakiniku in Shibuya, A5 grilled at your table after the Sky sunset","food",{start:"18:00",end:"19:45",book:true,opt:true,bookNote:"Optional dinner — reserve table for 4 after Shibuya Sky"}]
 ]},
 {id:5,date:"Mon Nov 30",title:"DisneySea",color:"#0aa2c0",load:"Heavy",stops:[
-  ["Tokyo DisneySea",35.6401,139.8880,"Full day 9:00–21:00, Fantasy Springs. Weekday Monday avoids brutal Sat/Sun crowds, and you're well-rested after Sunday's recovery! Big bags ship to Kyoto tonight",null,{start:"09:00",end:"21:00",book:true,bookNote:"Book 1-Day Passport + Fantasy Springs planning"}]
+  ["Tokyo DisneySea",35.6401,139.8880,"Full day 9:00–21:00, Fantasy Springs. Weekday Monday avoids brutal Sat/Sun crowds! Ship big bags to Kyoto tonight — keep 1-night backpack for Fuji tomorrow.",null,{start:"09:00",end:"21:00",book:true,bookNote:"Book 1-Day Passport + Fantasy Springs planning"}]
 ]},
-{id:6,date:"Tue Dec 1",title:"The bay day — sleep-in recovery",color:"#f032e6",load:"Recovery",stops:[
-  ["Tsukiji Outer Market",35.6654,139.7707,"Sleep in after DisneySea! 10:45 late-morning start (Tuesday = open market, unlike Wed/Sun) — street-food crawl: tamagoyaki, tuna, grilled scallops. Stalls wind down by ~14:00","food",{start:"10:45",end:"12:30",book:false}],
-  ["⭐ Louis Vuitton Ginza + Le Café V (optional)",35.6695,139.7633,"Optional, not required — Jun Aoki's rippling water-glass flagship building on Ginza Namiki-dori. Le Café V café on the top floor. If missed, there is a second chance on Dec 6 at the Osaka store.",null,{start:"12:45",end:"14:00",book:false,opt:true}],
-  ["Tokyo Rinkai Disaster Prevention Park, Ariake",35.6378,139.7877,"Easy afternoon, free, 72h tour",null,{start:"14:30",end:"16:15",book:false}],
-  ["Unicorn Gundam — DiverCity Tokyo, Odaiba",35.6373,139.7755,"Life-size Unicorn Gundam outside DiverCity, ~10 min from the park",null,{start:"16:30",end:"18:00",book:false}],
-  ["teamLab Planets, Toyosu",35.6490,139.7898,"~19:00, barefoot",null,{start:"19:00",end:"20:45",book:true,bookNote:"Book ~19:00 timed entry ticket"}]
+{id:6,date:"Tue Dec 1",title:"Tokyo → Mt. Fuji / Kawaguchiko (sleep-in + overnight)",color:"#3cb44b",load:"Medium",stops:[
+  ["Busta Shinjuku",35.6886,139.7006,"Sleep in after DisneySea! Check out ~10:00 → relaxed 10:45 highway bus to Kawaguchiko (no 07:05 alarm, no backtracking to Tokyo)",null,{start:"10:45",end:"12:45",book:true,bookNote:"Book ~10:45 highway bus Busta Shinjuku → Kawaguchiko"}],
+  ["Lake Kawaguchiko + Panoramic Ropeway",35.5045,138.7713,"Afternoon ropeway + sunset Fuji views, then check into Kawaguchiko hotel/onsen & rest",null,{start:"13:30",end:"17:00",book:false}]
 ]},
-{id:7,date:"Wed Dec 2",title:"Tokyo → Nagoya (WILLER bus)",color:"#9a6324",load:"Light",stops:[
-  ["Busta Shinjuku",35.6886,139.7006,"WILLER Express BE304, 08:10 → Nagoya 13:40 — Relax 4-across seats (no morning 3-row bus exists on this route; the on-time arrival won). Sit right side for Mt. Fuji",null,{start:"08:10",end:"10:00",book:true,bookNote:"Book WILLER Express BE304 (08:10 → 13:40)"}],
-  ["Ashigara Service Area",35.3360,138.9640,"Stop: food court + Fuji viewpoint",null,{start:"10:00",end:"10:30",book:false}],
-  ["Hamamatsu Service Area",34.7660,137.6940,"Stop",null,{start:"11:50",end:"12:15",book:false}],
-  ["Nagoya Castle",35.1856,136.8984,"If energy allows after the 13:40 arrival",null,{start:"14:30",end:"16:15",book:false,opt:true}],
-  ["Osu shopping streets",35.1595,136.9037,"",null,{start:"16:30",end:"18:30",book:false}],
-  ["Sakae",35.1679,136.9085,"Night",null,{start:"19:00",end:"21:00",book:false,opt:true}]
+{id:7,date:"Wed Dec 2",title:"Mt. Fuji → Nagoya (via Mishima)",color:"#9a6324",load:"Medium",stops:[
+  ["Chureito Pagoda",35.5013,138.8014,"08:15 crisp morning Mt. Fuji views before heading south",null,{start:"08:15",end:"10:00",book:false}],
+  ["Mishima Station (via Fujikyu bus)",35.1264,138.9110,"~10:30 bus Kawaguchiko → Mishima (~90m), then Shinkansen/JR onward to Nagoya (~1.5h) — saves 3+ hours of backtracking!",null,{start:"10:30",end:"13:45",book:true,bookNote:"Book ~10:30 Kawaguchiko → Mishima bus + JR/Shinkansen to Nagoya"}],
+  ["Nagoya Castle",35.1856,136.8984,"Likely cut — tight after 13:45 arrival since castle closes ~16:30",null,{start:"14:30",end:"16:00",book:false,opt:true,cut:true}],
+  ["Osu shopping streets",35.1595,136.9037,"Relaxed afternoon stroll",null,{start:"16:15",end:"18:15",book:false}],
+  ["Sakae",35.1679,136.9085,"Night",null,{start:"18:45",end:"20:45",book:false,opt:true}]
 ]},
 {id:8,date:"Thu Dec 3",title:"Nagoya → Kyoto (JR Special Rapid)",color:"#469990",load:"Medium",stops:[
   ["Toyota Commemorative Museum",35.1813,136.8762,"09:30–12:00",null,{start:"09:30",end:"12:00",book:true,bookNote:"Reserve timed/group tickets or arrive 09:30"}],
@@ -360,13 +357,13 @@ var DAYS=[
   ["Starbucks Ninenzaka Yasaka Chaya (tatami)",34.9987,135.7809,"Starbucks inside a traditional machiya townhouse on Ninenzaka — tatami seating upstairs",null,{start:"14:15",end:"15:00",book:false,opt:true}],
   ["Yasaka Shrine",35.0036,135.7785,"Dusk",null,{start:"16:00",end:"16:45",book:false}],
   ["Gion",35.0037,135.7748,"Evening",null,{start:"17:00",end:"18:00",book:false}],
-  ["Kennin-ji",35.0007,135.7740,"Kyoto's oldest Zen temple, at the end of Gion's Hanamikoji street",null,{start:"18:00",end:"18:45",book:false,opt:true}],
+  ["Kennin-ji",35.0007,135.7740,"Likely cut — extra temple at dusk after Fushimi Inari & Kiyomizu-dera",null,{start:"18:00",end:"18:45",book:false,opt:true,cut:true}],
   ["Kodai-ji",35.0007,135.7809,"Night illumination",null,{start:"19:00",end:"20:30",book:false}]
 ]},
 {id:10,date:"Sat Dec 5",title:"Arashiyama",color:"#d33682",load:"Medium",stops:[
   ["Bamboo Grove",35.0176,135.6713,"08:30",null,{start:"08:30",end:"09:30",book:false}],
   ["Tenryu-ji",35.0159,135.6738,"",null,{start:"09:35",end:"10:45",book:false}],
-  ["Okochi Sanso Villa Garden",35.0172,135.6686,"Former film star's villa garden at the end of the bamboo grove — matcha & a wafer included with entry",null,{start:"10:50",end:"11:50",book:false,opt:true}],
+  ["Okochi Sanso Villa Garden",35.0172,135.6686,"Likely cut — extra garden when already doing Tenryu-ji",null,{start:"10:50",end:"11:50",book:false,opt:true,cut:true}],
   ["Shigetsu (inside Tenryu-ji)",35.0157,135.6742,"Lunch option — Michelin Bib Gourmand shojin (vegetarian temple) restaurant inside Tenryu-ji itself; mention halal needs when booking","food",{start:"12:00",end:"13:15",book:true,opt:true,bookNote:"Optional lunch — reserve & note halal dietary needs"}],
   ["Yoshiya Arashiyama",35.0145,135.6765,"Lunch alternative — halal set meals, certified by Kyoto's halal council with a separate kitchen and a prayer room on site","food",{start:"12:00",end:"13:15",book:true,opt:true,bookNote:"Alternative lunch reservation (halal certified)"}],
   ["Togetsukyo Bridge",35.0129,135.6777,"",null,{start:"13:30",end:"14:15",book:false}],
@@ -376,12 +373,12 @@ var DAYS=[
 {id:11,date:"Sun Dec 6",title:"Kyoto → Osaka via Evangelion",color:"#0f7b6c",load:"Medium",stops:[
   ["Eikan-do",35.0148,135.7954,"Morning, last autumn day · bags ship ahead to Osaka",null,{start:"09:00",end:"10:00",book:false}],
   ["Nanzen-ji",35.0113,135.7939,"Right next to Eikan-do — Zen temple with a red-brick aqueduct through its grounds",null,{start:"10:05",end:"11:00",book:false}],
-  ["Philosopher's Path",35.0170,135.7945,"",null,{start:"11:05",end:"12:00",book:false,opt:true}],
+  ["Philosopher's Path",35.0170,135.7945,"Likely cut — long walk before Evangelion transit",null,{start:"11:05",end:"12:00",book:false,opt:true,cut:true}],
   ["Hirakata Park",34.8086,135.6396,"ALL OF EVANGELION exhibition ~2h — Keihan Premium Car south from Kyoto",null,{start:"13:00",end:"15:00",book:true,bookNote:"Book ALL OF EVANGELION exhibition + Keihan Premium Car"}],
   ["Osaka Science Museum + Planetarium (Blake)",34.6918,135.4917,"Blake's solo split while others do Evangelion — hands-on science exhibits and a planetarium show; he rejoins the group at the Nippombashi hotel",null,{start:"13:30",end:"15:30",book:true,bookNote:"Book planetarium show time slot for Blake"}],
   ["Yodoyabashi, Osaka",34.6911,135.5009,"Stay southbound on Keihan to Yodoyabashi, then Midosuji hop south",null,{start:"15:30",end:"16:15",book:false}],
   ["Nippombashi — hotel check-in",34.6618,135.5060,"Check in ~16:30",null,{start:"16:30",end:"17:30",book:false}],
-  ["⭐ Louis Vuitton Maison Osaka + Le Café V (optional — 2nd chance)",34.6734,135.5008,"Optional, not required — sail-shaped facade flagship on Shinsaibashisuji, about 5 minutes from the hotel. Le Café V on the 7th floor with a terrace, open until 20:00. This is the backup if the Dec 1 Ginza stop was missed.",null,{start:"17:45",end:"18:45",book:false,opt:true}],
+  ["⭐ Louis Vuitton Maison Osaka + Le Café V (optional — 2nd chance)",34.6734,135.5008,"Likely cut — optional luxury stop on Shinsaibashisuji (backup if Nov 28 Ginza was skipped)",null,{start:"17:45",end:"18:45",book:false,opt:true,cut:true}],
   ["Dotonbori",34.6687,135.5013,"+ Shinsaibashi night",null,{start:"19:00",end:"20:00",book:false}],
   ["Tombori River Cruise",34.6686,135.5010,"20-minute boat under the neon and Glico sign, boats every 30 minutes until 21:00",null,{start:"20:00",end:"20:30",book:true,opt:true,bookNote:"Optional — book 20:00 or 20:30 boat slot (last boat 21:00)"}]
 ]},
@@ -389,9 +386,9 @@ var DAYS=[
   ["Osaka Castle",34.6873,135.5259,"Park + museum",null,{start:"09:30",end:"11:45",book:false}],
   ["Kuromon Market",34.6654,135.5066,"Lunch",null,{start:"12:15",end:"13:45",book:false}],
   ["Shinsekai / Tsutenkaku",34.6524,135.5063,"",null,{start:"14:15",end:"16:00",book:false}],
-  ["Den Den Town",34.6596,135.5057,"",null,{start:"16:15",end:"18:00",book:false,opt:true}],
+  ["Den Den Town",34.6596,135.5057,"Likely cut — skip if tired after Shinsekai",null,{start:"16:15",end:"18:00",book:false,opt:true,cut:true}],
   ["Dotonbori / Don Quijote",34.6687,135.5013,"",null,{start:"18:15",end:"19:45",book:false}],
-  ["Round1 Stadium Sennichimae",34.6674,135.5028,"Evening Spo-Cha block, open 24h",null,{start:"20:00",end:"22:00",book:false,opt:true}]
+  ["Round1 Stadium Sennichimae",34.6674,135.5028,"Likely cut — late-night Spo-Cha block; skip if legs are done",null,{start:"20:00",end:"22:00",book:false,opt:true,cut:true}]
 ]},
 {id:13,date:"Tue Dec 8",title:"Nara day trip",color:"#b8860b",load:"Medium",stops:[
   ["Osaka-Namba Station",34.6637,135.5016,"Regular Kintetsu limited express in the morning (~35 min) — we checked the Aoniyoshi sightseeing train, but its 09:10 Salon and Twin seats were sold out, so regular limited express instead",null,{start:"09:00",end:"09:45",book:true,bookNote:"Book Kintetsu limited express seats (~09:00)"}],
@@ -399,20 +396,20 @@ var DAYS=[
   ["Nara Park",34.6850,135.8430,"Deer",null,{start:"10:40",end:"11:45",book:false}],
   ["Todai-ji + Great Buddha",34.6889,135.8398,"",null,{start:"11:50",end:"13:00",book:false}],
   ["Nara Halal Restaurant (Yumekaze Hiroba)",34.6865,135.8380,"Halal lunch right in front of Todai-ji — certified. Default order: curries & kebabs ~¥2,000; the ¥4,500 A5 wagyu ramen is only an optional splurge","food",{start:"13:05",end:"14:15",book:false,opt:true}],
-  ["Nara National Museum",34.6836,135.8360,"Free right now (renovation)",null,{start:"14:25",end:"15:30",book:false,opt:true}],
-  ["Kasuga Taisha",34.6814,135.8484,"",null,{start:"15:45",end:"17:00",book:false,opt:true}]
+  ["Nara National Museum",34.6836,135.8360,"Likely cut — optional extra museum after Todai-ji",null,{start:"14:25",end:"15:30",book:false,opt:true,cut:true}],
+  ["Kasuga Taisha",34.6814,135.8484,"Likely cut — extra uphill walk after Todai-ji",null,{start:"15:45",end:"17:00",book:false,opt:true,cut:true}]
 ]},
 {id:14,date:"Wed Dec 9",title:"Osaka: aquarium + sky",color:"#1e88e5",load:"Light",stops:[
   ["Kaiyukan Aquarium",34.6545,135.4289,"10:00 entry, ~2.5–3h, whale sharks",null,{start:"10:00",end:"13:00",book:true,bookNote:"Book 10:00 timed entry ticket"}],
   ["Tempozan Ferris Wheel",34.6560,135.4310,"Right beside the aquarium — bay and harbour views from the top",null,{start:"13:15",end:"14:00",book:false,opt:true}],
-  ["America-mura",34.6723,135.4985,"If energy",null,{start:"14:30",end:"15:30",book:false,opt:true}],
+  ["America-mura",34.6723,135.4985,"Likely cut — extra transit detour before Umeda Sky",null,{start:"14:30",end:"15:30",book:false,opt:true,cut:true}],
   ["Umeda Sky Building",34.7052,135.4902,"Observatory at sunset, up by ~16:15",null,{start:"16:00",end:"17:30",book:true,bookNote:"Book ~16:00 sunset observatory slot"}],
   ["HEP5 / Umeda",34.7039,135.5000,"Shopping",null,{start:"17:45",end:"19:15",book:false,opt:true}],
   ["Ali's Kitchen",34.6748,135.5009,"Evening, last stop — Pakistani/Arabic halal restaurant in Shinsaibashi, Osaka — Michelin Bib Gourmand. Optional rec","food",{start:"19:45",end:"21:15",book:false,opt:true}]
 ]},
 {id:15,date:"Thu Dec 10",title:"Himeji Castle day + teamLab night",color:"#3949ab",load:"Medium",stops:[
   ["Himeji Castle",34.8394,134.6939,"Arrive ~09:15 — JR Special Rapid from Osaka, ~1h. Japan's best-preserved original castle, UNESCO-listed (Osaka Castle is a reconstruction; this is the real 1600s keep). Optional Kokoen garden combo ticket.",null,{start:"09:15",end:"12:00",book:false}],
-  ["Kobe — Sannomiya",34.6946,135.1956,"On the way back from Himeji IF energy holds — Kitano, Kobe Mosque, Meriken Park. Droppable.",null,{start:"13:00",end:"15:00",book:false,opt:true}],
+  ["Kobe — Sannomiya",34.6946,135.1956,"Likely cut — whole extra city stop between Himeji and evening teamLab",null,{start:"13:00",end:"15:00",book:false,opt:true,cut:true}],
   ["Kuromon Market / Nippombashi",34.6654,135.5066,"Flex: laundry, packing, souvenirs",null,{start:"15:45",end:"17:15",book:false,opt:true}],
   ["teamLab Botanical Garden, Nagai",34.6157,135.5227,"18:00 entry, night-only, last full evening",null,{start:"18:00",end:"20:00",book:true,bookNote:"Book 18:00 timed entry ticket"}]
 ]},
@@ -423,18 +420,27 @@ var DAYS=[
 ]}
 ];
 var HOTELS=[
-["Tokyo — Asakusa / Kuramae",35.7055,139.7935,"6 nights, Nov 26–Dec 2","APA Hotel Asakusa Kuramae Kita","tokyo",{
-  checkinDay:1, checkoutDay:7,
-  why:"Direct ~40 min train from Haneda (no transfers), quiet at night, steps from Day 2 East Tokyo, and ~25–30 min on the Oedo Line to Busta Shinjuku for Mt. Fuji & Nagoya.",
+["Tokyo — Asakusa / Kuramae",35.7055,139.7935,"5 nights, Nov 26–Dec 1","APA Hotel Asakusa Kuramae Kita","tokyo",{
+  checkinDay:1, checkoutDay:6,
+  why:"Direct ~40 min train from Haneda (no transfers), quiet at night, steps from Day 2 East Tokyo, and easy transit to Bay Day, West Tokyo & DisneySea.",
   recs:[
     {name:"MIMARU Tokyo Asakusa Station",note:"Best for 4 travelers — spacious apartment suites with kitchen/dining, right by the river & station."},
     {name:"APA Hotel Asakusa Kuramae Kita",note:"Budget candidate — book 2 connecting/adjacent rooms; 2 min walk to Kuramae Sta. (Oedo & Asakusa lines)."},
     {name:"Dormy Inn Express Asakusa",note:"Mid-range with onsen bath & Sumida River views; 1 min to Ginza/Asakusa lines."}
   ]
 }],
+["Mt. Fuji — Kawaguchiko",35.5006,138.7686,"1 night, Dec 1–2","Toyoko INN Fujisan Otsuki-eki / Kawaguchiko area","tokyo",{
+  checkinDay:6, checkoutDay:7,
+  why:"Eliminates 4 hours of backtracking to Tokyo! Sleep in after DisneySea, take a relaxed ~10:45 bus here, enjoy sunset Fuji + onsen, then continue directly via Mishima → Nagoya.",
+  recs:[
+    {name:"Kawaguchiko Station Inn / Fuji View area",note:"Right by Kawaguchiko Station — zero luggage hassle for the next morning's bus to Mishima."},
+    {name:"Konansou / Fuji Lake Hotel",note:"Lakeside onsen ryokan upgrade for 4 travelers with Mt. Fuji views."},
+    {name:"Megu Fuji 2021 (or Villa/Cabins)",note:"Great 4-person group/cabin value right near Kawaguchiko Station."}
+  ]
+}],
 ["Nagoya — Nagoya Station",35.1695,136.8795,"1 night, Dec 2","HOTEL LiVEMAX Nagoya Shinkansen-guchi","route",{
   checkinDay:7, checkoutDay:8,
-  why:"WILLER bus arrives at Nagoya Station, and next morning's Toyota Museum + JR Special Rapid to Kyoto both depart from here — zero luggage hauling.",
+  why:"Shinkansen/JR from Mishima arrives at Nagoya Station, and next morning's Toyota Museum + JR Special Rapid to Kyoto both depart from here — zero luggage hauling.",
   recs:[
     {name:"HOTEL LiVEMAX Nagoya Shinkansen-guchi",note:"Budget candidate — 4 min walk from the Shinkansen/Taiko-dori exit."},
     {name:"Daiwa Roynet Hotel Nagoya Taiko dori Side",note:"Modern, clean, reliable rooms ~4 min walk from Nagoya Station."},
@@ -460,18 +466,18 @@ var HOTELS=[
   ]
 }]
 ];
-var ROUTE_PTS=[[35.6886,139.7006],[35.1709,136.8815],[34.9855,135.7585],[34.6618,135.5060]];
-var ROUTE_CITIES=[["Tokyo — Busta Shinjuku",35.6886,139.7006],["Nagoya Station",35.1709,136.8815],["Kyoto Station",34.9855,135.7585],["Osaka — Nippombashi",34.6618,135.5060]];
+var ROUTE_PTS=[[35.6886,139.7006],[35.5006,138.7686],[35.1264,138.9110],[35.1709,136.8815],[34.9855,135.7585],[34.6618,135.5060]];
+var ROUTE_CITIES=[["Tokyo — Busta Shinjuku",35.6886,139.7006],["Kawaguchiko (Mt. Fuji)",35.5006,138.7686],["Mishima Station",35.1264,138.9110],["Nagoya Station",35.1709,136.8815],["Kyoto Station",34.9855,135.7585],["Osaka — Nippombashi",34.6618,135.5060]];
 var RETURN_PTS=[[34.7335,135.5003],[35.6285,139.7388]];
 var LEG_LABELS=[
-[[36.05,138.35],"Dec 2 — WILLER express bus"],
+[[36.05,138.35],"Dec 1–2 — Tokyo → Mt. Fuji → Mishima → Nagoya"],
 [[34.30,136.95],"Dec 3 — JR Special Rapid along Lake Biwa"],
 [[35.44,136.02],"Dec 6 — Keihan Premium Car via Hirakata (southbound)"],
 [[34.92,137.95],"Dec 11 — shinkansen (the one bullet train)"]
 ];
 /* Short labels for the wide views, staggered into open map space off each leg. */
 var LEG_LABELS_SHORT=[
-[[35.02,138.29],"Dec 2 · Bus"],
+[[35.02,138.29],"Dec 1–2 · Fuji→Nagoya"],
 [[34.42,136.02],"Dec 3 · JR Rapid"],
 [[35.10,134.45],"Dec 6 · Keihan"],
 [[35.64,137.62],"Dec 11 · Shinkansen"]
@@ -489,7 +495,7 @@ var markersByDay={}; /* dayId -> [markers] for the shared cluster group */
 var listEl=document.getElementById('dayList');
 DAYS.forEach(function(d){
   var div=document.createElement('div'); div.className='day'; div.id='dayrow-'+d.id;
-  var stopsHtml=d.stops.map(function(s,i){var food=s[4]==='food',sched=s[5]||{},tm=sched.start?'<span class="stopTime">'+esc(sched.start)+'</span>':'',bk=sched.book?'<span class="bookTag" title="'+esc(sched.bookNote||'Book tickets')+'">🎫</span>':'',op=sched.opt?'<span class="optTag">Optional</span>':'';return '<li class="'+(sched.opt?'is-opt':'')+'" data-day="'+d.id+'" data-idx="'+i+'" role="button" tabindex="0" aria-label="'+esc(s[0])+(sched.opt?' (optional idea)':' (must-do)')+(sched.start?' at '+esc(sched.start):'')+(food?' — halal food rec (optional)':'')+' — stop '+(i+1)+', '+esc(d.date)+'"><span class="n" style="background:'+(food?'#e8590c':d.color)+'">'+(i+1)+'</span>'+tm+'<span>'+esc(s[0])+(food?' 🍜':'')+bk+op+'</span></li>'}).join('');
+  var stopsHtml=d.stops.map(function(s,i){var food=s[4]==='food',sched=s[5]||{},tm=sched.start?'<span class="stopTime">'+esc(sched.start)+'</span>':'',bk=sched.book?'<span class="bookTag" title="'+esc(sched.bookNote||'Book tickets')+'">🎫</span>':'',op=sched.cut?'<span class="cutTag">✂️ Likely cut</span>':(sched.opt?'<span class="optTag">Optional</span>':'');return '<li class="'+(sched.opt?'is-opt':'')+'" data-day="'+d.id+'" data-idx="'+i+'" role="button" tabindex="0" aria-label="'+esc(s[0])+(sched.cut?' (likely cut)':(sched.opt?' (optional idea)':' (must-do)'))+(sched.start?' at '+esc(sched.start):'')+(food?' — halal food rec (optional)':'')+' — stop '+(i+1)+', '+esc(d.date)+'"><span class="n" style="background:'+(food?'#e8590c':d.color)+'">'+(i+1)+'</span>'+tm+'<span>'+esc(s[0])+(food?' 🍜':'')+bk+op+'</span></li>'}).join('');
   div.setAttribute('role','button'); div.setAttribute('tabindex','0');
   div.setAttribute('aria-label','Show only '+d.date+' — '+d.title);
   div.innerHTML='<div class="dayTop"><span class="chip" style="background:'+d.color+'"></span><div><h3>'+esc(d.title)+'</h3><div class="meta">'+esc(d.date)+' · '+d.stops.length+' stops'+loadBadge(d.load)+'</div></div></div><ul class="stops">'+stopsHtml+'</ul>';
@@ -532,7 +538,7 @@ function clusterIcon(cluster){
 function popupHtmlStop(d,s,i){
   var sched=s[5]||{};
   var timeStr=sched.start?(sched.start+(sched.end?'–'+sched.end:'')):'';
-  var prioTag=sched.opt?'<span class="optTag">Optional idea</span>':'<span class="mustTag">MUST-DO</span>';
+  var prioTag=sched.cut?'<span class="cutTag">✂️ Likely cut</span>':(sched.opt?'<span class="optTag">Optional idea</span>':'<span class="mustTag">MUST-DO</span>');
   var note=s[3]?'<div class="popNote">'+esc(s[3])+'</div>':'';
   var bookHtml=sched.book?'<div class="agBookNote">🎫 '+esc(sched.bookNote||'Advance ticket / reservation')+'</div>':'';
   var foodTag=s[4]==='food'?' · 🍜 Halal food rec (optional)':'';
@@ -903,10 +909,11 @@ function calDays(){
   return DAYS;
 }
 function hotelIdxForDay(id){
-  if(id>=1&&id<=6) return 0;
-  if(id===7) return 1;
-  if(id>=8&&id<=10) return 2;
-  if(id>=11&&id<=15) return 3;
+  if(id>=1&&id<=5) return 0;
+  if(id===6) return 1;
+  if(id===7) return 2;
+  if(id>=8&&id<=10) return 3;
+  if(id>=11&&id<=15) return 4;
   return -1;
 }
 function hotelForDay(id){
@@ -977,7 +984,7 @@ function renderCalendar(){
         var wStyle=it.cols===2?('width:calc(50% - 5px);left:'+(it.col===0?'4px':'calc(50% + 1px)')+';right:auto;'):'';
         var food=it.s[4]==='food'?' 🍜':'';
         var bk=it.sched.book?' 🎫':'';
-        var op=it.sched.opt?'<span class="optTag">Optional</span>':'';
+        var op=it.sched.cut?'<span class="cutTag">✂️ Likely cut</span>':(it.sched.opt?'<span class="optTag">Optional</span>':'');
         return '<div class="'+cls+'" data-evday="'+d.id+'" data-evidx="'+it.i+'" style="top:'+top+'px;height:'+h+'px;--ev-color:'+d.color+';'+wStyle+'"><div class="calEvTime"><span>'+esc(it.sched.start)+'–'+esc(it.sched.end)+'</span><span>'+food+bk+'</span></div><div class="calEvTitle">'+esc(it.s[0])+op+'</div></div>';
       }).join('');
       return '<div class="calDayCol" style="height:'+totalH+'px">'+evHtml+'</div>';
@@ -991,7 +998,7 @@ function renderCalendar(){
         if(calOnlyMust&&sched.opt) return '';
         var food=s[4]==='food'?' 🍜':'';
         var bk=sched.book?'<span class="bookTag">🎫 Book</span>':'';
-        var prio=sched.opt?'<span class="optTag">Optional / Idea</span>':'<span class="mustTag">MUST-DO</span>';
+        var prio=sched.cut?'<span class="cutTag">✂️ Likely cut</span>':(sched.opt?'<span class="optTag">Optional / Idea</span>':'<span class="mustTag">MUST-DO</span>');
         var timeLbl=sched.start?(fmt12(sched.start)+' – '+fmt12(sched.end)):'Flexible';
         return '<li class="agItem'+(sched.opt?' is-opt':'')+'" data-evday="'+d.id+'" data-evidx="'+i+'"><div class="agTime">'+esc(timeLbl)+'</div><div><div class="agTitle"><span class="n" style="background:'+(s[4]==='food'?'#e8590c':d.color)+';margin-right:6px">'+(i+1)+'</span>'+esc(s[0])+food+prio+bk+'</div>'+(s[3]?'<div class="agNote">'+esc(s[3])+'</div>':'')+(sched.book&&sched.bookNote?'<div class="agBookNote">🎫 '+esc(sched.bookNote)+'</div>':'')+'</div><button class="btn" type="button" data-evday="'+d.id+'" data-evidx="'+i+'">📍 Map</button></li>';
       }).join('');
@@ -1022,7 +1029,7 @@ function openEventModal(dayId,idx){
   if(!d||!d.stops[idx]) return;
   var s=d.stops[idx], sched=s[5]||{};
   modalTarget={dayId:dayId,idx:idx};
-  document.getElementById('evModalMeta').textContent=d.date+(sched.start?' · '+fmt12(sched.start)+' – '+fmt12(sched.end):'')+' · Stop '+(idx+1)+' of '+d.stops.length+(sched.opt?' · Optional / Idea':' · ★ MUST-DO');
+  document.getElementById('evModalMeta').textContent=d.date+(sched.start?' · '+fmt12(sched.start)+' – '+fmt12(sched.end):'')+' · Stop '+(idx+1)+' of '+d.stops.length+(sched.cut?' · ✂️ Likely cut':(sched.opt?' · Optional / Idea':' · ★ MUST-DO'));
   document.getElementById('evModalTitle').textContent=s[0]+(s[4]==='food'?' 🍜':'');
   document.getElementById('evModalNote').textContent=s[3]||'No additional notes.';
   var bookEl=document.getElementById('evModalBook');
