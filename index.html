@@ -326,23 +326,22 @@ var DAYS=[
   ["Shibuya Sky",35.6580,139.7020,"SUNSET slot ~16:00 — only fixed point today",null,{start:"16:00",end:"17:30",book:true,bookNote:"Book 16:00 sunset entry slot 4 weeks in advance"}],
   ["Gyumon Shibuya",35.6568,139.6970,"Evening — halal wagyu yakiniku in Shibuya, A5 grilled at your table after the Sky sunset","food",{start:"18:00",end:"19:45",book:true,opt:true,bookNote:"Optional dinner — reserve table for 4 after Shibuya Sky"}]
 ]},
-{id:5,date:"Mon Nov 30",title:"DisneySea",color:"#0aa2c0",load:"Heavy",stops:[
-  ["Tokyo DisneySea",35.6401,139.8880,"Full day 9:00–21:00, Fantasy Springs. Weekday Monday avoids brutal Sat/Sun crowds! Ship big bags to Kyoto tonight — keep 1-night backpack for Fuji tomorrow.",null,{start:"09:00",end:"21:00",book:true,bookNote:"Book 1-Day Passport + Fantasy Springs planning"}]
+{id:5,date:"Mon Nov 30",title:"Tokyo — rest, flex & bag shipping",color:"#808000",load:"Recovery",stops:[
+  ["Asakusa / Kuramae (sleep in & laundry)",35.7055,139.7935,"Built-in rest morning — sleep in, laundry, pack & ship big bags to Kyoto tonight (keep 2-night backpack for DisneySea & Fuji)",null,{start:"10:30",end:"12:30",book:false}],
+  ["Ikebukuro / Akihabara (flex catch-up)",35.7295,139.7109,"Optional flex afternoon — hit anything skipped earlier (Pokémon Center, Akihabara, or Ginza) at an easy pace",null,{start:"14:00",end:"17:30",book:false,opt:true}],
+  ["Asakusa dinner + early night",35.7117,139.7965,"Rest up for tomorrow's full day at DisneySea",null,{start:"18:30",end:"20:00",book:false}]
 ]},
-{id:6,date:"Tue Dec 1",title:"Tokyo → Mt. Fuji / Kawaguchiko (sleep-in + overnight)",color:"#3cb44b",load:"Medium",stops:[
-  ["Busta Shinjuku",35.6886,139.7006,"Sleep in after DisneySea! Check out ~10:00 → relaxed 10:45 highway bus to Kawaguchiko (no 07:05 alarm, no backtracking to Tokyo)",null,{start:"10:45",end:"12:45",book:true,bookNote:"Book ~10:45 highway bus Busta Shinjuku → Kawaguchiko"}],
+{id:6,date:"Tue Dec 1",title:"DisneySea",color:"#0aa2c0",load:"Heavy",stops:[
+  ["Tokyo DisneySea",35.6401,139.8880,"Full day 9:00–21:00, Fantasy Springs. Tuesday weekday = lower crowds, and you're fresh after Monday's rest day!",null,{start:"09:00",end:"21:00",book:true,bookNote:"Book 1-Day Passport + Fantasy Springs planning"}]
+]},
+{id:7,date:"Wed Dec 2",title:"Tokyo → Mt. Fuji / Kawaguchiko (sleep-in + overnight)",color:"#3cb44b",load:"Medium",stops:[
+  ["Busta Shinjuku",35.6886,139.7006,"Sleep in after DisneySea! Check out ~10:00 → relaxed 10:45 highway bus to Kawaguchiko (no 07:05 alarm, no backtracking)",null,{start:"10:45",end:"12:45",book:true,bookNote:"Book ~10:45 highway bus Busta Shinjuku → Kawaguchiko"}],
   ["Lake Kawaguchiko + Panoramic Ropeway",35.5045,138.7713,"Afternoon ropeway + sunset Fuji views, then check into Kawaguchiko hotel/onsen & rest",null,{start:"13:30",end:"17:00",book:false}]
 ]},
-{id:7,date:"Wed Dec 2",title:"Mt. Fuji → Nagoya (via Mishima)",color:"#9a6324",load:"Medium",stops:[
-  ["Chureito Pagoda",35.5013,138.8014,"08:15 crisp morning Mt. Fuji views before heading south",null,{start:"08:15",end:"10:00",book:false}],
-  ["Mishima Station (via Fujikyu bus)",35.1264,138.9110,"~10:30 bus Kawaguchiko → Mishima (~90m), then Shinkansen/JR onward to Nagoya (~1.5h) — saves 3+ hours of backtracking!",null,{start:"10:30",end:"13:45",book:true,bookNote:"Book ~10:30 Kawaguchiko → Mishima bus + JR/Shinkansen to Nagoya"}],
-  ["Nagoya Castle",35.1856,136.8984,"Likely cut — tight after 13:45 arrival since castle closes ~16:30",null,{start:"14:30",end:"16:00",book:false,opt:true,cut:true}],
-  ["Osu shopping streets",35.1595,136.9037,"Relaxed afternoon stroll",null,{start:"16:15",end:"18:15",book:false}],
-  ["Sakae",35.1679,136.9085,"Night",null,{start:"18:45",end:"20:45",book:false,opt:true}]
-]},
-{id:8,date:"Thu Dec 3",title:"Nagoya → Kyoto (JR Special Rapid)",color:"#469990",load:"Medium",stops:[
-  ["Toyota Commemorative Museum",35.1813,136.8762,"09:30–12:00",null,{start:"09:30",end:"12:00",book:true,bookNote:"Reserve timed/group tickets or arrive 09:30"}],
-  ["Kyoto Station Skywalk",34.9855,135.7585,"Arrive ~14:30 via JR Special Rapid along Lake Biwa",null,{start:"14:30",end:"15:15",book:false}],
+{id:8,date:"Thu Dec 3",title:"Mt. Fuji → Kyoto (via Mishima Shinkansen)",color:"#469990",load:"Medium",stops:[
+  ["Chureito Pagoda",35.5013,138.8014,"08:15 crisp morning Mt. Fuji views before heading west",null,{start:"08:15",end:"10:00",book:false}],
+  ["Mishima Station (via Fujikyu bus)",35.1264,138.9110,"~10:30 bus Kawaguchiko → Mishima (~90m), then Hikari Shinkansen Mishima → Kyoto (~2h, arrives ~14:30)",null,{start:"10:30",end:"14:15",book:true,bookNote:"Book ~10:30 Kawaguchiko → Mishima bus + Shinkansen Mishima → Kyoto"}],
+  ["Kyoto Station Skywalk",34.9855,135.7585,"Arrive ~14:30 right on schedule (with Nagoya cut, zero extra hotel move!)",null,{start:"14:30",end:"15:15",book:false}],
   ["Nishiki Market",35.0050,135.7630,"1–1.5h",null,{start:"15:30",end:"16:45",book:false}],
   ["Samurai & Ninja Museum",35.0075,135.7670,"Hands-on shuriken throwing, blowgun, samurai armor, sword demo, about 1 hour",null,{start:"17:00",end:"18:00",book:true,bookNote:"Book 17:00 tour slot"}],
   ["Hoippo — vintage kimono shop",35.0014,135.7642,"Blake's kimono keepsake hunt — pure-silk vintage kimono and haori in a 100-year-old machiya townhouse; closes 19:00, so it comes first in the evening",null,{start:"18:05",end:"18:55",book:false}],
@@ -420,8 +419,8 @@ var DAYS=[
 ]}
 ];
 var HOTELS=[
-["Tokyo — Asakusa / Kuramae",35.7055,139.7935,"5 nights, Nov 26–Dec 1","APA Hotel Asakusa Kuramae Kita","tokyo",{
-  checkinDay:1, checkoutDay:6,
+["Tokyo — Asakusa / Kuramae",35.7055,139.7935,"6 nights, Nov 26–Dec 2","APA Hotel Asakusa Kuramae Kita","tokyo",{
+  checkinDay:1, checkoutDay:7,
   why:"Direct ~40 min train from Haneda (no transfers), quiet at night, steps from Day 2 East Tokyo, and easy transit to Bay Day, West Tokyo & DisneySea.",
   recs:[
     {name:"MIMARU Tokyo Asakusa Station",note:"Best for 4 travelers — spacious apartment suites with kitchen/dining, right by the river & station."},
@@ -429,22 +428,13 @@ var HOTELS=[
     {name:"Dormy Inn Express Asakusa",note:"Mid-range with onsen bath & Sumida River views; 1 min to Ginza/Asakusa lines."}
   ]
 }],
-["Mt. Fuji — Kawaguchiko",35.5006,138.7686,"1 night, Dec 1–2","Toyoko INN Fujisan Otsuki-eki / Kawaguchiko area","tokyo",{
-  checkinDay:6, checkoutDay:7,
-  why:"Eliminates 4 hours of backtracking to Tokyo! Sleep in after DisneySea, take a relaxed ~10:45 bus here, enjoy sunset Fuji + onsen, then continue directly via Mishima → Nagoya.",
+["Mt. Fuji — Kawaguchiko",35.5006,138.7686,"1 night, Dec 2–3","Kawaguchiko Station Inn / Fuji View area","tokyo",{
+  checkinDay:7, checkoutDay:8,
+  why:"Eliminates 4 hours of backtracking to Tokyo! Sleep in after DisneySea, take a relaxed ~10:45 bus here, enjoy sunset Fuji + onsen, then continue directly via Mishima Shinkansen → Kyoto.",
   recs:[
     {name:"Kawaguchiko Station Inn / Fuji View area",note:"Right by Kawaguchiko Station — zero luggage hassle for the next morning's bus to Mishima."},
     {name:"Konansou / Fuji Lake Hotel",note:"Lakeside onsen ryokan upgrade for 4 travelers with Mt. Fuji views."},
     {name:"Megu Fuji 2021 (or Villa/Cabins)",note:"Great 4-person group/cabin value right near Kawaguchiko Station."}
-  ]
-}],
-["Nagoya — Nagoya Station",35.1695,136.8795,"1 night, Dec 2","HOTEL LiVEMAX Nagoya Shinkansen-guchi","route",{
-  checkinDay:7, checkoutDay:8,
-  why:"Shinkansen/JR from Mishima arrives at Nagoya Station, and next morning's Toyota Museum + JR Special Rapid to Kyoto both depart from here — zero luggage hauling.",
-  recs:[
-    {name:"HOTEL LiVEMAX Nagoya Shinkansen-guchi",note:"Budget candidate — 4 min walk from the Shinkansen/Taiko-dori exit."},
-    {name:"Daiwa Roynet Hotel Nagoya Taiko dori Side",note:"Modern, clean, reliable rooms ~4 min walk from Nagoya Station."},
-    {name:"JR Gate Tower Hotel",note:"Directly above Nagoya Station — maximum convenience for a 1-night transit stop."}
   ]
 }],
 ["Kyoto — Shijo / Kawaramachi",34.9988,135.7690,"3 nights, Dec 3–6","HOTEL LiVEMAX Kyoto Teramachidori","kansai",{
@@ -466,19 +456,17 @@ var HOTELS=[
   ]
 }]
 ];
-var ROUTE_PTS=[[35.6886,139.7006],[35.5006,138.7686],[35.1264,138.9110],[35.1709,136.8815],[34.9855,135.7585],[34.6618,135.5060]];
-var ROUTE_CITIES=[["Tokyo — Busta Shinjuku",35.6886,139.7006],["Kawaguchiko (Mt. Fuji)",35.5006,138.7686],["Mishima Station",35.1264,138.9110],["Nagoya Station",35.1709,136.8815],["Kyoto Station",34.9855,135.7585],["Osaka — Nippombashi",34.6618,135.5060]];
+var ROUTE_PTS=[[35.6886,139.7006],[35.5006,138.7686],[35.1264,138.9110],[34.9855,135.7585],[34.6618,135.5060]];
+var ROUTE_CITIES=[["Tokyo — Busta Shinjuku",35.6886,139.7006],["Kawaguchiko (Mt. Fuji)",35.5006,138.7686],["Mishima Station",35.1264,138.9110],["Kyoto Station",34.9855,135.7585],["Osaka — Nippombashi",34.6618,135.5060]];
 var RETURN_PTS=[[34.7335,135.5003],[35.6285,139.7388]];
 var LEG_LABELS=[
-[[36.05,138.35],"Dec 1–2 — Tokyo → Mt. Fuji → Mishima → Nagoya"],
-[[34.30,136.95],"Dec 3 — JR Special Rapid along Lake Biwa"],
+[[36.05,138.35],"Dec 2–3 — Tokyo → Mt. Fuji → Mishima Shinkansen → Kyoto"],
 [[35.44,136.02],"Dec 6 — Keihan Premium Car via Hirakata (southbound)"],
 [[34.92,137.95],"Dec 11 — shinkansen (the one bullet train)"]
 ];
 /* Short labels for the wide views, staggered into open map space off each leg. */
 var LEG_LABELS_SHORT=[
-[[35.02,138.29],"Dec 1–2 · Fuji→Nagoya"],
-[[34.42,136.02],"Dec 3 · JR Rapid"],
+[[35.02,138.29],"Dec 2–3 · Fuji→Kyoto"],
 [[35.10,134.45],"Dec 6 · Keihan"],
 [[35.64,137.62],"Dec 11 · Shinkansen"]
 ];
@@ -909,11 +897,10 @@ function calDays(){
   return DAYS;
 }
 function hotelIdxForDay(id){
-  if(id>=1&&id<=5) return 0;
-  if(id===6) return 1;
-  if(id===7) return 2;
-  if(id>=8&&id<=10) return 3;
-  if(id>=11&&id<=15) return 4;
+  if(id>=1&&id<=6) return 0;
+  if(id===7) return 1;
+  if(id>=8&&id<=10) return 2;
+  if(id>=11&&id<=15) return 3;
   return -1;
 }
 function hotelForDay(id){
