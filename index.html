@@ -310,6 +310,7 @@
     <div class="agBookNote" id="evModalBook"></div>
     <div class="popDay" id="evModalDay"></div>
     <div class="evActions">
+      <a class="btn" id="evModalGmapsBtn" href="#" target="_blank" rel="noopener" style="text-decoration:none">🧭 Google Maps</a>
       <button class="btn" id="evModalMapBtn" type="button">📍 Show on Map</button>
     </div>
   </div>
@@ -568,6 +569,9 @@ var lastFitBounds=null, userMoved=false;
 function clusterIcon(cluster){
   return L.divIcon({className:'',html:'<div class="trip-cluster">'+cluster.getChildCount()+'</div>',iconSize:[30,30],iconAnchor:[15,15]});
 }
+function gmapsUrl(lat,lng){
+  return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(lat+','+lng);
+}
 function popupHtmlStop(d,s,i){
   var sched=s[5]||{};
   var timeStr=sched.start?(sched.start+(sched.end?'–'+sched.end:'')):'';
@@ -578,7 +582,8 @@ function popupHtmlStop(d,s,i){
   if(sched.meal) extra+='<div class="popNote" style="margin-top:2px"><b>Meals:</b> '+esc(sched.meal)+'</div>';
   var bookHtml=sched.book?'<div class="agBookNote">🎫 '+esc(sched.bookNote||'Advance ticket / reservation')+'</div>':'';
   var foodTag=s[4]==='food'?' · 🍜 Halal food rec (optional)':'';
-  return '<div class="popMeta">'+esc(d.date)+(timeStr?' · '+esc(timeStr):'')+' · Stop '+(i+1)+' of '+d.stops.length+foodTag+'</div><p class="popTitle">'+esc(s[0])+prioTag+'</p>'+note+extra+bookHtml+'<div class="popDay">'+esc(d.title)+'</div>';
+  var gm='<div style="margin-top:7px"><a href="'+gmapsUrl(s[1],s[2])+'" target="_blank" rel="noopener" style="font-size:12px;font-weight:700;text-decoration:none">🧭 Open in Google Maps ↗</a></div>';
+  return '<div class="popMeta">'+esc(d.date)+(timeStr?' · '+esc(timeStr):'')+' · Stop '+(i+1)+' of '+d.stops.length+foodTag+'</div><p class="popTitle">'+esc(s[0])+prioTag+'</p>'+note+extra+bookHtml+gm+'<div class="popDay">'+esc(d.title)+'</div>';
 }
 function arrowIcon(color,deg){
   return L.divIcon({className:'',html:'<span class="arrow-pin" style="color:'+color+';transform:rotate('+deg.toFixed(0)+'deg)">&#9650;</span>',iconSize:[16,16],iconAnchor:[8,8]});
@@ -630,7 +635,8 @@ function buildHotelLayer(){
     var m=L.marker([h[1],h[2]],{icon:icon,title:h[0],zIndexOffset:500});
     var info=h[6]||{};
     var recsHtml=(info.recs||[]).map(function(r){ return '<li><b>'+esc(r.name)+'</b> — '+esc(r.note)+'</li>'; }).join('');
-    m.bindPopup('<div class="popMeta">&#9733; Ideal hotel area — not booked</div><p class="popTitle">'+esc(h[0])+'</p><div class="popNote">'+esc(h[3])+(info.why?'<br>'+esc(info.why):'')+'</div>'+(recsHtml?'<ul style="margin:6px 0 0;padding-left:16px;font-size:12px;line-height:1.4">'+recsHtml+'</ul>':''),{maxWidth:310});
+    var gm='<div style="margin-top:7px"><a href="'+gmapsUrl(h[1],h[2])+'" target="_blank" rel="noopener" style="font-size:12px;font-weight:700;text-decoration:none">🧭 Open in Google Maps ↗</a></div>';
+    m.bindPopup('<div class="popMeta">&#9733; Booked Stay</div><p class="popTitle">'+esc(h[4]||h[0])+'</p><div class="popNote">'+esc(h[0])+' · '+esc(h[3])+(info.why?'<br>'+esc(info.why):'')+'</div>'+(recsHtml?'<ul style="margin:6px 0 0;padding-left:16px;font-size:12px;line-height:1.4">'+recsHtml+'</ul>':'')+gm,{maxWidth:310});
     m.addTo(g);
     hotelMarkers[idx]=m;
   });
@@ -997,7 +1003,7 @@ function renderCalendar(){
   if(calMode==='grid'){
     var totalH=(CAL_END_HR-CAL_START_HR)*CAL_PX_PER_HR;
     var headHtml='<div class="calHeaderRow"><div class="calGutterHead"></div>'+days.map(function(d){
-      return '<div class="calDayHead" data-calday="'+d.id+'" title="Click to open '+esc(d.date)+' List View"><div class="calDayDate"><span class="calDayDot" style="background:'+d.color+'"></span>'+esc(d.date)+loadBadge(d.load)+'</div><div class="calDayTitle">'+esc(d.title)+'</div></div>';
+      return '<div class="calDayHead" data-calday="'+d.id+'" title="Click to open '+esc(d.date)+' List View"><div class="calDayDate"><span class="calDayDot" style="background:'+d.color+'"></span>'+esc(d.date)+loadBadge(d.load)+'<button class="btn" type="button" data-mapday="'+d.id+'" title="Go to '+esc(d.date)+' on Map" style="margin-left:auto;padding:2px 7px;font-size:11px">📍</button></div><div class="calDayTitle">'+esc(d.title)+'</div></div>';
     }).join('')+'</div>';
     var stayHtml='<div class="calStayRow"><div class="calStayGutter">Stay</div>'+days.map(function(d){
       var hIdx=hotelIdxForDay(d.id);
@@ -1055,12 +1061,12 @@ function renderCalendar(){
         if(sched.transit) subPills+='<span class="agPill">'+esc(sched.transit)+'</span>';
         if(sched.meal) subPills+='<span class="agPill">'+esc(sched.meal)+'</span>';
         var subHtml=subPills?'<div class="agSubLine">'+subPills+'</div>':'';
-        return '<li class="agItem'+(sched.opt?' is-opt':'')+'" data-evday="'+d.id+'" data-evidx="'+i+'"><div class="agTime">'+esc(timeLbl)+'</div><div><div class="agTitle"><span class="n" style="background:'+(s[4]==='food'?'#e8590c':d.color)+';margin-right:6px">'+(i+1)+'</span>'+esc(s[0])+food+prio+bk+'</div>'+(s[3]?'<div class="agNote">'+esc(s[3])+'</div>':'')+subHtml+(sched.book&&sched.bookNote?'<div class="agBookNote">🎫 '+esc(sched.bookNote)+'</div>':'')+'</div><button class="btn" type="button" data-evday="'+d.id+'" data-evidx="'+i+'">📍 Map</button></li>';
+        return '<li class="agItem'+(sched.opt?' is-opt':'')+'" data-evday="'+d.id+'" data-evidx="'+i+'"><div class="agTime">'+esc(timeLbl)+'</div><div><div class="agTitle"><span class="n" style="background:'+(s[4]==='food'?'#e8590c':d.color)+';margin-right:6px">'+(i+1)+'</span>'+esc(s[0])+food+prio+bk+'</div>'+(s[3]?'<div class="agNote">'+esc(s[3])+'</div>':'')+subHtml+(sched.book&&sched.bookNote?'<div class="agBookNote">🎫 '+esc(sched.bookNote)+'</div>':'')+'</div><div style="display:flex;gap:5px;flex-wrap:wrap"><a class="btn" href="'+gmapsUrl(s[1],s[2])+'" target="_blank" rel="noopener" style="text-decoration:none" onclick="event.stopPropagation()">🧭 Maps</a><button class="btn" type="button" data-evday="'+d.id+'" data-evidx="'+i+'">📍 Map</button></div></li>';
       }).join('');
       if((calOnlyBook||calOnlyMust)&&!rows) return '';
       var hIdx=hotelIdxForDay(d.id);
       var stayCtrl=hIdx>=0?'<button class="agStayBtn" type="button" data-hotelidx="'+hIdx+'">🏨 '+((HOTELS[hIdx][6]&&HOTELS[hIdx][6].checkinDay===d.id)?'Check-in: ':'Stay: ')+esc(hotelForDay(d.id))+'</button>':'<div class="agDayMeta">✈️ Flying home</div>';
-      return '<div class="agDay"><div class="agDayHead"><div class="agDayLeft"><span class="chip" style="background:'+d.color+'"></span><h3>'+esc(d.date)+' — '+esc(d.title)+'</h3>'+loadBadge(d.load)+'</div>'+stayCtrl+'</div><ul class="agList">'+rows+'</ul></div>';
+      return '<div class="agDay"><div class="agDayHead"><div class="agDayLeft"><span class="chip" style="background:'+d.color+'"></span><h3>'+esc(d.date)+' — '+esc(d.title)+'</h3>'+loadBadge(d.load)+'</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">'+stayCtrl+'<button class="btn" type="button" data-mapday="'+d.id+'">📍 Go to Map</button></div></div><ul class="agList">'+rows+'</ul></div>';
     }).join('');
   } else if(calMode==='stays'){
     var stayColors=['#3b82f6','#06b6d4','#911eb4','#e8590c'];
@@ -1082,7 +1088,7 @@ function renderCalendar(){
         +'<div class="stayWhy">'+esc(info.why||'')+'</div>'
         +'<div class="stayTrains"><b>🚆 Key Trains, Buses &amp; Costs</b>'+stayTransit[idx]+'</div>'
         +'<div class="stayDaysRow">'+dayChips+'</div>'
-        +'<div class="stayActions"><button class="btn" type="button" data-hotelidx="'+idx+'">★ Hotel Details</button><button class="btn" type="button" data-mapstay="'+idx+'">📍 Show Stay on Map</button></div>'
+        +'<div class="stayActions"><button class="btn" type="button" data-hotelidx="'+idx+'">★ Hotel Details</button><button class="btn" type="button" data-mapstay="'+idx+'">📍 Show Stay on Map</button><a class="btn" href="'+gmapsUrl(h[1],h[2])+'" target="_blank" rel="noopener" style="text-decoration:none">🧭 Google Maps</a></div>'
         +'</div>';
     }).join('')+'</div>';
   } else if(calMode==='bookings'){
@@ -1118,8 +1124,9 @@ function openHotelModal(hIdx){
   var bookEl=document.getElementById('evModalBook');
   bookEl.textContent='🎫 Book '+h[3]+' (4 travelers)';
   bookEl.style.display='block';
-  document.getElementById('evModalDay').textContent='Tap below to see this ★ hotel area on the map.';
-  document.getElementById('evModalMapBtn').textContent='★ Show Hotel Area on Map';
+  document.getElementById('evModalDay').textContent='Tap below to see this ★ stay on the map or open in Google Maps.';
+  document.getElementById('evModalGmapsBtn').href=gmapsUrl(h[1],h[2]);
+  document.getElementById('evModalMapBtn').textContent='★ Show Stay on Map';
   document.getElementById('evModal').classList.add('open');
 }
 function openEventModal(dayId,idx){
@@ -1138,6 +1145,7 @@ function openEventModal(dayId,idx){
   bookEl.textContent=sched.book?('🎫 '+(sched.bookNote||'Advance ticket / reservation recommended')):'';
   bookEl.style.display=sched.book?'block':'none';
   document.getElementById('evModalDay').textContent='Day '+d.id+': '+d.title+' · Stay: '+hotelForDay(d.id);
+  document.getElementById('evModalGmapsBtn').href=gmapsUrl(s[1],s[2]);
   document.getElementById('evModalMapBtn').textContent='📍 Show on Map';
   document.getElementById('evModal').classList.add('open');
 }
@@ -1153,6 +1161,14 @@ function switchAppTab(mode){
   document.getElementById('tabCal').setAttribute('aria-selected',isCal?'true':'false');
   if(isCal){ renderCalendar(); }
   else { setTimeout(settleMap,60); setTimeout(settleMap,300); }
+}
+function jumpToDayOnMap(dayId){
+  closeEventModal();
+  switchAppTab('map');
+  setTimeout(function(){
+    if(map) map.invalidateSize(false);
+    setView('day',dayId);
+  },90);
 }
 function jumpToStopOnMap(dayId,idx){
   closeEventModal();
@@ -1196,7 +1212,7 @@ document.getElementById('calendarView').addEventListener('click',function(ev){
   if(ev.target.closest('#backToGridBtn')){ setCalMode('grid',null); return; }
   if(ev.target.closest('#showAllAgendaBtn')){ setCalMode('agenda',null); return; }
   var mDay=ev.target.closest('[data-mapday]');
-  if(mDay){ switchAppTab('map'); setView('day',Number(mDay.getAttribute('data-mapday'))); return; }
+  if(mDay){ ev.stopPropagation(); jumpToDayOnMap(Number(mDay.getAttribute('data-mapday'))); return; }
   var mStay=ev.target.closest('[data-mapstay]');
   if(mStay){ jumpToHotelOnMap(Number(mStay.getAttribute('data-mapstay'))); return; }
   var hBtn=ev.target.closest('[data-hotelidx]');
