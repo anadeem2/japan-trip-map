@@ -181,7 +181,7 @@ footer{color:var(--faint);font-size:12.5px;margin-top:26px;border-top:1px solid 
   </div>
 
   <div class="toolbar" role="group" aria-label="Calendar controls">
-    <a class="pill" href="index.html" style="text-decoration:none;display:inline-flex;align-items:center">← Map</a>
+    <a class="pill" href="index.html" style="text-decoration:none;display:inline-flex;align-items:center">← Back to Map</a>
     <button class="pill" data-range="all" aria-pressed="false">All 17 days</button>
     <button class="pill" data-range="tokyo" aria-pressed="true">Nov 25–Dec 2 (Tokyo &amp; Fuji)</button>
     <button class="pill" data-range="kyoto" aria-pressed="false">Dec 3–9 (Kyoto–Osaka)</button>
@@ -407,8 +407,8 @@ function renderCal(){
   gut+='</div>';
   var cols=days.map(function(d){
     var evs=d.events.map(function(e){
-      var rawH=(e.e-e.s)*HOUR-4, height=Math.max(rawH,22), top=(e.s-START)*HOUR+2;
-      var compact=height<42;
+      var rawH=(e.e-e.s)*HOUR-4, height=Math.max(rawH,24), top=(e.s-START)*HOUR+2;
+      var compact=height<48;
       var dim=(state.mustdo&&e.k==='optional')||(state.bookedOnly&&e.k!=='booked');
       var cls='ev '+e.k+(compact?' compact':'')+(e.soldout?' soldout':'')+(dim?' dimmed':'');
       return '<button class="'+cls+'" data-day="'+d.id+'" style="--ac:'+d.ac+';top:'+top+'px;height:'+height+'px">'
@@ -485,7 +485,12 @@ document.getElementById('navCalBtn').addEventListener('click',function(){ setVie
 document.getElementById('navListBtn').addEventListener('click',function(){ setViewMode(true); });
 renderCal();
 showDay(state.selected);
-if(location.hash==='#list') setViewMode(true);
+if(location.hash==='#list'){
+  state.range='all';
+  document.querySelectorAll('[data-range]').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-range')==='all'?'true':'false');});
+  renderCal();
+  setViewMode(true);
+}
 document.getElementById('ticketList').innerHTML=TICKETS.map(function(t){
   return '<div class="trow"><div class="date">'+t.date+'</div><div class="tname">'+t.name+'<span>'+t.sub+'</span></div><div class="price">'+t.price+'<span>per person</span></div><div class="status '+t.status+'">'+t.label+'</div></div>';
 }).join('');
