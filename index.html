@@ -297,169 +297,188 @@
 <script>
 var DAYS=[
 {id:1,date:"Thu Nov 26",title:"Arrive Tokyo",color:"#4363d8",load:"Light",stops:[
-  ["Haneda Airport",35.5494,139.7798,"Land ~5 p.m.",null,{start:"17:00",end:"18:30",book:false,transit:"🚆 Keikyu Airport Line → Toei Asakusa Line direct to Kuramae (~40m, no transfer)"}],
-  ["Asakusa (dinner area)",35.7117,139.7965,"Halal dinner (Naritaya or Origami Asakusa) + 7-Eleven/FamilyMart run for tomorrow's breakfast, early night",null,{start:"19:00",end:"20:45",book:false,transit:"🚶 Walk 10 min from Kuramae hotel",meal:"🍽️ Dinner: Halal Asakusa + konbini breakfast run"}]
+  ["Haneda Airport",35.5494,139.7798,"Land ~5 p.m.",null,{start:"17:00",end:"18:00",book:false,transit:"✈️ Land Haneda ~17:00"}],
+  ["🚆 Airport train: Haneda → Keisei-Takasago",35.6400,139.7900,"Direct through-train (Keikyu Airport → Toei Asakusa → Keisei line, ~1h, no transfer) + 5-min walk to Hao Bros.Home Gemini",null,{start:"18:00",end:"19:15",book:false,transit:"🚆 Keikyu/Asakusa/Keisei direct (~1h) · ~¥1,040 pp · Suica/IC (no booking)"}],
+  ["Hao Bros.Home Gemini — Check in",35.7480,139.8645,"6 nights (Nov 26–Dec 2, BOOKED) · self check-in · 5-min walk from Keisei-Takasago",null,{start:"19:15",end:"20:00",book:false,transit:"🚶 5-min walk from Keisei-Takasago Sta."}],
+  ["Asakusa / Takasago dinner + konbini run",35.7117,139.7965,"Halal dinner on the way in or local in Takasago + 7-Eleven/FamilyMart run, early night",null,{start:"20:00",end:"21:30",book:false,transit:"🚶 Walk in Takasago / Asakusa",meal:"🍽️ Dinner: Halal Asakusa or local Takasago + konbini run"}]
 ]},
-{id:2,date:"Fri Nov 27",title:"East Tokyo — easy pace (jetlag day)",color:"#f58231",load:"Light",stops:[
-  ["Senso-ji, Asakusa",35.7148,139.7967,"Jetlag-friendly start right outside your Asakusa hotel — zero commute, skip optional stops if tired",null,{start:"09:30",end:"11:00",book:false,transit:"🚶 Walk 8 min from hotel",meal:"🍽️ Breakfast: Konbini / hotel coffee before 09:30"}],
+{id:2,date:"Fri Nov 27",title:"East Tokyo — easy pace",color:"#f58231",load:"Light",stops:[
+  ["🚆 Asakusa line direct: Takasago → Asakusa",35.7290,139.8300,"Direct ride on Asakusa line (~20 min, no transfer)",null,{start:"09:00",end:"09:30",book:false,transit:"🚆 Asakusa line direct (~20m) · ~¥380 pp · Suica/IC (no booking)"}],
+  ["Senso-ji, Asakusa + Nakamise",35.7148,139.7967,"Late start, no fixed time — + Nakamise, skip anything if tired",null,{start:"09:30",end:"11:00",book:false,transit:"🚶 Walk 3 min from Asakusa Sta.",meal:"🍽️ Breakfast: Konbini / café before 09:00"}],
   ["Kappabashi Kitchen Street",35.7107,139.7886,"5 min from Senso-ji — chef knives, kitchenware & the famous food-sample shops",null,{start:"11:05",end:"12:00",book:false,transit:"🚶 Walk 5 min from Senso-ji"}],
   ["Sumida River walk",35.7105,139.8015,"Gentle ~30 min stroll toward Ueno",null,{start:"12:05",end:"12:40",book:false,transit:"🚶 Walk 10 min east to river"}],
-  ["Ameyoko Market",35.7089,139.7741,"Lunch",null,{start:"12:45",end:"13:45",book:false,transit:"🚇 Ginza Line Asakusa → Ueno (5m)",meal:"🍽️ Lunch: Street food / kebab / seafood at Ameyoko"}],
-  ["Tokyo National Museum, Ueno",35.7188,139.7763,"Likely cut if jetlagged — 1–2h museum",null,{start:"14:00",end:"15:30",book:false,opt:true,cut:true,transit:"🚶 Walk 10 min through Ueno Park"}],
-  ["Akihabara",35.6984,139.7731,"Afternoon, only if energy remains — optional",null,{start:"15:45",end:"17:30",book:false,opt:true,transit:"🚆 JR Yamanote Ueno → Akihabara (4m)",meal:"🍽️ Dinner: Halal ramen/curry in Akihabara or back in Asakusa"}],
-  ["Ikebukuro",35.7295,139.7109,"Likely cut — across town on the west side; skip unless high energy",null,{start:"18:00",end:"19:45",book:false,opt:true,cut:true,transit:"🚆 JR Yamanote Akihabara → Ikebukuro (21m)"}]
+  ["Ameyoko Market",35.7089,139.7741,"Lunch",null,{start:"12:45",end:"13:45",book:false,transit:"🚇 Ginza Line Asakusa → Ueno (5m, ¥180)",meal:"🍽️ Lunch: Street food / kebab / seafood at Ameyoko"}],
+  ["Tokyo National Museum, Ueno",35.7188,139.7763,"Likely cut if jetlagged — ¥1,000 at door, ~2h",null,{start:"14:00",end:"15:30",book:false,opt:true,cut:true,transit:"🚶 Walk 10 min through Ueno Park · ¥1,000 at door"}],
+  ["Akihabara",35.6984,139.7731,"Afternoon, only if energy remains — optional",null,{start:"16:00",end:"17:30",book:false,opt:true,transit:"🚆 JR Yamanote Ueno → Akihabara (4m, ¥150)",meal:"🍽️ Dinner: Halal ramen/curry in Akihabara or back in Takasago"}],
+  ["Ikebukuro",35.7295,139.7109,"FLEX only — Pokémon Center / Animate, if energy remains",null,{start:"18:00",end:"19:30",book:false,opt:true,cut:true,transit:"🚆 JR Yamanote Akihabara → Ikebukuro (21m, ¥210)"}],
+  ["🚆 Return: Keisei-Ueno / Nippori → Takasago",35.7280,139.8100,"Direct Keisei train back to Keisei-Takasago",null,{start:"19:35",end:"20:05",book:false,transit:"🚆 Keisei line direct (~25–35m) · ~¥330–400 pp · Suica/IC"}]
 ]},
 {id:3,date:"Sat Nov 28",title:"The bay day",color:"#f032e6",load:"Medium",stops:[
-  ["Tsukiji Outer Market",35.6654,139.7707,"Saturday morning = full market open (unlike Sunday/Wednesday) — street-food crawl: tamagoyaki, tuna, grilled scallops. Stalls wind down by ~14:00","food",{start:"10:00",end:"12:00",book:false,transit:"🚇 Oedo Line Kuramae → Tsukijishijo (18m)",meal:"🍽️ Breakfast + Early Lunch: Tsukiji street food"}],
-  ["⭐ Louis Vuitton Ginza + Le Café V (optional)",35.6695,139.7633,"Likely cut — optional luxury detour; 2nd chance in Osaka on Dec 6",null,{start:"12:15",end:"13:30",book:false,opt:true,cut:true,transit:"🚶 Walk 10 min from Tsukiji"}],
-  ["Tokyo Rinkai Disaster Prevention Park, Ariake",35.6378,139.7877,"Afternoon, free, 72h tour",null,{start:"14:15",end:"16:00",book:false,transit:"🚆 Yurakucho Line → Rinkai Line to Kokusai-Tenjijo (25m)"}],
-  ["Unicorn Gundam — DiverCity Tokyo, Odaiba",35.6373,139.7755,"Life-size Unicorn Gundam outside DiverCity, ~10 min from the park",null,{start:"16:15",end:"17:45",book:false,transit:"🚶 Walk 10 min across Odaiba"}],
-  ["teamLab Planets, Toyosu",35.6490,139.7898,"~19:00, barefoot",null,{start:"19:00",end:"20:45",book:true,bookNote:"Book ~19:00 timed entry ticket",transit:"🚆 Yurikamome Daiba → Shin-Toyosu (12m)",meal:"🍽️ Dinner: LaLaport Toyosu or back in Asakusa (~21:15)"}]
+  ["🚆 Asakusa line direct: Takasago → Higashi-Ginza",35.7080,139.8150,"Direct 30-min ride from Gemini to Tsukiji / Ginza",null,{start:"09:15",end:"09:50",book:false,transit:"🚆 Asakusa line direct (~30m) · ~¥440 pp · Suica/IC (no booking)"}],
+  ["Tsukiji Outer Market",35.6654,139.7707,"Saturday morning = full market open — tamagoyaki, tuna, grilled scallops. Stalls wind down ~14:00","food",{start:"10:00",end:"12:00",book:false,transit:"🚶 Walk 5 min from Higashi-Ginza",meal:"🍽️ Breakfast + Early Lunch: Tsukiji street food"}],
+  ["⭐ Louis Vuitton Ginza + Le Café V (optional)",35.6695,139.7633,"Optional, not required — Jun Aoki's rippling water-glass flagship. 2nd chance Dec 6 in Osaka",null,{start:"12:15",end:"13:30",book:false,opt:true,cut:true,transit:"🚶 Walk 10 min from Tsukiji"}],
+  ["🚆 Yurikamome: Shimbashi → Ariake",35.6520,139.7720,"Elevated automated transit across Rainbow Bridge",null,{start:"13:35",end:"14:15",book:false,transit:"🚆 Yurikamome Shimbashi → Ariake (~25m) · ~¥390 pp · Suica/IC"}],
+  ["Tokyo Rinkai Disaster Prevention Park, Ariake",35.6378,139.7877,"Afternoon, free, 72h earthquake tour (last entry 16:30)",null,{start:"14:15",end:"16:00",book:false,transit:"🚶 Walk 3 min from Ariake Sta."}],
+  ["Unicorn Gundam — DiverCity Tokyo, Odaiba",35.6373,139.7755,"Life-size Unicorn Gundam outside DiverCity — transforms on the hour",null,{start:"16:30",end:"17:45",book:false,transit:"🚆 Yurikamome Ariake → Daiba (~10m, ¥250) + walk"}],
+  ["teamLab Planets, Toyosu",35.6490,139.7898,"BOOKED ~19:00 — barefoot, water to knees, 1.5–2h",null,{start:"19:00",end:"21:00",book:true,bookNote:"🎟 BOOKED ~19:00 · ¥4,400 pp",transit:"🚆 Yurikamome Daiba → Shin-Toyosu (~15m, ¥260)",meal:"🍽️ Dinner: LaLaport Toyosu or back in Takasago (~21:30)"}],
+  ["🚆 Return: Toyosu → Takasago",35.6850,139.8100,"Yurikamome to Shimbashi, then Asakusa line direct to Takasago",null,{start:"21:05",end:"21:55",book:false,transit:"🚆 Yurikamome + Asakusa line (~50m) · ~¥760 pp · Suica/IC"}]
 ]},
-{id:4,date:"Sun Nov 29",title:"West Tokyo — easy start",color:"#911eb4",load:"Medium",stops:[
-  ["Meiji Shrine",35.6764,139.6993,"10:00 relaxed start — Sundays often feature traditional wedding processions at Meiji Shrine",null,{start:"10:00",end:"11:00",book:false,transit:"🚇 Ginza Line → Omotesando → Chiyoda Line to Meiji-jingumae (35m)",meal:"🍽️ Breakfast: Konbini / café near hotel before 09:15"}],
-  ["Harajuku / Takeshita St",35.6710,139.7030,"Easy stroll + Omotesando",null,{start:"11:05",end:"12:15",book:false,transit:"🚶 Walk 5 min from Meiji Shrine"}],
-  ["Tokyo Camii",35.6680,139.6760,"Likely cut — detour out to Yoyogi-Uehara if pressed for time",null,{start:"12:30",end:"13:15",book:false,opt:true,cut:true,transit:"🚆 Odakyu Line to Yoyogi-Uehara (5m)"}],
-  ["Shibuya Crossing + Hachiko",35.6595,139.7005,"",null,{start:"13:30",end:"14:00",book:false,transit:"🚶 Walk 15 min down Omotesando",meal:"🍽️ Lunch: Casual lunch in Harajuku / Shibuya"}],
-  ["Nintendo Tokyo + Pokémon Center, Shibuya Parco",35.6621,139.6982,"Both on the 6th floor of Shibuya Parco, a few minutes from the crossing",null,{start:"14:05",end:"15:00",book:false,transit:"🚶 Walk 5 min from crossing"}],
-  ["Shibuya Parco 10F rooftop park",35.6623,139.6984,"Free rooftop park on the 10th floor of Shibuya Parco — easy add-on while you're there",null,{start:"15:00",end:"15:20",book:false,opt:true,transit:"🚶 Elevator inside Shibuya Parco"}],
-  ["Starbucks Reserve Roastery Tokyo, Nakameguro",35.6493,139.6925,"Likely cut — 20-min detour south of Shibuya right before 16:00 Shibuya Sky",null,{start:"15:25",end:"15:45",book:false,opt:true,cut:true,transit:"🚆 Tokyu Toyoko Shibuya → Nakameguro (4m each way)"}],
-  ["SHIBU NIWA — Shibuya Fukuras rooftop",35.6576,139.7003,"Free rooftop terrace, 17th floor of Shibuya Fukuras — skips easily since you're doing Shibuya Sky",null,{start:"15:45",end:"16:00",book:false,opt:true,cut:true,transit:"🚶 Walk 6 min"}],
-  ["Shibuya Sky",35.6580,139.7020,"SUNSET slot ~16:00 — only fixed point today",null,{start:"16:00",end:"17:30",book:true,bookNote:"Book 16:00 sunset entry slot 4 weeks in advance",transit:"🚶 Shibuya Scramble Square (connected to Sta.)"}],
-  ["Gyumon Shibuya",35.6568,139.6970,"Evening — halal wagyu yakiniku in Shibuya, A5 grilled at your table after the Sky sunset","food",{start:"18:00",end:"19:45",book:true,opt:true,bookNote:"Optional dinner — reserve table for 4 after Shibuya Sky",transit:"🚶 Walk 6 min from Shibuya Sky",meal:"🍽️ Dinner: Halal A5 wagyu yakiniku"}]
+{id:4,date:"Sun Nov 29",title:"West Tokyo + Golden Gai night",color:"#911eb4",load:"Medium",stops:[
+  ["🚆 Asakusa + Yamanote: Takasago → Harajuku",35.6950,139.7800,"Direct Asakusa line to Shimbashi (~35m), then Yamanote to Harajuku (~20m)",null,{start:"09:00",end:"09:55",book:false,transit:"🚆 Asakusa + Yamanote (~55m) · ~¥550 pp · Suica/IC (no booking)"}],
+  ["Meiji Shrine",35.6764,139.6993,"Late, relaxed start — Sunday wedding processions likely late morning",null,{start:"10:00",end:"11:00",book:false,transit:"🚶 Walk 3 min from Harajuku Sta.",meal:"🍽️ Breakfast: Konbini / café before 09:00"}],
+  ["Harajuku / Takeshita St + Yoyogi Rockabillies",35.6710,139.7030,"Sunday fashion crowd on Takeshita + Sunday-only rockabilly dancers at Yoyogi Park + Omotesando",null,{start:"11:05",end:"13:15",book:false,transit:"🚶 Walk 5 min from Meiji Shrine",meal:"🍽️ Lunch: Casual lunch in Harajuku / Omotesando"}],
+  ["Tokyo Camii",35.6680,139.6760,"If time — detour to Yoyogi-Uehara",null,{start:"13:20",end:"13:55",book:false,opt:true,cut:true,transit:"🚆 Odakyu Line to Yoyogi-Uehara (5m, ¥140)"}],
+  ["Ikebukuro / Akihabara (optional squeeze)",35.7295,139.7109,"Optional squeeze only if wanted — Pokémon Center / Animate or Akihabara, or rest back at Takasago",null,{start:"14:00",end:"16:00",book:false,opt:true,transit:"🚆 JR Yamanote (~20m, ¥210)"}],
+  ["Golden Gai, Shinjuku",35.6938,139.7048,"Moved from Nov 30 — evening stroll, 30–45 min",null,{start:"19:00",end:"20:00",book:false,transit:"🚆 JR Yamanote Harajuku → Shinjuku (5m, ¥150)"}],
+  ["Shinjuku-tei Shinjuku",35.6942,139.7040,"Moved from Nov 30 — halal wagyu ramen flagship (the trip's one ramen splurge)","food",{start:"20:10",end:"21:15",book:false,opt:true,transit:"🚶 Walk 3 min from Golden Gai",meal:"🍽️ Dinner: Halal wagyu ramen at Shinjuku-tei"}],
+  ["🚆 Return: Shinjuku → Takasago",35.7200,139.7800,"Leave Shinjuku by ~23:00 — last workable trains back to Takasago leave around then",null,{start:"21:25",end:"22:00",book:false,transit:"🚆 JR + Keisei via Nippori/Shimbashi (~55m) · ~¥550 pp · Suica/IC"}]
 ]},
-{id:5,date:"Mon Nov 30",title:"Tokyo — rest, flex & bag shipping",color:"#808000",load:"Recovery",stops:[
-  ["Asakusa / Kuramae (sleep in & laundry)",35.7055,139.7935,"Built-in rest morning — sleep in, laundry, pack & ship big bags to Kyoto tonight (keep 2-night backpack for DisneySea & Fuji)",null,{start:"10:30",end:"12:30",book:false,transit:"🚶 At hotel (Yamato Takkyubin at front desk)",meal:"🍽️ Breakfast: Relaxed café / hotel breakfast"}],
-  ["Ikebukuro / Akihabara (flex catch-up)",35.7295,139.7109,"Optional flex afternoon — hit anything skipped earlier (Pokémon Center, Akihabara, or Ginza) at an easy pace",null,{start:"14:00",end:"17:30",book:false,opt:true,transit:"🚇 Ginza/Marunouchi/JR (~20–25m)",meal:"🍽️ Lunch: Wherever you wander"}],
-  ["Asakusa dinner + early night",35.7117,139.7965,"Rest up for tomorrow's full day at DisneySea",null,{start:"18:30",end:"20:00",book:false,transit:"🚶 Walk in Asakusa",meal:"🍽️ Dinner: Halal dinner in Asakusa + grab breakfast for 07:30"}]
+{id:5,date:"Mon Nov 30",title:"Shibuya day + Shibuya Sky 17:20",color:"#0aa2c0",load:"Medium",stops:[
+  ["📦 Ship big bags to Kyoto (Yamato)",35.7480,139.8645,"Drop big checked bags at a Yamato office / konbini in Takasago, addressed to Yamato pickup near JR Nijo / Kyoto Kyo-Hiiragi (both stays unstaffed)",null,{start:"09:00",end:"10:00",book:false,transit:"📦 Yamato Transport drop-off · ~¥3,000/bag at counter"}],
+  ["🚆 Asakusa + Yamanote: Takasago → Shibuya",35.6950,139.7800,"Gemini → Shimbashi direct (~35m), then Yamanote to Shibuya (~18m)",null,{start:"10:05",end:"10:55",book:false,transit:"🚆 Asakusa + Yamanote (~55m) · ~¥550 pp · Suica/IC (no booking)"}],
+  ["Shibuya Crossing + Hachiko",35.6595,139.7005,"Moved from Nov 29 — late morning into Shibuya",null,{start:"11:00",end:"11:30",book:false,transit:"🚶 At Shibuya Sta.",meal:"🍽️ Breakfast: Café / konbini before 10:00"}],
+  ["Mega Don Quijote Shibuya",35.6598,139.6978,"Mega Don Quijote flagship — souvenirs and snacks, a few minutes from the crossing",null,{start:"11:35",end:"12:30",book:false,transit:"🚶 Walk 4 min from crossing"}],
+  ["Nintendo Tokyo + Pokémon Center, Shibuya Parco",35.6621,139.6982,"Moved from Nov 29 — 6F Shibuya Parco + free 10F rooftop park",null,{start:"13:00",end:"14:30",book:false,transit:"🚶 Walk 5 min from Don Quijote",meal:"🍽️ Lunch: Shibuya Parco / Center-Gai"}],
+  ["SHIBU NIWA — Shibuya Fukuras rooftop",35.6576,139.7003,"17F Shibuya Fukuras free rooftop terrace looking down on the crossing, timed for sunset (~16:28)",null,{start:"16:00",end:"16:40",book:false,transit:"🚶 Walk 6 min from Parco"}],
+  ["Shibuya Sky",35.6580,139.7020,"BOOKED Mon Nov 30 · entry 17:20–17:39 · blue-hour / night lights · no exit limit · passports required at entry",null,{start:"17:20",end:"18:45",book:true,bookNote:"🎟 BOOKED 17:20–17:39 · ¥3,400 pp (passports required)",transit:"🚶 Shibuya Scramble Square (connected to Sta.)"}],
+  ["Gyumon Shibuya",35.6568,139.6970,"Moved from Nov 29 — certified halal wagyu yakiniku (~¥3,000–4,000 courses, reserve if group wants it)","food",{start:"19:00",end:"20:30",book:false,opt:true,transit:"🚶 Walk 6 min from Shibuya Sky",meal:"🍽️ Dinner: Halal A5 wagyu yakiniku"}],
+  ["Starbucks Reserve Roastery Tokyo, Nakameguro",35.6493,139.6925,"Optional — 1 stop on Toyoko line; only if energy holds (early night before 07:15 DisneySea)",null,{start:"20:35",end:"21:00",book:false,opt:true,cut:true,transit:"🚆 Tokyu Toyoko Shibuya → Nakameguro (4m, ¥140)"}],
+  ["🚆 Return: Shibuya → Takasago",35.6950,139.7800,"Early night — DisneySea starts with a 07:15 departure tomorrow",null,{start:"21:00",end:"21:55",book:false,transit:"🚆 Yamanote + Asakusa line (~55m) · ~¥550 pp · Suica/IC"}]
 ]},
-{id:6,date:"Tue Dec 1",title:"DisneySea",color:"#0aa2c0",load:"Heavy",stops:[
-  ["Tokyo DisneySea",35.6401,139.8880,"Full day 9:00–21:00, Fantasy Springs. Tuesday weekday = lower crowds, and you're fresh after Monday's rest day!",null,{start:"09:00",end:"21:00",book:true,bookNote:"Book 1-Day Passport + Fantasy Springs planning",transit:"🚆 Asakusa Line → Hatchobori → JR Keiyo Line to Maihama + Resort Line (~45m total)",meal:"🍽️ Breakfast: 07:30 before leaving · Lunch & Dinner: Inside DisneySea"}]
+{id:6,date:"Tue Dec 1",title:"DisneySea",color:"#22d3ee",load:"Heavy",stops:[
+  ["🚆 Keisei + JR + Resort Line → DisneySea",35.6950,139.9200,"Leave Hao Bros.Home Gemini ~07:15: Keisei → Funabashi, JR → Nishi-Funabashi → Musashino line → Maihama → Disney Resort Line",null,{start:"07:15",end:"08:30",book:false,transit:"🚆 Keisei + JR Musashino + Resort Line (~70m, 2 changes) · ~¥700 pp · Suica/IC",meal:"🍽️ Breakfast: 07:00 before leaving"}],
+  ["Tokyo DisneySea",35.6401,139.8880,"BOOKED Tue Dec 1 · 9:00–21:00 · Fantasy Springs · Believe! show 19:30",null,{start:"09:00",end:"21:00",book:true,bookNote:"🎟 BOOKED Tue Dec 1 · ¥10,900 pp",transit:"🚆 Disney Resort Line to Tokyo DisneySea Sta.",meal:"🍽️ Lunch & Dinner: Inside DisneySea"}],
+  ["🚆 Return: DisneySea → Takasago",35.6950,139.9200,"Same route back after close (trains run past 22:00)",null,{start:"21:05",end:"22:00",book:false,transit:"🚆 Resort Line + JR + Keisei (~70m) · ~¥700 pp · Suica/IC"}]
 ]},
-{id:7,date:"Wed Dec 2",title:"Tokyo → Mt. Fuji / Kawaguchiko (sleep-in + overnight)",color:"#3cb44b",load:"Medium",stops:[
-  ["Busta Shinjuku",35.6886,139.7006,"Sleep in after DisneySea! Check out ~10:00 → relaxed 10:45 highway bus to Kawaguchiko (no 07:05 alarm, no backtracking)",null,{start:"10:45",end:"12:45",book:true,bookNote:"Book ~10:45 highway bus Busta Shinjuku → Kawaguchiko",transit:"🚇 Oedo Line Kuramae → Shinjuku (26m) + 🚌 Highway Bus (~1h 55m)",meal:"🍽️ Breakfast: Hotel checkout + grab coffee/food for the bus"}],
-  ["Lake Kawaguchiko + Panoramic Ropeway",35.5045,138.7713,"Afternoon ropeway + sunset Fuji views, then check into Kawaguchiko hotel/onsen & rest",null,{start:"13:30",end:"17:00",book:false,transit:"🚌 Sightseeing bus / walk 15 min from Kawaguchiko Sta.",meal:"🍽️ Lunch: Lakeside café/hoto (~13:00) · Dinner: Onsen/hotel or near station"}]
+{id:7,date:"Wed Dec 2",title:"Mt. Fuji — Kawaguchiko + Fuyo No Yado",color:"#3cb44b",load:"Medium",stops:[
+  ["🚆 Keisei + Yamanote: Takasago → Busta Shinjuku",35.7150,139.7800,"Leave Gemini ~07:30: Keisei-Takasago → Nippori (~25m), Yamanote → Shinjuku (~25m)",null,{start:"07:30",end:"08:50",book:false,transit:"🚆 Keisei + Yamanote (~55m + walk) · ~¥550 pp · Suica/IC",meal:"🍽️ Breakfast: Grab coffee/food for the bus"}],
+  ["🚌 Highway Bus: Busta Shinjuku → Kawaguchiko",35.6886,139.7006,"09:05 departure from Busta Shinjuku → arrives Kawaguchiko ~11:15",null,{start:"09:05",end:"11:15",book:true,bookNote:"🚌 BOOK AHEAD (Highwaybus.com) · 09:05 dep → 11:15 arr · ¥2,200 pp",transit:"🚌 Fujikyu / Keio Highway Bus (~2h 10m) · ¥2,200 pp"}],
+  ["Mt. Fuji Panoramic Ropeway",35.5038,138.7728,"First right after arrival — last descent ~16:20 in winter and queues build on clear days",null,{start:"11:30",end:"12:45",book:false,transit:"🚶 ~10-min walk from Kawaguchiko Sta. · ¥1,200 at door"}],
+  ["Lake Kawaguchiko",35.5045,138.7713,"Fuji views across the lake",null,{start:"13:00",end:"14:00",book:false,transit:"🚶 Lakeside walk"}],
+  ["T&T Fujiyama Halal Restaurant",35.4952,138.8198,"Halal-certified hōtō noodles in Fujiyoshida — open 11:00–16:00 (closed Tue), ~¥1,000–2,000 pp","food",{start:"14:15",end:"15:15",book:false,transit:"🚆 Fujikyu / bus / taxi (~10m from Kawaguchiko) · ~¥300–1,200",meal:"🍽️ Lunch: Halal hōtō noodles (~¥1,000–2,000)"}],
+  ["Fujisan Resort Loghouse Fuyo No Yado — Check in",35.4790,138.7840,"1 night (Dec 2–3, BOOKED) · front desk 15:30–18:00 · whole log house + private tub + Resort Inn Fuyo public bath",null,{start:"15:30",end:"16:15",book:false,transit:"🚕 5-min taxi from Fujisan Sta. (~¥800)"}],
+  ["Chureito Pagoda (sunset)",35.5013,138.8014,"Fuji views at sunset — ~5 min from Fuyo No Yado",null,{start:"16:30",end:"17:45",book:false,transit:"🚶/🚕 ~5 min from house"}],
+  ["Soak: private tub + Resort Inn Fuyo public bath",35.4790,138.7840,"Public bath next door is free for log-house guests",null,{start:"18:30",end:"20:00",book:false,opt:true,transit:"🚶 Next door to log house",meal:"🍽️ Dinner: Near Fujiyoshida / house"}]
 ]},
-{id:8,date:"Thu Dec 3",title:"Mt. Fuji → Kyoto (via Mishima Shinkansen)",color:"#469990",load:"Medium",stops:[
-  ["Chureito Pagoda",35.5013,138.8014,"08:15 crisp morning Mt. Fuji views before heading west",null,{start:"08:15",end:"10:00",book:false,transit:"🚆 Fujikyu Line Kawaguchiko → Shimoyoshida (5m) + 10m walk",meal:"🍽️ Breakfast: Quick breakfast before 08:00"}],
-  ["Mishima Station (via Fujikyu bus)",35.1264,138.9110,"~10:30 bus Kawaguchiko → Mishima (~90m), then Hikari Shinkansen Mishima → Kyoto (~2h, arrives ~14:30)",null,{start:"10:30",end:"14:15",book:true,bookNote:"Book ~10:30 Kawaguchiko → Mishima bus + Shinkansen Mishima → Kyoto",transit:"🚌 Fujikyu Bus (~90m) + 🚅 Hikari Shinkansen (~2h)",meal:"🍽️ Lunch: Ekiben bento on the Shinkansen"}],
-  ["Kyoto Station Skywalk",34.9855,135.7585,"Arrive ~14:30 right on schedule (with Nagoya cut, zero extra hotel move!)",null,{start:"14:30",end:"15:15",book:false,transit:"🚶 Inside Kyoto Station (drop packs at hotel/locker)"}],
-  ["Nishiki Market",35.0050,135.7630,"1–1.5h",null,{start:"15:30",end:"16:45",book:false,transit:"🚇 Karasuma Subway Kyoto → Shijo (4m)"}],
-  ["Samurai & Ninja Museum",35.0075,135.7670,"Hands-on shuriken throwing, blowgun, samurai armor, sword demo, about 1 hour",null,{start:"17:00",end:"18:00",book:true,bookNote:"Book 17:00 tour slot",transit:"🚶 Walk 5 min"}],
-  ["Hoippo — vintage kimono shop",35.0014,135.7642,"Blake's kimono keepsake hunt — pure-silk vintage kimono and haori in a 100-year-old machiya townhouse; closes 19:00, so it comes first in the evening",null,{start:"18:05",end:"18:55",book:false,transit:"🚶 Walk 5 min"}],
-  ["Chicago Kyoto — vintage kimono shop",35.0045,135.7675,"The big-rack vintage kimono hunt, kimono floor upstairs; open until 20:00",null,{start:"19:00",end:"19:55",book:false,transit:"🚶 Walk 4 min"}],
-  ["Kawaramachi",35.0039,135.7689,"",null,{start:"20:00",end:"20:30",book:false,opt:true,transit:"🚶 Walk 2 min"}],
-  ["Pontocho Alley",35.0058,135.7708,"+ Kamo River at dusk",null,{start:"20:30",end:"21:30",book:false,opt:true,transit:"🚶 Walk 3 min",meal:"🍽️ Dinner: Halal/local dinner along Kawaramachi or Pontocho"}]
+{id:8,date:"Thu Dec 3",title:"Fujiyoshida → Kyoto Kyo-Hiiragi + downtown",color:"#469990",load:"Heavy",stops:[
+  ["Sunrise Fuji viewing — Fuyo / Chureito",35.4790,138.7840,"Sunrise viewing at the house or Chureito (5 min) when Fuji is most often clear",null,{start:"07:00",end:"07:45",book:false,transit:"🚶 Walk from Fuyo No Yado",meal:"🍽️ Breakfast: Quick breakfast before walking to Fuji-Q Highland stop"}],
+  ["🚌🚅 Mishima Liner Bus + Hikari Shinkansen → Kyoto",35.1270,138.9106,"Walk 10–15m to Fuji-Q Highland stop → 09:05 Mishima Liner (arr 10:15, ¥2,500) → Hikari 11:46 (arr Kyoto 13:37, ~¥10,780)",null,{start:"09:05",end:"13:37",book:true,bookNote:"🚌🚅 BOOK AHEAD: 09:05 bus (Fujikyu/Sekisho, ¥2,500) + 11:46 Hikari (SmartEX, ~¥10,780) = ~¥13,280 pp",transit:"🚌 Mishima Liner (70m, ¥2,500) + 🚅 Hikari Shinkansen (1h51m, ~¥10,780)",meal:"🍽️ Lunch: Ekiben bento on the Hikari"}],
+  ["Kyoto Station Skywalk",34.9855,135.7585,"Arrive Kyoto ~13:37",null,{start:"13:45",end:"14:15",book:false,transit:"🚶 Inside Kyoto Station"}],
+  ["Nishiki Market",35.0050,135.7630,"1–1.5h",null,{start:"14:30",end:"15:45",book:false,transit:"🚇 Karasuma Subway Kyoto → Shijo (4m, ¥220)"}],
+  ["Samurai & Ninja Museum",35.0075,135.7670,"Hands-on shuriken throwing, blowgun, samurai armor, sword demo (~1h)",null,{start:"16:00",end:"17:15",book:true,bookNote:"🎟 BOOK AHEAD online (~¥3,300 vs ~¥4,400 at door)",transit:"🚶 Walk 5 min"}],
+  ["Hoippo — vintage kimono shop",35.0014,135.7642,"Blake's kimono keepsake hunt — closes 19:00, so it comes first; kimono from ¥8,800",null,{start:"17:30",end:"18:15",book:false,opt:true,transit:"🚶 Walk 5 min"}],
+  ["Chicago Kyoto — vintage kimono shop",35.0045,135.7675,"Big-rack vintage kimono hunt, kimono floor upstairs; open until 20:00",null,{start:"18:20",end:"19:00",book:false,opt:true,transit:"🚶 Walk 4 min"}],
+  ["Kawaramachi + Pontocho Alley",35.0058,135.7708,"Evening stroll + Kamo River at dusk",null,{start:"19:15",end:"20:20",book:false,transit:"🚶 Walk 3 min",meal:"🍽️ Dinner: Kawaramachi / Pontocho"}],
+  ["🚆 Subway Tozai + Check in: Kyoto Kyo-Hiiragi",35.0073,135.7406,"3 nights (Dec 3–6, BOOKED) · check-in 15:00–21:00 · 4–5 min walk from JR/Tozai Nijo Sta.",null,{start:"20:25",end:"21:00",book:false,transit:"🚇 Subway Tozai Shiyakusho-mae → Nijo (~6m, ¥220) + 5m walk"}]
 ]},
-{id:9,date:"Fri Dec 4",title:"Kyoto temples",color:"#e6194b",load:"Heavy",stops:[
-  ["Fushimi Inari",34.9671,135.7727,"08:00 start — gentler morning after travel day, still before crowds",null,{start:"08:00",end:"10:15",book:false,transit:"🚆 Keihan Line Gion-Shijo → Fushimi-Inari (10m)",meal:"🍽️ Breakfast: Konbini / bakery before 07:30"}],
-  ["Kiyomizu-dera",34.9949,135.7850,"",null,{start:"11:00",end:"12:30",book:false,transit:"🚆 Keihan Fushimi-Inari → Kiyomizu-Gojo (8m) + 20m uphill walk"}],
-  ["Sannenzaka / Ninenzaka",34.9963,135.7807,"+ Higashiyama",null,{start:"12:30",end:"14:15",book:false,transit:"🚶 Walk downhill from Kiyomizu-dera",meal:"🍽️ Lunch: Street food / noodles in Higashiyama"}],
-  ["Starbucks Ninenzaka Yasaka Chaya (tatami)",34.9987,135.7809,"Starbucks inside a traditional machiya townhouse on Ninenzaka — tatami seating upstairs",null,{start:"14:15",end:"15:00",book:false,opt:true,transit:"🚶 Right on Ninenzaka"}],
-  ["Yasaka Shrine",35.0036,135.7785,"Dusk",null,{start:"16:00",end:"16:45",book:false,transit:"🚶 Walk 10 min"}],
-  ["Gion",35.0037,135.7748,"Evening",null,{start:"17:00",end:"18:00",book:false,transit:"🚶 Walk 3 min"}],
-  ["Kennin-ji",35.0007,135.7740,"Likely cut — extra temple at dusk after Fushimi Inari & Kiyomizu-dera",null,{start:"18:00",end:"18:45",book:false,opt:true,cut:true,transit:"🚶 Walk 5 min"}],
-  ["Kodai-ji",35.0007,135.7809,"Night illumination",null,{start:"19:00",end:"20:30",book:false,transit:"🚶 Walk 8 min",meal:"🍽️ Dinner: Gion / Kawaramachi after illumination"}]
+{id:9,date:"Fri Dec 4",title:"Kyoto temples — Fushimi & Higashiyama",color:"#e6194b",load:"Heavy",stops:[
+  ["🚆 JR Sagano + Nara: Nijo → Inari",34.9855,135.7585,"Leave Kyoto Kyo-Hiiragi ~07:20: 4–5 min walk to JR Nijo → Kyoto Sta. (~6m) → JR Nara line to Inari (~5m)",null,{start:"07:20",end:"07:55",book:false,transit:"🚆 JR Sagano + Nara (~20m) · ¥240 pp · Suica/IC (no booking)",meal:"🍽️ Breakfast: Konbini / bakery before 07:15"}],
+  ["Fushimi Inari",34.9671,135.7727,"08:00 start — before worst crowds",null,{start:"08:00",end:"10:00",book:false,transit:"🚶 Steps from JR Inari Sta."}],
+  ["Kiyomizu-dera",34.9949,135.7850,"¥500 at door",null,{start:"10:30",end:"11:45",book:false,transit:"🚆 Keihan Fushimi-Inari → Kiyomizu-Gojo (8m, ¥220) + 20m uphill walk"}],
+  ["Sannenzaka / Ninenzaka + tatami Starbucks",34.9963,135.7807,"Higashiyama lanes + Starbucks inside a traditional machiya with tatami upstairs",null,{start:"11:45",end:"13:15",book:false,transit:"🚶 Walk downhill from Kiyomizu-dera",meal:"🍽️ Lunch: Higashiyama"}],
+  ["Tea ceremony + Kimono rental (optional)",34.9987,135.7809,"Tea ceremony (~1h, +¥4,000) / Kimono rental (+~¥3,100)",null,{start:"13:25",end:"15:30",book:false,opt:true,transit:"🚶 In Higashiyama"}],
+  ["Yasaka Shrine + Gion + Kennin-ji",35.0036,135.7785,"Yasaka at dusk + Gion Hanamikoji + Kennin-ji",null,{start:"17:00",end:"18:30",book:false,transit:"🚶 Walk 10 min"}],
+  ["Kodai-ji",35.0007,135.7809,"Night illumination (¥800 at door)",null,{start:"18:45",end:"20:00",book:false,transit:"🚶 Walk 8 min · ¥800 at door",meal:"🍽️ Dinner: Gion / Higashiyama"}],
+  ["🚆 Return: Subway Tozai Higashiyama → Nijo",35.0090,135.7600,"Direct Tozai line back to Nijo + 4–5 min walk to Kyoto Kyo-Hiiragi",null,{start:"20:05",end:"20:30",book:false,transit:"🚇 Subway Tozai direct (~10m) · ¥260 pp · Suica/IC"}]
 ]},
-{id:10,date:"Sat Dec 5",title:"Arashiyama + teamLab Biovortex Kyoto",color:"#d33682",load:"Medium",stops:[
-  ["Bamboo Grove",35.0176,135.6713,"08:30",null,{start:"08:30",end:"09:30",book:false,transit:"🚆 Hankyu Line Kawaramachi → Katsura → Arashiyama (25m) + 12m walk",meal:"🍽️ Breakfast: Quick breakfast before 07:45"}],
-  ["Tenryu-ji",35.0159,135.6738,"",null,{start:"09:35",end:"10:45",book:false,transit:"🚶 Walk 3 min"}],
-  ["Okochi Sanso Villa Garden",35.0172,135.6686,"Likely cut — extra garden when already doing Tenryu-ji",null,{start:"10:50",end:"11:50",book:false,opt:true,cut:true,transit:"🚶 At end of Bamboo Grove"}],
-  ["Shigetsu (inside Tenryu-ji)",35.0157,135.6742,"Lunch option — Michelin Bib Gourmand shojin (vegetarian temple) restaurant inside Tenryu-ji itself; mention halal needs when booking","food",{start:"12:00",end:"13:15",book:true,opt:true,bookNote:"Optional lunch — reserve & note halal dietary needs",transit:"🚶 Inside Tenryu-ji",meal:"🍽️ Lunch: Shojin temple cuisine"}],
-  ["Yoshiya Arashiyama",35.0145,135.6765,"Lunch alternative — halal set meals, certified by Kyoto's halal council with a separate kitchen and a prayer room on site","food",{start:"12:00",end:"13:15",book:true,opt:true,bookNote:"Alternative lunch reservation (halal certified)",transit:"🚶 Walk 5 min from Tenryu-ji",meal:"🍽️ Lunch: Halal certified set meals"}],
-  ["Togetsukyo Bridge",35.0129,135.6777,"",null,{start:"13:30",end:"14:15",book:false,transit:"🚶 Walk 5 min"}],
-  ["Kinkaku-ji",35.0394,135.7292,"",null,{start:"14:45",end:"16:00",book:false,transit:"🚆 Randen Tram Arashiyama → Kitano-Hakubaicho (22m) + 🚌 Bus 205 (10m)"}],
-  ["teamLab Biovortex Kyoto",34.9820,135.7649,"17:00–21:00 — 21-5 Higashikujo Higashi-Iwamotocho, 7–10 min walk from Kyoto Station Hachijo East Gate",null,{start:"17:00",end:"21:00",book:true,bookNote:"Book 17:00 timed entry ticket for teamLab Biovortex Kyoto",transit:"🚌 City Bus 205 Kinkaku-ji → Kyoto Station (~40m) + 8m walk",meal:"🍽️ Dinner: Kyoto Station / Kawaramachi after teamLab (~21:00)"}],
-  ["Kawaramachi",35.0039,135.7689,"Late dinner / evening stroll after teamLab",null,{start:"21:10",end:"22:00",book:false,opt:true,transit:"🚇 Karasuma Subway Kyoto → Shijo (4m)",meal:"🍽️ Dinner: Kawaramachi"}]
+{id:10,date:"Sat Dec 5",title:"Arashiyama + teamLab Biovortex 17:30",color:"#d33682",load:"Heavy",stops:[
+  ["🚆 JR Sagano direct: Nijo → Saga-Arashiyama",35.0130,135.7100,"4–5 min walk from Kyo-Hiiragi to JR Nijo, then direct Sagano line train (no transfer)",null,{start:"08:00",end:"08:25",book:false,transit:"🚆 JR Sagano direct (~11m) · ¥200 pp · Suica/IC (no booking)",meal:"🍽️ Breakfast: Quick breakfast before 07:45"}],
+  ["Bamboo Grove + Tenryu-ji",35.0176,135.6713,"08:30 start · Tenryu-ji ¥800 at door",null,{start:"08:30",end:"10:30",book:false,transit:"🚶 Walk 10 min from Saga-Arashiyama Sta."}],
+  ["Okochi Sanso Villa Garden",35.0172,135.6686,"¥1,000 at door — matcha & wafer included",null,{start:"10:45",end:"11:45",book:false,transit:"🚶 At end of Bamboo Grove · ¥1,000 at door"}],
+  ["Shigetsu / Yoshiya Arashiyama (lunch)",35.0145,135.6765,"Shigetsu (Michelin Bib Gourmand shojin inside Tenryu-ji) or Yoshiya (halal-certified sets from ~¥1,350 + prayer room)","food",{start:"12:00",end:"13:00",book:false,opt:true,transit:"🚶 Walk 5 min",meal:"🍽️ Lunch: Shigetsu (shojin) or Yoshiya (halal)"}],
+  ["Togetsukyo Bridge + riverside",35.0129,135.6777,"",null,{start:"13:15",end:"14:00",book:false,transit:"🚶 Walk 5 min"}],
+  ["Kinkaku-ji (Golden Pavilion)",35.0394,135.7292,"¥500 at door · taxi/Randen hop from Arashiyama",null,{start:"14:30",end:"15:45",book:false,transit:"🚕 Taxi (~20m, ~¥2,500 split 4 ways) or Randen Tram + Bus"}],
+  ["teamLab Biovortex Kyoto",34.9837,135.7649,"BOOKED 17:30 entry (~3h, closes 21:00) — 7 min walk from Kyoto Station Hachijo East Gate",null,{start:"17:30",end:"20:30",book:true,bookNote:"🎟 BOOKED 17:30 entry · ~¥5,200 pp (Sagano Romantic Train sold out)",transit:"🚌/🚕 Kinkaku-ji → Kyoto Station + 7m walk",meal:"🍽️ Dinner: Kyoto Station / Kawaramachi after teamLab"}],
+  ["🚆 Return: JR Sagano direct Kyoto → Nijo",34.9960,135.7480,"2 stops north directly to Nijo + 4–5 min walk to Kyoto Kyo-Hiiragi",null,{start:"20:35",end:"21:00",book:false,transit:"🚆 JR Sagano direct (~6m) · ¥190 pp · Suica/IC"}]
 ]},
-{id:11,date:"Sun Dec 6",title:"Kyoto → Osaka via Evangelion",color:"#0f7b6c",load:"Medium",stops:[
-  ["Eikan-do",35.0148,135.7954,"Morning, last autumn day · bags ship ahead to Osaka",null,{start:"09:00",end:"10:00",book:false,transit:"🚌 City Bus 5 Kawaramachi → Nanzenji/Eikando (25m)",meal:"🍽️ Breakfast: Hotel checkout + ship bags at front desk"}],
-  ["Nanzen-ji",35.0113,135.7939,"Right next to Eikan-do — Zen temple with a red-brick aqueduct through its grounds",null,{start:"10:05",end:"11:00",book:false,transit:"🚶 Walk 5 min"}],
-  ["Philosopher's Path",35.0170,135.7945,"Likely cut — long walk before Evangelion transit",null,{start:"11:05",end:"12:00",book:false,opt:true,cut:true,transit:"🚶 Walk 5 min"}],
-  ["Hirakata Park",34.8086,135.6396,"ALL OF EVANGELION exhibition ~2h — Keihan Premium Car south from Kyoto",null,{start:"13:00",end:"15:00",book:true,bookNote:"Book ALL OF EVANGELION exhibition + Keihan Premium Car",transit:"🚆 Keihan Premium Car Sanjo/Demachiyanagi → Hirakata-koen (~40m)",meal:"🍽️ Lunch: Quick lunch near Hirakata-koen"}],
-  ["Osaka Science Museum + Planetarium (Blake)",34.6918,135.4917,"Blake's solo split while others do Evangelion — hands-on science exhibits and a planetarium show; he rejoins the group at the Nippombashi hotel",null,{start:"13:30",end:"15:30",book:true,bookNote:"Book planetarium show time slot for Blake",transit:"🚆 Keihan to Yodoyabashi (~50m) + 12m walk"}],
-  ["Yodoyabashi, Osaka",34.6911,135.5009,"Stay southbound on Keihan to Yodoyabashi, then Midosuji hop south",null,{start:"15:30",end:"16:15",book:false,transit:"🚆 Keihan Hirakata-koen → Yodoyabashi (22m)"}],
-  ["Nippombashi — hotel check-in",34.6618,135.5060,"Check in ~16:30",null,{start:"16:30",end:"17:30",book:false,transit:"🚇 Sakaisuji / Midosuji Subway (~15m)"}],
-  ["⭐ Louis Vuitton Maison Osaka + Le Café V (optional — 2nd chance)",34.6734,135.5008,"Likely cut — optional luxury stop on Shinsaibashisuji (backup if Nov 28 Ginza was skipped)",null,{start:"17:45",end:"18:45",book:false,opt:true,cut:true,transit:"🚶 Walk 8 min"}],
-  ["Dotonbori",34.6687,135.5013,"+ Shinsaibashi night",null,{start:"19:00",end:"20:00",book:false,transit:"🚶 Walk 5 min from hotel",meal:"🍽️ Dinner: Dotonbori (takoyaki / halal options)"}],
-  ["Tombori River Cruise",34.6686,135.5010,"20-minute boat under the neon and Glico sign, boats every 30 minutes until 21:00",null,{start:"20:00",end:"20:30",book:true,opt:true,bookNote:"Optional — book 20:00 or 20:30 boat slot (last boat 21:00)",transit:"🚶 Right at Dotonbori canal"}]
+{id:11,date:"Sun Dec 6",title:"Kyoto → Osaka (Wolf Pack) via Evangelion",color:"#0f7b6c",load:"Heavy",stops:[
+  ["🚆 Subway Tozai: Nijo → Keage (Eikan-do)",35.0110,135.7650,"Ship bags at Yamato near Nijo first, then direct Tozai line to Keage (~12m) or 4-way taxi",null,{start:"08:15",end:"08:55",book:false,transit:"🚇 Subway Tozai direct (~12m, ¥260) or 🚕 4-way taxi (~¥2,000)",meal:"🍽️ Breakfast: Checkout + ship bags at Yamato near Nijo"}],
+  ["Eikan-do (last autumn day)",35.0148,135.7954,"¥1,500 at door · last autumn foliage day",null,{start:"09:00",end:"10:30",book:false,transit:"🚶 Walk 10 min from Keage Sta."}],
+  ["Nanzen-ji + aqueduct + Philosopher's Path",35.0113,135.7939,"Zen temple with red-brick aqueduct right next to Eikan-do",null,{start:"10:45",end:"12:00",book:false,transit:"🚶 Walk 5 min"}],
+  ["🚆 Keihan Premium Car: Sanjo/Demachiyanagi → Hirakata",34.9000,135.7000,"Reserved-seat express south to Hirakata-koen",null,{start:"12:30",end:"13:15",book:true,bookNote:"🚆 BOOK AHEAD (Keihan / station) · ¥420 fare + ¥400–500 seat = ~¥820–920 pp",transit:"🚆 Keihan Premium Car (~40m) · ~¥820–920 pp"}],
+  ["Hirakata Park — ALL OF EVANGELION",34.8086,135.6396,"Exhibition ~2h (¥2,200 advance / ¥2,400 door) — last day before Dec 7–11 closure",null,{start:"13:30",end:"15:00",book:true,bookNote:"🎟 ¥2,200 advance / ¥2,400 door",transit:"🚶 Walk 3 min from Hirakata-koen Sta.",meal:"🍽️ Lunch: Quick lunch near Hirakata-koen"}],
+  ["Osaka Science Museum + Planetarium (Blake)",34.6918,135.4917,"Parallel split — Blake goes to Yodoyabashi; ¥400 + ¥600 (planetarium on sale Nov 29)",null,{start:"13:30",end:"15:30",book:true,opt:true,bookNote:"🎟 Book planetarium morning of Nov 29 (7 days ahead) · ¥1,000 total",transit:"🚆 Keihan to Yodoyabashi + 12m walk"}],
+  ["🚆 Keihan + Midosuji: Hirakata → Daikokucho",34.7200,135.5600,"Southbound Keihan to Yodoyabashi, then 4 Midosuji stops south to Daikokucho",null,{start:"15:10",end:"16:15",book:false,transit:"🚆 Keihan + Midosuji (~45m) · ~¥600 pp · Suica/IC"}],
+  ["Wolf Pack Apartment 1001 — Check in",34.6542,135.4968,"5 nights (Dec 6–11, BOOKED) · a few minutes' walk from Daikokucho Sta.",null,{start:"16:30",end:"17:15",book:false,transit:"🚶 Walk 4 min from Daikokucho Sta."}],
+  ["Dotonbori + Shinsaibashi night",34.6687,135.5013,"1 stop on Midosuji (Namba) or ~15-min walk",null,{start:"17:30",end:"19:00",book:false,transit:"🚇 Midosuji 1 stop (¥190) or 15m walk",meal:"🍽️ Dinner: Dotonbori"}],
+  ["Tombori River Cruise",34.6686,135.5010,"20-min boat under neon & Glico sign · ¥2,000",null,{start:"19:15",end:"19:45",book:true,bookNote:"¥2,000 · evening boats fill first",transit:"🚶 Right at Dotonbori canal"}],
+  ["⭐ Louis Vuitton Maison Osaka + Le Café V (optional)",34.6734,135.5008,"2nd chance if Nov 28 Ginza was missed (Le Café V open until 20:00)",null,{start:"20:00",end:"21:00",book:false,opt:true,cut:true,transit:"🚶 Walk 6 min up Shinsaibashisuji"}]
 ]},
-{id:12,date:"Mon Dec 7",title:"Osaka",color:"#6a3df0",load:"Medium",stops:[
-  ["Osaka Castle",34.6873,135.5259,"Park + museum",null,{start:"09:30",end:"11:45",book:false,transit:"🚇 Tanimachi / Chuo Subway (~20m)",meal:"🍽️ Breakfast: Café / konbini near Nippombashi"}],
-  ["Kuromon Market",34.6654,135.5066,"Lunch",null,{start:"12:15",end:"13:45",book:false,transit:"🚇 Subway back to Nippombashi (15m)",meal:"🍽️ Lunch: Kuromon Market seafood / street food"}],
-  ["Shinsekai / Tsutenkaku",34.6524,135.5063,"",null,{start:"14:15",end:"16:00",book:false,transit:"🚇 Sakaisuji Line Nippombashi → Ebisucho (5m)"}],
-  ["Den Den Town",34.6596,135.5057,"Likely cut — skip if tired after Shinsekai",null,{start:"16:15",end:"18:00",book:false,opt:true,cut:true,transit:"🚶 Walk 8 min north"}],
-  ["Dotonbori / Don Quijote",34.6687,135.5013,"",null,{start:"18:15",end:"19:45",book:false,transit:"🚶 Walk 10 min",meal:"🍽️ Dinner: Dotonbori / Namba"}],
-  ["Round1 Stadium Sennichimae",34.6674,135.5028,"Likely cut — late-night Spo-Cha block; skip if legs are done",null,{start:"20:00",end:"22:00",book:false,opt:true,cut:true,transit:"🚶 Walk 4 min"}]
+{id:12,date:"Mon Dec 7",title:"Osaka Castle, markets & Round1",color:"#6a3df0",load:"Medium",stops:[
+  ["📦 Pick up bags — Yamato Kizuichiba Center",34.6590,135.5000,"~10-min walk from Wolf Pack · passport + waybill needed",null,{start:"09:00",end:"09:35",book:false,transit:"🚶 10-min walk from Wolf Pack",meal:"🍽️ Breakfast: Café / konbini near Daikokucho"}],
+  ["🚆 Midosuji + Chuo: Daikokucho → Osaka Castle",34.6750,135.5100,"Midosuji to Hommachi → Chuo line to Morinomiya / Tanimachi-4chome (~20m)",null,{start:"09:35",end:"10:00",book:false,transit:"🚇 Midosuji + Chuo (~20m) · ¥240 pp · Suica/IC"}],
+  ["Osaka Castle",34.6873,135.5259,"Park + museum (¥1,200 at door)",null,{start:"10:00",end:"12:00",book:false,transit:"🚶 Walk 10 min in park · ¥1,200 at door"}],
+  ["Kuromon Market",34.6654,135.5066,"Lunch (~15m walk back to Wolf Pack area)",null,{start:"12:15",end:"13:30",book:false,transit:"🚇 Subway to Nippombashi (~15m, ¥240)",meal:"🍽️ Lunch: Kuromon Market"}],
+  ["Shinsekai / Tsutenkaku + Den Den Town",34.6524,135.5063,"1 Midosuji stop to Dobutsuen-mae + walk north through Den Den Town",null,{start:"14:00",end:"16:00",book:false,transit:"🚇 Midosuji 1 stop (¥190) + walk"}],
+  ["Dotonbori / Don Quijote",34.6687,135.5013,"",null,{start:"16:15",end:"17:45",book:false,transit:"🚶 Walk 10 min",meal:"🍽️ Dinner: Dotonbori / Namba"}],
+  ["Round1 Stadium Sennichimae — Spo-Cha 3h",34.6674,135.5028,"~¥2,690 at door · open 24h, no booking",null,{start:"18:00",end:"21:00",book:false,opt:true,transit:"🚶 Walk 4 min · ~¥2,690 at door"}]
 ]},
 {id:13,date:"Tue Dec 8",title:"Nara day trip",color:"#b8860b",load:"Medium",stops:[
-  ["Osaka-Namba Station",34.6637,135.5016,"Regular Kintetsu limited express in the morning (~35 min) — we checked the Aoniyoshi sightseeing train, but its 09:10 Salon and Twin seats were sold out, so regular limited express instead",null,{start:"09:00",end:"09:45",book:true,bookNote:"Book Kintetsu limited express seats (~09:00)",transit:"🚆 Kintetsu Limited Express Osaka-Namba → Kintetsu-Nara (~35m)",meal:"🍽️ Breakfast: Grab at Namba before 09:00"}],
-  ["Nakatanidou, Nara",34.6818,135.8288,"Famous high-speed mochi-pounding shop on the way in from Kintetsu-Nara station — fresh yomogi mochi",null,{start:"10:00",end:"10:30",book:false,transit:"🚶 Walk 5 min from Kintetsu-Nara Sta."}],
-  ["Nara Park",34.6850,135.8430,"Deer",null,{start:"10:40",end:"11:45",book:false,transit:"🚶 Walk 8 min"}],
-  ["Todai-ji + Great Buddha",34.6889,135.8398,"",null,{start:"11:50",end:"13:00",book:false,transit:"🚶 Walk 10 min"}],
-  ["Nara Halal Restaurant (Yumekaze Hiroba)",34.6865,135.8380,"Halal lunch right in front of Todai-ji — certified. Default order: curries & kebabs ~¥2,000; the ¥4,500 A5 wagyu ramen is only an optional splurge","food",{start:"13:05",end:"14:15",book:false,opt:true,transit:"🚶 Right outside Todai-ji",meal:"🍽️ Lunch: Certified halal curries & kebabs"}],
-  ["Nara National Museum",34.6836,135.8360,"Likely cut — optional extra museum after Todai-ji",null,{start:"14:25",end:"15:30",book:false,opt:true,cut:true,transit:"🚶 Walk 6 min"}],
-  ["Kasuga Taisha",34.6814,135.8484,"Likely cut — extra uphill walk after Todai-ji",null,{start:"15:45",end:"17:00",book:false,opt:true,cut:true,transit:"🚶 Walk 12m uphill · 🚆 Kintetsu Express back to Namba (~38m)",meal:"🍽️ Dinner: Back in Namba / Dotonbori"}]
+  ["🚆 Kintetsu Limited Express: Namba → Nara",34.6637,135.5016,"Daikokucho → Namba 1 stop (¥190), then Kintetsu Ltd Express (~35m, ~¥1,130; Aoniyoshi 09:10 sold out)",null,{start:"09:00",end:"09:45",book:true,bookNote:"🚆 BOOK / MACHINE: ~¥1,130 pp outbound (¥680 fare + ¥520 seat)",transit:"🚆 Midosuji + Kintetsu Ltd Express (~45m) · ~¥1,320 total",meal:"🍽️ Breakfast: Grab at Namba before 09:00"}],
+  ["Nakatanidou, Nara",34.6818,135.8288,"High-speed mochi-pounding shop on the way in from Kintetsu-Nara",null,{start:"10:00",end:"10:30",book:false,transit:"🚶 Walk 5 min from Kintetsu-Nara Sta."}],
+  ["Nara Park + Todai-ji + Great Buddha",34.6889,135.8398,"Deer park + Todai-ji (¥800 at door)",null,{start:"10:45",end:"13:00",book:false,transit:"🚶 Walk 10–15 min · Todai-ji ¥800 at door"}],
+  ["Nara Halal Restaurant (Yumekaze Hiroba)",34.6865,135.8380,"Certified halal right in front of Todai-ji · curries & kebabs ~¥2,000 (A5 wagyu ramen ¥4,500 optional)","food",{start:"13:15",end:"14:15",book:false,opt:true,transit:"🚶 Right outside Todai-ji",meal:"🍽️ Lunch: Certified halal curries & kebabs (~¥2,000)"}],
+  ["Nara National Museum",34.6836,135.8360,"Free right now (renovation)",null,{start:"14:20",end:"15:00",book:false,opt:true,transit:"🚶 Walk 6 min"}],
+  ["Kasuga Taisha",34.6814,135.8484,"",null,{start:"15:10",end:"16:15",book:false,transit:"🚶 Walk 12 min"}],
+  ["🚆 Return: Aoniyoshi 17:36 or Kintetsu Express → Namba",34.6840,135.8180,"Aoniyoshi 17:36 (¥1,410, Twin booths if booked) or regular Kintetsu Express (~¥680–1,130)",null,{start:"17:36",end:"18:15",book:true,bookNote:"🚆 BOOK Aoniyoshi 17:36 (¥1,410) or take regular Kintetsu (~¥680–1,130)",transit:"🚆 Kintetsu back to Osaka-Namba (~35–40m)",meal:"🍽️ Dinner: Back in Namba / Dotonbori"}]
 ]},
-{id:14,date:"Wed Dec 9",title:"Osaka: aquarium + sky",color:"#1e88e5",load:"Light",stops:[
-  ["Kaiyukan Aquarium",34.6545,135.4289,"10:00 entry, ~2.5–3h, whale sharks",null,{start:"10:00",end:"13:00",book:true,bookNote:"Book 10:00 timed entry ticket",transit:"🚇 Chuo Line Sakaisuji-Hommachi → Osakako (~25m)",meal:"🍽️ Breakfast: Relaxed morning near hotel"}],
-  ["Tempozan Ferris Wheel",34.6560,135.4310,"Right beside the aquarium — bay and harbour views from the top",null,{start:"13:15",end:"14:00",book:false,opt:true,transit:"🚶 Right beside Kaiyukan",meal:"🍽️ Lunch: Tempozan Marketplace"}],
-  ["America-mura",34.6723,135.4985,"Likely cut — extra transit detour before Umeda Sky",null,{start:"14:30",end:"15:30",book:false,opt:true,cut:true,transit:"🚇 Chuo → Yotsubashi Line (~20m)"}],
-  ["Umeda Sky Building",34.7052,135.4902,"Observatory at sunset, up by ~16:15",null,{start:"16:00",end:"17:30",book:true,bookNote:"Book ~16:00 sunset observatory slot",transit:"🚇 Midosuji Line → Umeda (~20m) + 10m walk"}],
-  ["HEP5 / Umeda",34.7039,135.5000,"Shopping",null,{start:"17:45",end:"19:15",book:false,opt:true,transit:"🚶 Walk 8 min"}],
-  ["Ali's Kitchen",34.6748,135.5009,"Evening, last stop — Pakistani/Arabic halal restaurant in Shinsaibashi, Osaka — Michelin Bib Gourmand. Optional rec","food",{start:"19:45",end:"21:15",book:false,opt:true,transit:"🚇 Midosuji Line Umeda → Shinsaibashi (8m)",meal:"🍽️ Dinner: Michelin Bib Gourmand halal Pakistani/Arabic"}]
+{id:14,date:"Wed Dec 9",title:"Osaka: aquarium + sky",color:"#1e88e5",load:"Medium",stops:[
+  ["🚆 Midosuji + Chuo: Daikokucho → Osakako",34.6600,135.4600,"Daikokucho → Hommachi → Osakako (~30m)",null,{start:"09:20",end:"09:55",book:false,transit:"🚇 Midosuji + Chuo (~30m) · ¥290 pp · Suica/IC",meal:"🍽️ Breakfast: Relaxed morning near Wolf Pack"}],
+  ["Kaiyukan Aquarium",34.6545,135.4289,"10:00 entry, ~2.5h, whale sharks",null,{start:"10:00",end:"12:30",book:true,bookNote:"🎟 BOOK AHEAD: 10:00 date/time e-ticket · ~¥2,700 (dynamic to ¥3,200)",transit:"🚶 Walk 5 min from Osakako Sta."}],
+  ["Tempozan Ferris Wheel",34.6560,135.4310,"Right beside the aquarium · ¥900 at door",null,{start:"12:45",end:"13:30",book:false,transit:"🚶 Right beside Kaiyukan · ¥900 at door",meal:"🍽️ Lunch: Tempozan Marketplace"}],
+  ["America-mura",34.6723,135.4985,"Optional if energy holds",null,{start:"14:00",end:"15:30",book:false,opt:true,transit:"🚇 Chuo → Yotsubashi Line (~20m, ¥240)"}],
+  ["🚆 Midosuji direct → Umeda",34.6900,135.4950,"Direct Midosuji ride to Umeda (~12m)",null,{start:"15:35",end:"16:10",book:false,transit:"🚇 Midosuji direct (~12m) · ¥240 pp · Suica/IC"}],
+  ["Umeda Sky Building",34.7052,135.4902,"Observatory at sunset, up by ~16:15 · ¥2,000 at door",null,{start:"16:15",end:"18:00",book:false,transit:"🚶 Walk 10 min from Umeda · ¥2,000 at door"}],
+  ["HEP5 / Umeda",34.7039,135.5000,"Shopping",null,{start:"18:05",end:"18:45",book:false,opt:true,transit:"🚶 Walk 8 min"}],
+  ["Ali's Kitchen",34.6748,135.5009,"Pakistani/Arabic halal restaurant in Shinsaibashi — Michelin Bib Gourmand (optional rec)","food",{start:"19:00",end:"20:15",book:false,opt:true,transit:"🚇 Midosuji Umeda → Shinsaibashi (8m, ¥240)",meal:"🍽️ Dinner: Michelin Bib Gourmand halal Pakistani/Arabic"}]
 ]},
-{id:15,date:"Thu Dec 10",title:"Himeji Castle day",color:"#3949ab",load:"Medium",stops:[
-  ["Himeji Castle",34.8394,134.6939,"Arrive ~09:15 — JR Special Rapid from Osaka, ~1h. Japan's best-preserved original castle, UNESCO-listed (Osaka Castle is a reconstruction; this is the real 1600s keep). Optional Kokoen garden combo ticket.",null,{start:"09:15",end:"12:00",book:false,transit:"🚆 JR Special Rapid Osaka → Himeji (~62m) + 15m walk",meal:"🍽️ Breakfast: Grab at Osaka Station"}],
-  ["Kobe — Sannomiya",34.6946,135.1956,"Likely cut — whole extra city stop on the way back from Himeji",null,{start:"13:00",end:"15:00",book:false,opt:true,cut:true,transit:"🚆 JR Special Rapid Himeji → Sannomiya (40m)",meal:"🍽️ Lunch: Himeji or Kobe (halal options near Kobe Mosque)"}],
-  ["Kuromon Market / Nippombashi",34.6654,135.5066,"Flex: laundry, packing, souvenirs & farewell Osaka dinner (teamLab Botanical Garden cut)",null,{start:"15:45",end:"19:30",book:false,opt:true,transit:"🚆 JR Sannomiya → Osaka + Subway (~45m)",meal:"🍽️ Dinner: Farewell Osaka dinner near Namba / Dotonbori"}]
+{id:15,date:"Thu Dec 10",title:"Himeji Castle + free evening",color:"#3949ab",load:"Light",stops:[
+  ["🚆 Midosuji + JR Special Rapid: Osaka → Himeji",34.7600,135.1000,"Leave ~08:00: Daikokucho → Umeda (¥240) → JR Special Rapid to Himeji (~1h, ¥1,520)",null,{start:"08:00",end:"09:15",book:false,transit:"🚆 Midosuji + JR Special Rapid (~1h15m) · ¥1,760 pp · Suica/IC (no booking)",meal:"🍽️ Breakfast: Grab at Osaka Station"}],
+  ["Himeji Castle",34.8394,134.6939,"UNESCO original 1600s keep · ¥1,000 (Kokoen combo ¥1,050) at door",null,{start:"09:15",end:"11:30",book:false,transit:"🚶 Walk 15 min from Himeji Sta. · ¥1,000–1,050 at door"}],
+  ["🚆 JR Special Rapid: Himeji → Kobe / Osaka",34.7300,134.9500,"¥990 to Sannomiya (~40m) or ¥1,520 direct to Osaka (~1h)",null,{start:"11:45",end:"12:50",book:false,transit:"🚆 JR Special Rapid · ¥990–1,520 pp · Suica/IC"}],
+  ["Kobe — Sannomiya (optional)",34.6946,135.1956,"If energy holds — Kitano, Kobe Mosque, Meriken Park; be back ~17:00 (+¥420 back to Osaka)",null,{start:"13:00",end:"16:30",book:false,opt:true,cut:true,transit:"🚶/🚇 Around Sannomiya · +¥420 back to Osaka",meal:"🍽️ Lunch: Himeji or Kobe (halal near Kobe Mosque)"}],
+  ["Kuromon / Daikokucho — free evening",34.6542,135.4968,"Laundry, packing, souvenirs near Wolf Pack (Osaka teamLab Botanical DROPPED)",null,{start:"18:00",end:"20:00",book:false,transit:"🚶 Near Wolf Pack",meal:"🍽️ Dinner: Farewell Osaka dinner"}]
 ]},
-{id:16,date:"Fri Dec 11",title:"Home",color:"#616161",load:"Light",stops:[
-  ["Shin-Osaka Station",34.7335,135.5003,"Shinkansen ~12:30",null,{start:"12:30",end:"14:45",book:true,bookNote:"Book Nozomi Shinkansen ~12:30 (Shin-Osaka → Shinagawa)",transit:"🚇 Midosuji Namba → Shin-Osaka (15m) + 🚅 Nozomi (~2h 15m)",meal:"🍽️ Breakfast + Early Lunch: Relaxed morning + bento at Shin-Osaka"}],
-  ["Shinagawa Station",35.6285,139.7388,"~14:45",null,{start:"14:45",end:"15:30",book:false,transit:"🚆 Keikyu Airport Express Shinagawa → Haneda T3 (~15m)"}],
-  ["Haneda Airport",35.5494,139.7798,"Flight home ~6 p.m.",null,{start:"15:30",end:"18:00",book:false,transit:"✈️ Check-in & security for ~18:00 flight"}]
+{id:16,date:"Fri Dec 11",title:"Home — Osaka → Haneda → Chicago",color:"#616161",load:"Light",stops:[
+  ["Wolf Pack Apartment 1001 — Check out",34.6542,135.4968,"10:00 checkout",null,{start:"10:00",end:"10:30",book:false,transit:"🏠 10:00 checkout"}],
+  ["🚆 Midosuji direct: Daikokucho → Shin-Osaka",34.6900,135.4990,"Direct ~25m, no transfer — with all 6 checked bags",null,{start:"10:35",end:"11:15",book:false,transit:"🚇 Midosuji direct (~25m) · ¥290 pp · Suica/IC",meal:"🍽️ Lunch: Ekiben / lunch at Shin-Osaka"}],
+  ["🚅 Shinkansen: Shin-Osaka → Shinagawa (~12:30)",34.7335,135.5003,"Hayatoku 21 discount (¥12,980) closes Fri Nov 20, 08:30 CST — reserve oversized-bag seats via SmartEX",null,{start:"12:30",end:"14:45",book:true,bookNote:"🚅 BOOK NOW (SmartEX): ¥12,980 Hayatoku 21 · closes Fri Nov 20, 08:30 CST",transit:"🚅 Shinkansen (~2h15m) · ¥12,980 pp"}],
+  ["🚆 Keikyu Airport Line: Shinagawa → Haneda",35.6285,139.7388,"~15:00–15:30 to Haneda T3",null,{start:"15:00",end:"15:30",book:false,transit:"🚆 Keikyu Airport Express (~20m) · ~¥300 pp · Suica/IC"}],
+  ["Haneda Airport — Flight home",35.5494,139.7798,"Flight home ~6 p.m. (booked)",null,{start:"15:30",end:"18:00",book:false,transit:"✈️ Check-in & security for ~18:00 flight"}]
 ]}
 ];
 var HOTELS=[
-["Tokyo — Asakusa / Kuramae",35.7055,139.7935,"6 nights, Nov 26–Dec 2","APA Hotel Asakusa Kuramae Kita","tokyo",{
+["Tokyo — Takasago, Katsushika",35.7480,139.8645,"6 nights, Nov 26–Dec 2 · Keisei-Takasago 5-min walk","Hao Bros.Home Gemini — 3-20-7 Takasago (BOOKED)","tokyo",{
   checkinDay:1, checkoutDay:7,
-  why:"Direct ~40 min train from Haneda (no transfers), quiet at night, steps from Day 2 East Tokyo, and easy transit to Bay Day, West Tokyo & DisneySea.",
+  why:"Direct ~1h through-train from Haneda (no transfers), direct Asakusa line to Asakusa (~20m) & Higashi-Ginza (~30m), and self check-in for 4 travelers.",
   recs:[
-    {name:"MIMARU Tokyo Asakusa Station",note:"Best for 4 travelers — spacious apartment suites with kitchen/dining, right by the river & station."},
-    {name:"APA Hotel Asakusa Kuramae Kita",note:"Budget candidate — book 2 connecting/adjacent rooms; 2 min walk to Kuramae Sta. (Oedo & Asakusa lines)."},
-    {name:"Dormy Inn Express Asakusa",note:"Mid-range with onsen bath & Sumida River views; 1 min to Ginza/Asakusa lines."}
+    {name:"Hao Bros.Home Gemini (BOOKED — Nov 26–Dec 2)",note:"3-20-7 Takasago, Katsushika · 5-min walk to Keisei-Takasago Sta. · whole home for 4."}
   ]
 }],
-["Mt. Fuji — Kawaguchiko",35.5006,138.7686,"1 night, Dec 2–3","Kawaguchiko Station Inn / Fuji View area","tokyo",{
+["Fujiyoshida — Matsuyama",35.4790,138.7840,"1 night, Dec 2–3 · Fuji-Q Highland stop 10–15m walk","Fujisan Resort Loghouse Fuyo No Yado — 1394 Matsuyama (BOOKED)","tokyo",{
   checkinDay:7, checkoutDay:8,
-  why:"Eliminates 4 hours of backtracking to Tokyo! Sleep in after DisneySea, take a relaxed ~10:45 bus here, enjoy sunset Fuji + onsen, then continue directly via Mishima Shinkansen → Kyoto.",
+  why:"Eliminates 4 hours of Tokyo backtracking! Front desk 15:30–18:00, private wooden tub + free Resort Inn Fuyo public bath next door, ~5 min from Chureito Pagoda.",
   recs:[
-    {name:"Kawaguchiko Station Inn / Fuji View area",note:"Right by Kawaguchiko Station — zero luggage hassle for the next morning's bus to Mishima."},
-    {name:"Konansou / Fuji Lake Hotel",note:"Lakeside onsen ryokan upgrade for 4 travelers with Mt. Fuji views."},
-    {name:"Megu Fuji 2021 (or Villa/Cabins)",note:"Great 4-person group/cabin value right near Kawaguchiko Station."}
+    {name:"Fujisan Resort Loghouse Fuyo No Yado (BOOKED — Dec 2–3)",note:"1394 Matsuyama, Fujiyoshida · whole log house · 10–15m walk to Fuji-Q Highland bus stop for Dec 3 Mishima Liner."}
   ]
 }],
-["Kyoto — Shijo / Kawaramachi",34.9988,135.7690,"3 nights, Dec 3–6","HOTEL LiVEMAX Kyoto Teramachidori","kansai",{
+["Kyoto — Nijo, Nakagyo",35.0073,135.7406,"3 nights, Dec 3–6 · JR Nijo & Tozai Nijo 4–5m walk","Kyoto Kyo-Hiiragi — 28-26 Mibu Amagaike-cho (BOOKED)","kansai",{
   checkinDay:8, checkoutDay:11,
-  why:"Walkable to Nishiki Market, Gion, Pontocho, and Hoippo/Chicago kimono shops; direct Keihan/Hankyu/bus links to Fushimi Inari, Arashiyama, and Hirakata.",
+  why:"4–5 min walk from JR Nijo (direct 6m to Kyoto Station, direct 11m to Saga-Arashiyama) & Subway Tozai Nijo (direct 6–12m to downtown, Higashiyama & Keage). Check-in 15:00–21:00.",
   recs:[
-    {name:"MIMARU Kyoto Kawaramachi Gojo",note:"Best for 4 travelers — 4-person apartment suites, easy walk/bus to Kawaramachi & Kyoto Station."},
-    {name:"HOTEL LiVEMAX Kyoto Teramachidori",note:"Budget candidate — central Teramachi/Kawaramachi location."},
-    {name:"Cross Hotel Kyoto",note:"Stylish mid-range right off Kawaramachi & Pontocho Alley."}
+    {name:"Kyoto Kyo-Hiiragi (BOOKED — Dec 3–6)",note:"28-26 Mibu Amagaike-cho, Nakagyo-ku · machiya holiday home · 4–5 min walk to JR & Subway Nijo."}
   ]
 }],
-["Osaka — Nippombashi / Namba",34.6618,135.5060,"5 nights, Dec 6–11","Hotel Amaterrace Nippombashi-higashi","kansai",{
+["Osaka — Daikokucho, Naniwa",34.6542,135.4968,"5 nights, Dec 6–11 · Daikokucho (Midosuji) few min walk","Wolf Pack Apartment 1001 — 3-1-10 Daikoku (BOOKED)","kansai",{
   checkinDay:11, checkoutDay:16,
-  why:"5 min walk to Dotonbori & Kuromon Market, direct Kintetsu train to Nara (Dec 8), and quick Midosuji/JR access to Aquarium, Umeda, Himeji & Shin-Osaka.",
+  why:"Few min walk to Daikokucho on the Midosuji line: 1 stop to Namba (Dotonbori & Kintetsu to Nara), direct 25m to Shin-Osaka on bag day (Dec 11).",
   recs:[
-    {name:"Hotel Amaterrace Nippombashi-higashi",note:"Top candidate for 4 — apartment-style rooms with space to pack & rest over 5 nights."},
-    {name:"MIMARU Osaka Namba Station",note:"4-person family/group suites right near Nippombashi & Namba."},
-    {name:"Swissôtel Nankai Osaka",note:"Upscale hub directly above Namba Station — effortless transit everywhere."}
+    {name:"Wolf Pack Apartment 1001 (BOOKED — Dec 6–11)",note:"3-1-10 Daikoku, Naniwa-ku · 10-min walk from Yamato Kizuichiba pickup · direct Midosuji access."}
   ]
 }]
 ];
-var ROUTE_PTS=[[35.6886,139.7006],[35.5006,138.7686],[35.1264,138.9110],[34.9855,135.7585],[34.6618,135.5060]];
-var ROUTE_CITIES=[["Tokyo — Busta Shinjuku",35.6886,139.7006],["Kawaguchiko (Mt. Fuji)",35.5006,138.7686],["Mishima Station",35.1264,138.9110],["Kyoto Station",34.9855,135.7585],["Osaka — Nippombashi",34.6618,135.5060]];
+var ROUTE_PTS=[[35.6886,139.7006],[35.4986,138.7685],[35.1270,138.9106],[34.9855,135.7585],[34.6542,135.4968]];
+var ROUTE_CITIES=[["Tokyo — Busta Shinjuku",35.6886,139.7006],["Kawaguchiko Station",35.4986,138.7685],["Mishima Station",35.1270,138.9106],["Kyoto Station",34.9855,135.7585],["Osaka — Daikokucho (Wolf Pack)",34.6542,135.4968]];
 var RETURN_PTS=[[34.7335,135.5003],[35.6285,139.7388]];
 var LEG_LABELS=[
 [[36.05,138.35],"Dec 2–3 — Tokyo → Mt. Fuji → Mishima Shinkansen → Kyoto"],
