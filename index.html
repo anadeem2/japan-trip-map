@@ -22,6 +22,11 @@
   html,body{height:100%}
   body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
   header{padding:12px 18px 10px;border-bottom:1px solid var(--line);background:var(--panel);flex:0 0 auto}
+  .headTop{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+  .navTabs{display:inline-flex;gap:6px;flex-wrap:wrap}
+  .navTab{font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);text-decoration:none;transition:border-color .15s,background .15s}
+  .navTab:hover{border-color:var(--accent)}
+  .navTab.active{background:var(--ink);color:var(--panel);border-color:var(--ink)}
   header h1{font-family:Georgia,'Iowan Old Style',serif;font-size:clamp(19px,3vw,27px);margin:0;line-height:1.12;font-weight:700;letter-spacing:-.01em}
   header h1 span{color:var(--accent)}
   header p{margin:4px 0 0;color:var(--muted);font-size:12.5px;line-height:1.45;max-width:900px}
@@ -121,107 +126,20 @@
     body.list-full aside{flex:1 1 auto}
     header p{font-size:11.5px;margin-top:3px}
   }
-  /* ---------- View Switcher & Calendar Mode ---------- */
-  header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .viewTabs{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:3px;flex:0 0 auto}
-  .viewTab{font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;border:0;background:transparent;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-  .viewTab:hover{color:var(--ink)}
-  .viewTab.active{background:var(--ink);color:var(--panel)}
-  .stopTime{font-size:11px;font-weight:700;color:var(--ink);background:var(--chip);padding:1px 6px;border-radius:999px;white-space:nowrap;flex:0 0 auto;height:fit-content;margin-top:1px}
-  .bookTag{font-size:10.5px;font-weight:700;color:#b03a2e;background:rgba(176,58,46,.12);padding:1px 6px;border-radius:999px;white-space:nowrap;margin-left:4px}
-  .optTag{font-size:10px;font-weight:700;color:var(--muted);border:1px dashed var(--muted);padding:0 5px;border-radius:999px;white-space:nowrap;margin-left:4px;opacity:.9}
-  .cutTag{font-size:10px;font-weight:700;color:#9a4d00;background:rgba(217,119,6,.14);border:1px dashed rgba(217,119,6,.55);padding:0 5px;border-radius:999px;white-space:nowrap;margin-left:4px}
-  .mustTag{font-size:10px;font-weight:800;color:#1b6e3a;background:rgba(27,110,58,.12);padding:1px 6px;border-radius:999px;white-space:nowrap;margin-left:4px;letter-spacing:.02em}
-  .loadTag{font-size:10px;font-weight:700;padding:1px 6px;border-radius:999px;white-space:nowrap;margin-left:5px}
-  .load-Light{color:#1b6e3a;background:rgba(27,110,58,.11)}
-  .load-Recovery{color:#0f7b6c;background:rgba(15,123,108,.13)}
-  .load-Medium{color:#8a5a00;background:rgba(212,160,23,.16)}
-  .load-Heavy{color:#b03a2e;background:rgba(176,58,46,.13)}
-  @media (prefers-color-scheme: dark){ .bookTag{color:#ff8a7a;background:rgba(255,138,122,.16)} .cutTag{color:#fbbf24;background:rgba(251,191,36,.15)} .mustTag,.load-Light{color:#6ee79a;background:rgba(110,231,154,.16)} .load-Recovery{color:#5eead4;background:rgba(94,234,212,.15)} .load-Medium{color:#fcd34d;background:rgba(252,211,77,.16)} .load-Heavy{color:#ff8a7a;background:rgba(255,138,122,.16)} }
-  .stops li.is-opt{opacity:.78}
-  .calEvent.is-opt{border-left-style:dashed;border-top:1px dashed var(--line);border-right:1px dashed var(--line);border-bottom:1px dashed var(--line);opacity:.82;background:var(--panel)}
-  .agItem.is-opt{opacity:.82;background:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(128,128,128,.03) 8px,rgba(128,128,128,.03) 16px)}
-  #calendarView{display:none;flex:1;min-height:0;flex-direction:column;background:var(--bg)}
-  body.cal-mode .layout{display:none}
-  body.cal-mode #calendarView{display:flex}
-  .calToolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line);flex-wrap:wrap;flex:0 0 auto}
-  .calGroup{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-  .calBtn{font-size:12px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer}
-  .calBtn:hover{border-color:var(--accent)}
-  .calBtn.active{background:var(--ink);color:var(--panel);border-color:var(--ink)}
-  .calBtn.bookFilter.active{background:var(--accent);border-color:var(--accent);color:#fff}
-  /* Google Calendar Time Grid */
-  .calGridWrap{flex:1;min-height:0;overflow:auto;position:relative;background:var(--panel)}
-  .calGrid{display:flex;flex-direction:column;min-width:max-content}
-  .calHeaderRow{display:flex;position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line)}
-  .calGutterHead{width:58px;flex:0 0 58px;border-right:1px solid var(--line);background:var(--panel);position:sticky;left:0;z-index:25}
-  .calDayHead{width:175px;flex:1 0 175px;padding:8px 10px;border-right:1px solid var(--line);cursor:pointer}
-  .calDayHead:hover{background:var(--panel2)}
-  .calStayRow{display:flex;background:var(--panel2);border-bottom:1px solid var(--line)}
-  .calStayGutter{width:58px;flex:0 0 58px;border-right:1px solid var(--line);font-size:10px;font-weight:700;color:var(--muted);display:flex;align-items:center;justify-content:flex-end;padding-right:6px;position:sticky;left:0;z-index:16;background:var(--panel2)}
-  .calStayCell{width:175px;flex:1 0 175px;padding:4px 5px;border-right:1px solid var(--line);display:flex;align-items:center}
-  .calStayChip{width:100%;font-size:11px;font-weight:700;padding:4px 7px;border-radius:6px;background:rgba(212,160,23,.15);border:1px solid rgba(212,160,23,.45);color:var(--ink);cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px}
-  .calStayChip:hover{background:rgba(212,160,23,.28)}
-  .calStayChip.is-checkin{border-left:4px solid var(--gold);background:rgba(212,160,23,.24)}
-  .hotelRecList{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
-  .hotelRecItem{padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);font-size:12.5px;line-height:1.4}
-  .hotelRecItem b{display:block;color:var(--ink);font-size:13px}
-  .agStayBtn{font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:999px;border:1px solid rgba(212,160,23,.55);background:rgba(212,160,23,.14);color:var(--ink);cursor:pointer}
-  .agStayBtn:hover{background:rgba(212,160,23,.26)}
-  .calDayDate{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:flex;align-items:center;gap:6px}
-  .calDayDot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 9px}
-  .calDayTitle{font-family:Georgia,serif;font-size:13.5px;font-weight:700;color:var(--ink);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .calBodyRow{display:flex;position:relative}
-  .calGutter{width:58px;flex:0 0 58px;border-right:1px solid var(--line);background:var(--panel);position:sticky;left:0;z-index:15}
-  .calHourLabel{height:52px;font-size:10.5px;color:var(--muted);text-align:right;padding:0 7px;transform:translateY(-7px);user-select:none}
-  .calDayCol{width:175px;flex:1 0 175px;position:relative;border-right:1px solid var(--line);background-image:linear-gradient(to bottom,var(--line) 1px,transparent 1px);background-size:100% 52px}
-  .calEvent{position:absolute;left:4px;right:4px;border-radius:7px;padding:4px 6px;font-size:11.5px;line-height:1.25;overflow:hidden;cursor:pointer;border-left:4px solid var(--ev-color,#4363d8);background:var(--panel2);box-shadow:0 1px 3px rgba(0,0,0,.12);transition:transform .1s ease,box-shadow .1s ease;z-index:2}
-  .calEvent:hover{z-index:10;box-shadow:0 4px 12px rgba(0,0,0,.22);transform:translateY(-1px)}
-  .calEvent.is-book{box-shadow:inset 0 0 0 1px rgba(176,58,46,.35),0 1px 3px rgba(0,0,0,.12)}
-  .calEvent.is-dim{opacity:.22}
-  .calEvTime{font-size:10px;font-weight:700;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:4px}
-  .calEvTitle{font-weight:700;color:var(--ink);margin-top:1px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  /* Agenda / List Schedule Mode */
-  .calAgenda{flex:1;min-height:0;overflow-y:auto;padding:14px 16px 28px;display:none}
-  .calAgenda.open{display:block}
-  .calGridWrap.hidden{display:none}
-  .agDay{max-width:860px;margin:0 auto 14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  .agDayHead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:var(--panel2);border-bottom:1px solid var(--line);flex-wrap:wrap}
-  .agDayLeft{display:flex;align-items:center;gap:9px}
-  .agDayLeft h3{margin:0;font-family:Georgia,serif;font-size:15.5px}
-  .agDayMeta{font-size:12px;color:var(--muted)}
-  .agList{list-style:none;margin:0;padding:0}
-  .agItem{display:grid;grid-template-columns:112px 1fr auto;gap:10px;align-items:start;padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer}
-  .agItem:last-child{border-bottom:0}
-  .agItem:hover{background:var(--panel2)}
-  .agItem.is-dim{opacity:.3}
-  .agTime{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap}
-  .agTitle{font-size:13.5px;font-weight:700;color:var(--ink)}
-  .agNote{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4}
-  .agSubLine{font-size:11.5px;color:var(--ink);margin-top:4px;display:flex;flex-wrap:wrap;gap:6px;line-height:1.35}
-  .agPill{background:var(--chip);padding:2px 7px;border-radius:6px;font-weight:600}
-  .agBookNote{font-size:11.5px;color:#b03a2e;margin-top:3px;font-weight:600}
-  @media (prefers-color-scheme: dark){ .agBookNote{color:#ff8a7a} }
-  /* Event Detail Modal */
-  #evModal{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px}
-  #evModal.open{display:flex}
-  .evCard{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:14px;max-width:440px;width:100%;padding:16px 18px;box-shadow:var(--shadow)}
-  .evCardTop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-  .evClose{background:none;border:0;font-size:20px;line-height:1;color:var(--muted);cursor:pointer;padding:2px 6px}
-  .evCard h3{margin:4px 0 6px;font-family:Georgia,serif;font-size:18px}
-  .evActions{display:flex;gap:8px;margin-top:14px;justify-content:flex-end}
-  @media (max-width:760px){
-    .agItem{grid-template-columns:1fr;gap:4px}
-    .calDayHead,.calDayCol{width:148px;flex:1 0 148px}
-  }
 </style>
 </head>
 <body>
 <header>
-  <h1>Japan Trip <span>— Nov 25 to Dec 11, 2026</span> · 4 travelers</h1>
+  <div class="headTop">
+    <h1>Japan Trip <span>— Nov 25 to Dec 11, 2026</span> · 4 travelers</h1>
+    <nav class="navTabs" aria-label="Views">
+      <a class="navTab active" href="index.html">🗺️ Map</a>
+      <a class="navTab" href="calendar.html">📅 Calendar</a>
+      <a class="navTab" href="calendar.html#list">☰ List View</a>
+    </nav>
+  </div>
   <p><b>Your stays (locked in):</b> Tokyo — Hao Bros.Home Gemini, Takasago · Fuji — Fujisan Resort Loghouse Fuyo No Yado, Fujiyoshida · Kyoto — Kyoto Kyo-Hiiragi, Nijo · Osaka — Wolf Pack Apartment 1001, Daikokucho. Gold stars mark each stay — tap a day below for that day's transport from its base.</p>
 </header>
-  <p style="margin:6px 0 0;font-size:14px;"><a href="calendar.html">📅 Calendar view</a></p>
 <div class="layout">
   <aside id="panel">
     <div class="controls">
@@ -302,11 +220,6 @@ var LEG_LABELS_SHORT=[
 [[35.64,137.62],"Dec 11 · Shinkansen"]
 ];
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-function loadBadge(load){
-  if(!load) return '';
-  var icons={Light:'🔋',Recovery:'🛌',Medium:'⚡',Heavy:'🔥'};
-  return '<span class="loadTag load-'+esc(load)+'">'+(icons[load]||'')+' '+esc(load)+'</span>';
-}
 
 /* ---------- Panel ---------- */
 var markerByStop={}; /* "dayId-index" -> marker */
@@ -314,7 +227,7 @@ var markersByDay={}; /* dayId -> [markers] for the shared cluster group */
 var listEl=document.getElementById('dayList');
 DAYS.forEach(function(d){
   var div=document.createElement('div'); div.className='day'; div.id='dayrow-'+d.id;
-  var stopsHtml=d.stops.map(function(s,i){var food=s[4]==='food',sched=s[5]||{},tm=sched.start?'<span class="stopTime">'+esc(sched.start)+'</span>':'',bk=sched.book?'<span class="bookTag" title="'+esc(sched.bookNote||'Book tickets')+'">🎫</span>':'',op=sched.cut?'<span class="cutTag">✂️ Likely cut</span>':(sched.opt?'<span class="optTag">Optional</span>':'');return '<li class="'+(sched.opt?'is-opt':'')+'" data-day="'+d.id+'" data-idx="'+i+'" role="button" tabindex="0" aria-label="'+esc(s[0])+(sched.cut?' (likely cut)':(sched.opt?' (optional idea)':' (must-do)'))+(sched.start?' at '+esc(sched.start):'')+(food?' — halal food rec (optional)':'')+' — stop '+(i+1)+', '+esc(d.date)+'"><span class="n" style="background:'+(food?'#e8590c':d.color)+'">'+(i+1)+'</span>'+tm+'<span>'+esc(s[0])+(food?' 🍜':'')+bk+op+'</span></li>'}).join('');
+  var stopsHtml=d.stops.map(function(s,i){var food=s[4]==='food';return '<li data-day="'+d.id+'" data-idx="'+i+'" role="button" tabindex="0" aria-label="'+esc(s[0])+(food?' — halal food rec (optional)':'')+' — stop '+(i+1)+', '+esc(d.date)+'"><span class="n" style="background:'+(food?'#e8590c':d.color)+'">'+(i+1)+'</span><span>'+esc(s[0])+(food?' 🍜':'')+'</span></li>'}).join('');
   div.setAttribute('role','button'); div.setAttribute('tabindex','0');
   div.setAttribute('aria-label','Show only '+d.date+' — '+d.title);
   div.innerHTML='<div class="dayTop"><span class="chip" style="background:'+d.color+'"></span><div><h3>'+esc(d.title)+'</h3><div class="meta">'+esc(d.date)+' · '+d.stops.length+' stops</div></div></div>'+(d.note?'<div class="dayNote">'+esc(d.note)+'</div>':'')+'<ul class="stops">'+stopsHtml+'</ul>';
@@ -355,16 +268,9 @@ function clusterIcon(cluster){
   return L.divIcon({className:'',html:'<div class="trip-cluster">'+cluster.getChildCount()+'</div>',iconSize:[30,30],iconAnchor:[15,15]});
 }
 function popupHtmlStop(d,s,i){
-  var sched=s[5]||{};
-  var timeStr=sched.start?(sched.start+(sched.end?'–'+sched.end:'')):'';
-  var prioTag=sched.cut?'<span class="cutTag">✂️ Likely cut</span>':(sched.opt?'<span class="optTag">Optional idea</span>':'<span class="mustTag">MUST-DO</span>');
   var note=s[3]?'<div class="popNote">'+esc(s[3])+'</div>':'';
-  var extra='';
-  if(sched.transit) extra+='<div class="popNote" style="margin-top:4px"><b>Transit:</b> '+esc(sched.transit)+'</div>';
-  if(sched.meal) extra+='<div class="popNote" style="margin-top:2px"><b>Meals:</b> '+esc(sched.meal)+'</div>';
-  var bookHtml=sched.book?'<div class="agBookNote">🎫 '+esc(sched.bookNote||'Advance ticket / reservation')+'</div>':'';
   var foodTag=s[4]==='food'?' · 🍜 Halal food rec (optional)':'';
-  return '<div class="popMeta">'+esc(d.date)+(timeStr?' · '+esc(timeStr):'')+' · Stop '+(i+1)+' of '+d.stops.length+foodTag+'</div><p class="popTitle">'+esc(s[0])+prioTag+'</p>'+note+extra+bookHtml+'<div class="popDay">'+esc(d.title)+'</div>';
+  return '<div class="popMeta">'+esc(d.date)+' · Stop '+(i+1)+' of '+d.stops.length+foodTag+'</div><p class="popTitle">'+esc(s[0])+'</p>'+note+'<div class="popDay">'+esc(d.title)+'</div>';
 }
 function arrowIcon(color,deg){
   return L.divIcon({className:'',html:'<span class="arrow-pin" style="color:'+color+';transform:rotate('+deg.toFixed(0)+'deg)">&#9650;</span>',iconSize:[16,16],iconAnchor:[8,8]});
@@ -399,11 +305,9 @@ function buildDayLayer(d){
   });
   return g;
 }
-var hotelMarkers=[];
 function buildHotelLayer(){
   var g=L.layerGroup();
-  hotelMarkers=[];
-  HOTELS.forEach(function(h,idx){
+  HOTELS.forEach(function(h){
     /* Anchor offsets push each star glyph diagonally off its point: at wide
        zoom the hotel areas sit on top of the stop clusters, and a centered
        star covered the cluster badge's tap target. The marker's point (and
@@ -416,7 +320,6 @@ function buildHotelLayer(){
     var m=L.marker([h[1],h[2]],{icon:icon,title:h[0],zIndexOffset:500});
     m.bindPopup('<div class="popMeta">&#9733; Your stay — locked in</div><p class="popTitle">'+esc(h[4])+'</p><div class="popNote">'+esc(h[3])+'</div><div class="popDay">'+esc(h[0])+'</div>',{maxWidth:280});
     m.addTo(g);
-    hotelMarkers[idx]=m;
   });
   return g;
 }
@@ -707,236 +610,6 @@ document.addEventListener('keydown',function(ev){
   if(ev.key==='Escape'&&!document.fullscreenElement&&document.body.classList.contains('map-full')) setMapFull(false);
 });
 window.addEventListener('resize',queueSettle);
-
-/* ---------- Google Calendar-style Schedule ---------- */
-var calRange='all', calMode='grid', calOnlyBook=false, calOnlyMust=false, modalTarget=null;
-var CAL_START_HR=7, CAL_END_HR=22, CAL_PX_PER_HR=52;
-function parseMin(hhmm){
-  if(!hhmm) return 540;
-  var p=hhmm.split(':');
-  return Number(p[0])*60+Number(p[1]);
-}
-function fmt12(hhmm){
-  if(!hhmm) return '';
-  var p=hhmm.split(':'), h=Number(p[0]), m=p[1], ap=h>=12?'PM':'AM';
-  h=h%12; if(h===0) h=12;
-  return h+':'+m+' '+ap;
-}
-function calDays(){
-  if(calRange==='w1') return DAYS.filter(function(d){return d.id>=1&&d.id<=7;});
-  if(calRange==='w2') return DAYS.filter(function(d){return d.id>=8&&d.id<=14;});
-  if(calRange==='w3') return DAYS.filter(function(d){return d.id>=15&&d.id<=16;});
-  return DAYS;
-}
-function hotelIdxForDay(id){
-  if(id>=1&&id<=6) return 0;
-  if(id===7) return 1;
-  if(id>=8&&id<=10) return 2;
-  if(id>=11&&id<=15) return 3;
-  return -1;
-}
-function hotelForDay(id){
-  var idx=hotelIdxForDay(id);
-  return idx>=0?HOTELS[idx][0]:'Flying home';
-}
-function updateBookCount(){
-  var n=0;
-  DAYS.forEach(function(d){ d.stops.forEach(function(s){ if(s[5]&&s[5].book) n++; }); });
-  var el=document.getElementById('bookCount');
-  if(el) el.textContent=n;
-}
-function layoutOverlaps(items){
-  /* Simple sweep-line column assignment for overlapping events (like Google Calendar). */
-  var sorted=items.slice().sort(function(a,b){ return a.sMin-b.sMin || a.eMin-b.eMin; });
-  sorted.forEach(function(it){ it.col=0; it.cols=1; });
-  for(var i=0;i<sorted.length;i++){
-    var group=[sorted[i]], maxEnd=sorted[i].eMin;
-    for(var j=i+1;j<sorted.length;j++){
-      if(sorted[j].sMin<maxEnd){ group.push(sorted[j]); if(sorted[j].eMin>maxEnd) maxEnd=sorted[j].eMin; }
-      else break;
-    }
-    if(group.length>1){
-      group.forEach(function(g,idx){ g.col=idx%2; g.cols=2; });
-      i+=group.length-1;
-    }
-  }
-  return items;
-}
-function renderCalendar(){
-  var days=calDays();
-  var gridWrap=document.getElementById('calGridWrap');
-  var agendaEl=document.getElementById('calAgenda');
-  gridWrap.classList.toggle('hidden', calMode!=='grid');
-  agendaEl.classList.toggle('open', calMode==='agenda');
-  if(calMode==='grid'){
-    var totalH=(CAL_END_HR-CAL_START_HR)*CAL_PX_PER_HR;
-    var headHtml='<div class="calHeaderRow"><div class="calGutterHead"></div>'+days.map(function(d){
-      return '<div class="calDayHead" data-calday="'+d.id+'" title="Open '+esc(d.date)+' on Map"><div class="calDayDate"><span class="calDayDot" style="background:'+d.color+'"></span>'+esc(d.date)+loadBadge(d.load)+'</div><div class="calDayTitle">'+esc(d.title)+'</div></div>';
-    }).join('')+'</div>';
-    var stayHtml='<div class="calStayRow"><div class="calStayGutter">Stay</div>'+days.map(function(d){
-      var hIdx=hotelIdxForDay(d.id);
-      if(hIdx<0) return '<div class="calStayCell"><span class="calStayChip" style="opacity:.65;cursor:default">✈️ Fly home</span></div>';
-      var h=HOTELS[hIdx], info=h[6]||{}, isIn=info.checkinDay===d.id;
-      var shortName=h[0].split('—')[0].trim()+' ('+(h[0].split('—')[1]||'').trim().split('/')[0].trim()+')';
-      var lbl=(isIn?'🏨 Check-in: ':'★ ')+shortName;
-      return '<div class="calStayCell"><button class="calStayChip'+(isIn?' is-checkin':'')+'" type="button" data-hotelidx="'+hIdx+'" title="View hotel recommendations & location">'+esc(lbl)+'</button></div>';
-    }).join('')+'</div>';
-    var gutterHtml='<div class="calGutter" style="height:'+totalH+'px">';
-    for(var hr=CAL_START_HR;hr<CAL_END_HR;hr++){
-      var lbl=(hr%12===0?12:hr%12)+(hr>=12?' PM':' AM');
-      gutterHtml+='<div class="calHourLabel" style="height:'+CAL_PX_PER_HR+'px">'+(hr===CAL_START_HR?'':lbl)+'</div>';
-    }
-    gutterHtml+='</div>';
-    var colsHtml=days.map(function(d){
-      var items=d.stops.map(function(s,i){
-        var sched=s[5]||{start:'09:00',end:'10:30',book:false};
-        var sMin=Math.max(CAL_START_HR*60, parseMin(sched.start));
-        var eMin=Math.min(CAL_END_HR*60, Math.max(sMin+20, parseMin(sched.end)));
-        return {s:s,i:i,sched:sched,sMin:sMin,eMin:eMin};
-      });
-      layoutOverlaps(items);
-      var evHtml=items.map(function(it){
-        var top=((it.sMin-CAL_START_HR*60)/60)*CAL_PX_PER_HR;
-        var h=Math.max(22, ((it.eMin-it.sMin)/60)*CAL_PX_PER_HR - 2);
-        var dim=(calOnlyBook&&!it.sched.book)||(calOnlyMust&&it.sched.opt);
-        var cls='calEvent'+(it.sched.book?' is-book':'')+(it.sched.opt?' is-opt':'')+(dim?' is-dim':'');
-        var wStyle=it.cols===2?('width:calc(50% - 5px);left:'+(it.col===0?'4px':'calc(50% + 1px)')+';right:auto;'):'';
-        var food=it.s[4]==='food'?' 🍜':'';
-        var bk=it.sched.book?' 🎫':'';
-        var op=it.sched.cut?'<span class="cutTag">✂️ Likely cut</span>':(it.sched.opt?'<span class="optTag">Optional</span>':'');
-        return '<div class="'+cls+'" data-evday="'+d.id+'" data-evidx="'+it.i+'" style="top:'+top+'px;height:'+h+'px;--ev-color:'+d.color+';'+wStyle+'"><div class="calEvTime"><span>'+esc(it.sched.start)+'–'+esc(it.sched.end)+'</span><span>'+food+bk+'</span></div><div class="calEvTitle">'+esc(it.s[0])+op+'</div></div>';
-      }).join('');
-      return '<div class="calDayCol" style="height:'+totalH+'px">'+evHtml+'</div>';
-    }).join('');
-    gridWrap.innerHTML='<div class="calGrid">'+headHtml+stayHtml+'<div class="calBodyRow">'+gutterHtml+colsHtml+'</div></div>';
-  } else {
-    agendaEl.innerHTML=days.map(function(d){
-      var rows=d.stops.map(function(s,i){
-        var sched=s[5]||{start:'',end:'',book:false};
-        if(calOnlyBook&&!sched.book) return '';
-        if(calOnlyMust&&sched.opt) return '';
-        var food=s[4]==='food'?' 🍜':'';
-        var bk=sched.book?'<span class="bookTag">🎫 Book</span>':'';
-        var prio=sched.cut?'<span class="cutTag">✂️ Likely cut</span>':(sched.opt?'<span class="optTag">Optional / Idea</span>':'<span class="mustTag">MUST-DO</span>');
-        var timeLbl=sched.start?(fmt12(sched.start)+' – '+fmt12(sched.end)):'Flexible';
-        var subPills='';
-        if(sched.transit) subPills+='<span class="agPill">'+esc(sched.transit)+'</span>';
-        if(sched.meal) subPills+='<span class="agPill">'+esc(sched.meal)+'</span>';
-        var subHtml=subPills?'<div class="agSubLine">'+subPills+'</div>':'';
-        return '<li class="agItem'+(sched.opt?' is-opt':'')+'" data-evday="'+d.id+'" data-evidx="'+i+'"><div class="agTime">'+esc(timeLbl)+'</div><div><div class="agTitle"><span class="n" style="background:'+(s[4]==='food'?'#e8590c':d.color)+';margin-right:6px">'+(i+1)+'</span>'+esc(s[0])+food+prio+bk+'</div>'+(s[3]?'<div class="agNote">'+esc(s[3])+'</div>':'')+subHtml+(sched.book&&sched.bookNote?'<div class="agBookNote">🎫 '+esc(sched.bookNote)+'</div>':'')+'</div><button class="btn" type="button" data-evday="'+d.id+'" data-evidx="'+i+'">📍 Map</button></li>';
-      }).join('');
-      if((calOnlyBook||calOnlyMust)&&!rows) return '';
-      var hIdx=hotelIdxForDay(d.id);
-      var stayCtrl=hIdx>=0?'<button class="agStayBtn" type="button" data-hotelidx="'+hIdx+'">🏨 '+((HOTELS[hIdx][6]&&HOTELS[hIdx][6].checkinDay===d.id)?'Check-in: ':'Stay: ')+esc(hotelForDay(d.id))+' · 3 picks</button>':'<div class="agDayMeta">✈️ Flying home</div>';
-      return '<div class="agDay"><div class="agDayHead"><div class="agDayLeft"><span class="chip" style="background:'+d.color+'"></span><h3>'+esc(d.date)+' — '+esc(d.title)+'</h3>'+loadBadge(d.load)+'</div>'+stayCtrl+'</div><ul class="agList">'+rows+'</ul></div>';
-    }).join('');
-  }
-}
-function openHotelModal(hIdx){
-  var h=HOTELS[hIdx]; if(!h) return;
-  var info=h[6]||{};
-  modalTarget={hotelIdx:hIdx};
-  document.getElementById('evModalMeta').textContent='★ IDEAL HOTEL AREA · '+h[3]+' (NOT BOOKED)';
-  document.getElementById('evModalTitle').textContent=h[0];
-  var recs=(info.recs||[]).map(function(r){ return '<li class="hotelRecItem"><b>'+esc(r.name)+'</b>'+esc(r.note)+'</li>'; }).join('');
-  document.getElementById('evModalNote').innerHTML=(info.why?'<div>'+esc(info.why)+'</div>':'')+(recs?'<ul class="hotelRecList">'+recs+'</ul>':'');
-  var bookEl=document.getElementById('evModalBook');
-  bookEl.textContent='🎫 Book '+h[3]+' (4 travelers)';
-  bookEl.style.display='block';
-  document.getElementById('evModalDay').textContent='Tap below to see this ★ hotel area on the map.';
-  document.getElementById('evModalMapBtn').textContent='★ Show Hotel Area on Map';
-  document.getElementById('evModal').classList.add('open');
-}
-function openEventModal(dayId,idx){
-  var d=DAYS.find(function(x){return x.id===dayId;});
-  if(!d||!d.stops[idx]) return;
-  var s=d.stops[idx], sched=s[5]||{};
-  modalTarget={dayId:dayId,idx:idx};
-  document.getElementById('evModalMeta').textContent=d.date+(sched.start?' · '+fmt12(sched.start)+' – '+fmt12(sched.end):'')+' · Stop '+(idx+1)+' of '+d.stops.length+(sched.cut?' · ✂️ Likely cut':(sched.opt?' · Optional / Idea':' · ★ MUST-DO'));
-  document.getElementById('evModalTitle').textContent=s[0]+(s[4]==='food'?' 🍜':'');
-  var noteParts=[];
-  if(s[3]) noteParts.push('<div>'+esc(s[3])+'</div>');
-  if(sched.transit) noteParts.push('<div style="margin-top:6px"><b>Transit:</b> '+esc(sched.transit)+'</div>');
-  if(sched.meal) noteParts.push('<div style="margin-top:4px"><b>Meals:</b> '+esc(sched.meal)+'</div>');
-  document.getElementById('evModalNote').innerHTML=noteParts.length?noteParts.join(''):'No additional notes.';
-  var bookEl=document.getElementById('evModalBook');
-  bookEl.textContent=sched.book?('🎫 '+(sched.bookNote||'Advance ticket / reservation recommended')):'';
-  bookEl.style.display=sched.book?'block':'none';
-  document.getElementById('evModalDay').textContent='Day '+d.id+': '+d.title+' · Stay: '+hotelForDay(d.id);
-  document.getElementById('evModalMapBtn').textContent='📍 Show on Map';
-  document.getElementById('evModal').classList.add('open');
-}
-function closeEventModal(){
-  document.getElementById('evModal').classList.remove('open');
-}
-function switchAppTab(mode){
-  var isCal=mode==='cal';
-  document.body.classList.toggle('cal-mode',isCal);
-  document.getElementById('tabMap').classList.toggle('active',!isCal);
-  document.getElementById('tabMap').setAttribute('aria-selected',isCal?'false':'true');
-  document.getElementById('tabCal').classList.toggle('active',isCal);
-  document.getElementById('tabCal').setAttribute('aria-selected',isCal?'true':'false');
-  if(isCal){ renderCalendar(); }
-  else { setTimeout(settleMap,60); setTimeout(settleMap,300); }
-}
-function jumpToStopOnMap(dayId,idx){
-  closeEventModal();
-  switchAppTab('map');
-  setView('day',dayId,true);
-  var m=markerByStop[dayId+'-'+idx];
-  if(m&&map){ setTimeout(function(){ map.flyTo(m.getLatLng(),14,{duration:.7}); setTimeout(function(){ m.openPopup(); },750); },160); }
-}
-function jumpToHotelOnMap(hIdx){
-  closeEventModal();
-  switchAppTab('map');
-  document.getElementById('hotelsToggle').checked=true;
-  setView('all',null,true);
-  var m=hotelMarkers[hIdx];
-  if(m&&map){ setTimeout(function(){ map.flyTo(m.getLatLng(),14,{duration:.7}); setTimeout(function(){ m.openPopup(); },750); },160); }
-}
-document.getElementById('tabMap').addEventListener('click',function(){ switchAppTab('map'); });
-document.getElementById('tabCal').addEventListener('click',function(){ switchAppTab('cal'); });
-document.querySelectorAll('[data-calrange]').forEach(function(b){ b.addEventListener('click',function(){
-  calRange=b.dataset.calrange;
-  document.querySelectorAll('[data-calrange]').forEach(function(x){ x.classList.toggle('active',x===b); });
-  renderCalendar();
-}); });
-document.querySelectorAll('[data-calmode]').forEach(function(b){ b.addEventListener('click',function(){
-  calMode=b.dataset.calmode;
-  document.querySelectorAll('[data-calmode]').forEach(function(x){ x.classList.toggle('active',x===b); });
-  renderCalendar();
-}); });
-document.getElementById('mustFilterBtn').addEventListener('click',function(){
-  calOnlyMust=!calOnlyMust;
-  this.classList.toggle('active',calOnlyMust);
-  this.setAttribute('aria-pressed',calOnlyMust?'true':'false');
-  renderCalendar();
-});
-document.getElementById('bookFilterBtn').addEventListener('click',function(){
-  calOnlyBook=!calOnlyBook;
-  this.classList.toggle('active',calOnlyBook);
-  this.setAttribute('aria-pressed',calOnlyBook?'true':'false');
-  renderCalendar();
-});
-document.getElementById('calendarView').addEventListener('click',function(ev){
-  var hBtn=ev.target.closest('[data-hotelidx]');
-  if(hBtn){ ev.stopPropagation(); openHotelModal(Number(hBtn.getAttribute('data-hotelidx'))); return; }
-  var head=ev.target.closest('[data-calday]');
-  if(head){ switchAppTab('map'); setView('day',Number(head.getAttribute('data-calday'))); return; }
-  var btn=ev.target.closest('button[data-evday]');
-  if(btn){ ev.stopPropagation(); jumpToStopOnMap(Number(btn.getAttribute('data-evday')),Number(btn.getAttribute('data-evidx'))); return; }
-  var item=ev.target.closest('[data-evday]');
-  if(item){ openEventModal(Number(item.getAttribute('data-evday')),Number(item.getAttribute('data-evidx'))); }
-});
-document.getElementById('evModalClose').addEventListener('click',closeEventModal);
-document.getElementById('evModal').addEventListener('click',function(ev){ if(ev.target===this) closeEventModal(); });
-document.getElementById('evModalMapBtn').addEventListener('click',function(){
-  if(!modalTarget) return;
-  if(modalTarget.hotelIdx!==undefined) jumpToHotelOnMap(modalTarget.hotelIdx);
-  else jumpToStopOnMap(modalTarget.dayId,modalTarget.idx);
-});
-updateBookCount();
-
 initMap();
 </script>
 </body>

@@ -23,7 +23,22 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,
 button{font-family:inherit;cursor:pointer}
 .wrap{max-width:1560px;margin:0 auto;padding:18px 14px 44px}
 /* header */
-.tophead{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
+.tophead{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;justify-content:space-between}
+.navTabs{display:inline-flex;gap:6px;flex-wrap:wrap;align-items:center}
+.navTab{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:999px;padding:8px 15px;font-weight:700;font-size:13px;text-decoration:none;cursor:pointer;transition:border-color .15s,background .15s}
+.navTab:hover{border-color:var(--muted)}
+.navTab.active{background:#f4efe8;color:#171512;border-color:#f4efe8}
+.list-view{display:none;flex-direction:column;gap:14px;margin:8px 0 20px}
+.list-view.open{display:flex}
+.list-card{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--ac);border-radius:14px;padding:16px 18px}
+.list-card h3{margin:0 0 4px;font-size:18px;font-weight:800;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.list-card .meta{color:var(--muted);font-size:12.5px;font-weight:600;margin-bottom:12px}
+.list-card ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.list-card li{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:10px;background:var(--panel2);border:1px solid var(--line2);border-left:5px solid var(--ac,#57534a)}
+.list-card li.booked{background:var(--red-soft);border-color:#7a352b}
+.list-card li.optional{border:1.5px dashed #8a6420;background:rgba(232,163,61,.05)}
+.list-card li.dimmed{opacity:.25}
+.cal-shell.hidden,.detail.hidden{display:none}
 h1{font-size:clamp(24px,3.4vw,36px);font-weight:900;letter-spacing:-.02em;margin:0;line-height:1.05}
 h1 .jp{font-family:"Noto Sans JP",sans-serif;display:block;font-size:12px;letter-spacing:.22em;color:var(--red);font-weight:700;margin-bottom:6px}
 .sub{color:var(--muted);font-size:13.5px;max-width:760px;margin:8px 0 0}
@@ -129,8 +144,13 @@ footer{color:var(--faint);font-size:12.5px;margin-top:26px;border-top:1px solid 
   <div class="tophead">
     <div>
       <h1><span class="jp">日本旅行 — カレンダー</span>Japan Trip Calendar</h1>
-      <p class="sub"><strong>Wed Nov 25 – Fri Dec 11, 2026 · 4 travelers</strong> — Blake, brother, Usama &amp; Awais. Tokyo 6n → Kawaguchiko 1n → Kyoto 3n → Osaka 5n. A week-grid view, like a real calendar: pick a leg above, scroll sideways through the days, tap a day for its full plan and transport.</p>
+      <p class="sub"><strong>Wed Nov 25 – Fri Dec 11, 2026 · 4 travelers</strong> — Blake, brother, Usama &amp; Awais. Tokyo 6n → Kawaguchiko 1n → Kyoto 3n → Osaka 5n. Pick a leg below, switch between Calendar Grid and List View, or jump back to the interactive Map.</p>
     </div>
+    <nav class="navTabs" aria-label="Views">
+      <a class="navTab" href="index.html">🗺️ Map</a>
+      <button class="navTab active" id="navCalBtn" type="button">📅 Calendar</button>
+      <button class="navTab" id="navListBtn" type="button">☰ List View</button>
+    </nav>
   </div>
 
   <div class="alerts">
@@ -153,6 +173,7 @@ footer{color:var(--faint);font-size:12.5px;margin-top:26px;border-top:1px solid 
     <span class="spacer"></span>
     <button class="pill toggle" id="mustdoToggle" aria-pressed="false">★ Must-do only</button>
     <button class="pill toggle" id="bookedToggle" aria-pressed="false">🎟 Booked only</button>
+    <button class="pill toggle" id="listToggle" aria-pressed="false">☰ List view</button>
   </div>
   <div class="legend" aria-label="Legend">
     <span><span class="sw"></span>Core / free</span>
@@ -162,7 +183,7 @@ footer{color:var(--faint);font-size:12.5px;margin-top:26px;border-top:1px solid 
     <span>Times are the planned schedule for each day, 6 AM–11 PM.</span>
   </div>
 
-  <div class="cal-shell">
+  <div class="cal-shell" id="calShell">
     <div class="cal-scroll" id="calScroll">
       <div class="cal" id="cal">
         <div class="cal-head" id="calHead"></div>
@@ -170,6 +191,8 @@ footer{color:var(--faint);font-size:12.5px;margin-top:26px;border-top:1px solid 
       </div>
     </div>
   </div>
+
+  <section class="list-view" id="listView" aria-label="Full list schedule"></section>
 
   <section class="detail" id="detail" aria-live="polite"></section>
 
@@ -393,23 +416,54 @@ function showDay(key){
   detail.innerHTML='<h2>'+esc(day.title)+'</h2><div class="meta">'+esc(day.label)+', 2026 · Sleep: '+esc(day.sleep)+' · Pace: '+day.paceLabel+' · Day total '+esc(day.total)+'</div><ul>'+lis+'</ul>'
     +'<p class="transport">🚆 <strong>Getting around:</strong> '+esc(day.transport)+'</p>';
 }
+function renderList(){
+  var days=DAYS.filter(function(d){return state.range==='all'||d.range===state.range;});
+  var html=days.map(function(d){
+    var lis=d.events.map(function(e){
+      var dim=(state.mustdo&&e.k==='optional')||(state.bookedOnly&&e.k!=='booked');
+      return '<li class="'+e.k+(dim?' dimmed':'')+'" style="--ac:'+d.ac+'"><span class="tag">'+(e.tag||e.k)+'</span><span><strong>'+hm24(e.s)+'–'+hm24(e.e)+' · '+esc(e.t)+'</strong>'+(e.note?'<br><span style="opacity:.85;font-size:13px">'+esc(e.note)+'</span>':'')+'</span></li>';
+    }).join('');
+    return '<article class="list-card" style="--ac:'+d.ac+'">'
+      +'<h3><span>'+esc(d.label)+' — '+esc(d.title)+'</span><span class="pace '+d.pace+'">'+d.paceLabel+'</span></h3>'
+      +'<div class="meta">🛏 '+esc(d.sleep)+' · '+esc(d.total)+'</div>'
+      +'<ul>'+lis+'</ul>'
+      +'<p class="transport">🚆 <strong>Getting around:</strong> '+esc(d.transport)+'</p>'
+      +'</article>';
+  }).join('');
+  document.getElementById('listView').innerHTML=html;
+}
+function setViewMode(isList){
+  state.list=!!isList;
+  document.getElementById('calShell').classList.toggle('hidden',state.list);
+  document.getElementById('detail').classList.toggle('hidden',state.list);
+  document.getElementById('listView').classList.toggle('open',state.list);
+  document.getElementById('listToggle').setAttribute('aria-pressed',state.list?'true':'false');
+  document.getElementById('navCalBtn').classList.toggle('active',!state.list);
+  document.getElementById('navListBtn').classList.toggle('active',state.list);
+  if(state.list) renderList();
+}
 document.querySelectorAll('[data-range]').forEach(function(btn){
   btn.addEventListener('click',function(){
     document.querySelectorAll('[data-range]').forEach(function(b){b.setAttribute('aria-pressed','false')});
     btn.setAttribute('aria-pressed','true');
     state.range=btn.getAttribute('data-range');
     renderCal();
+    if(state.list) renderList();
     document.getElementById('calScroll').scrollLeft=0;
   });
 });
 document.getElementById('mustdoToggle').addEventListener('click',function(){
-  state.mustdo=!state.mustdo; this.setAttribute('aria-pressed',state.mustdo?'true':'false'); renderCal();
+  state.mustdo=!state.mustdo; this.setAttribute('aria-pressed',state.mustdo?'true':'false'); renderCal(); if(state.list) renderList();
 });
 document.getElementById('bookedToggle').addEventListener('click',function(){
-  state.bookedOnly=!state.bookedOnly; this.setAttribute('aria-pressed',state.bookedOnly?'true':'false'); renderCal();
+  state.bookedOnly=!state.bookedOnly; this.setAttribute('aria-pressed',state.bookedOnly?'true':'false'); renderCal(); if(state.list) renderList();
 });
+document.getElementById('listToggle').addEventListener('click',function(){ setViewMode(!state.list); });
+document.getElementById('navCalBtn').addEventListener('click',function(){ setViewMode(false); });
+document.getElementById('navListBtn').addEventListener('click',function(){ setViewMode(true); });
 renderCal();
 showDay(state.selected);
+if(location.hash==='#list') setViewMode(true);
 document.getElementById('ticketList').innerHTML=TICKETS.map(function(t){
   return '<div class="trow"><div class="date">'+t.date+'</div><div class="tname">'+t.name+'<span>'+t.sub+'</span></div><div class="price">'+t.price+'<span>per person</span></div><div class="status '+t.status+'">'+t.label+'</div></div>';
 }).join('');
