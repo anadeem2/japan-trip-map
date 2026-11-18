@@ -283,26 +283,20 @@
   <div class="calToolbar">
     <div class="calGroup">
       <button class="calBtn active" data-calrange="all" type="button">All 16 days</button>
-      <button class="calBtn" data-calrange="w1" type="button">Nov 26–Dec 2 (Tokyo &amp; Fuji)</button>
-      <button class="calBtn" data-calrange="w2" type="button">Dec 3–9 (Kyoto–Osaka)</button>
-      <button class="calBtn" data-calrange="w3" type="button">Dec 10–11 (Himeji &amp; Home)</button>
+      <button class="calBtn" data-calrange="tokyo" type="button">Tokyo · Gemini (Nov 26–Dec 1)</button>
+      <button class="calBtn" data-calrange="fuji" type="button">Fuji · Fuyo (Dec 2)</button>
+      <button class="calBtn" data-calrange="kyoto" type="button">Kyoto · Kyo-Hiiragi (Dec 3–5)</button>
+      <button class="calBtn" data-calrange="osaka" type="button">Osaka · Wolf Pack (Dec 6–11)</button>
     </div>
     <div class="calGroup">
       <button class="calBtn" id="mustFilterBtn" type="button" aria-pressed="false">★ Must-do only</button>
       <button class="calBtn bookFilter" id="bookFilterBtn" type="button" aria-pressed="false">🎫 Needs booking (<span id="bookCount">0</span>)</button>
       <button class="calBtn" id="hideTransitCalBtn" type="button" aria-pressed="false">🚆 Hide transit</button>
       <button class="calBtn" id="hideFoodCalBtn" type="button" aria-pressed="false">🍜 Hide food</button>
-      <button class="calBtn" id="compactGridBtn" type="button" aria-pressed="false">Compact grid</button>
-      <button class="calBtn active" data-calmode="grid" type="button">Calendar Grid</button>
-      <button class="calBtn" data-calmode="agenda" type="button">List Schedule</button>
-      <button class="calBtn" data-calmode="stays" type="button">🏨 By Stay</button>
-      <button class="calBtn" data-calmode="bookings" type="button">🚆 Trains &amp; Bookings</button>
     </div>
   </div>
   <div class="calGridWrap" id="calGridWrap"></div>
   <div class="calAgenda" id="calAgenda"></div>
-  <div class="calAgenda" id="calStays"></div>
-  <div class="calAgenda" id="calBookings"></div>
 </section>
 <div id="evModal" role="dialog" aria-modal="true" aria-labelledby="evModalTitle">
   <div class="evCard">
@@ -961,14 +955,14 @@ document.addEventListener('keydown',function(ev){
 window.addEventListener('resize',queueSettle);
 
 /* ---------- Google Calendar-style Schedule ---------- */
-var calRange='all', calMode='grid', calOnlyBook=false, calOnlyMust=false, calHideTransit=false, calHideFood=false, calCompact=false, calFocusDay=null, modalTarget=null;
+var calRange='all', calMode='grid', calOnlyBook=false, calOnlyMust=false, calHideTransit=false, calHideFood=false, calFocusDay=null, modalTarget=null;
 var CAL_START_HR=7, CAL_END_HR=22, CAL_PX_PER_HR=52;
 function savePrefs(){
   try{
     localStorage.setItem('japan_trip_prefs_v1', JSON.stringify({
       roadPaths:useRoadPaths, hideTransitPins:hideTransitPins,
-      calRange:calRange, calMode:calMode, calOnlyBook:calOnlyBook, calOnlyMust:calOnlyMust,
-      calHideTransit:calHideTransit, calHideFood:calHideFood, calCompact:calCompact
+      calRange:calRange, calOnlyBook:calOnlyBook, calOnlyMust:calOnlyMust,
+      calHideTransit:calHideTransit, calHideFood:calHideFood
     }));
   }catch(e){}
 }
@@ -979,13 +973,11 @@ function loadPrefs(){
     var p=JSON.parse(raw);
     if(typeof p.roadPaths==='boolean'){ useRoadPaths=p.roadPaths; document.getElementById('roadPathsToggle').checked=useRoadPaths; }
     if(typeof p.hideTransitPins==='boolean'){ hideTransitPins=p.hideTransitPins; document.getElementById('hideTransitPinsToggle').checked=hideTransitPins; }
-    if(p.calRange) calRange=p.calRange;
-    if(p.calMode) calMode=p.calMode;
+    if(['all','tokyo','fuji','kyoto','osaka'].indexOf(p.calRange)!==-1) calRange=p.calRange;
     if(typeof p.calOnlyBook==='boolean') calOnlyBook=p.calOnlyBook;
     if(typeof p.calOnlyMust==='boolean') calOnlyMust=p.calOnlyMust;
     if(typeof p.calHideTransit==='boolean') calHideTransit=p.calHideTransit;
     if(typeof p.calHideFood==='boolean') calHideFood=p.calHideFood;
-    if(typeof p.calCompact==='boolean'){ calCompact=p.calCompact; CAL_PX_PER_HR=calCompact?36:52; }
   }catch(e){}
 }
 function parseMin(hhmm){
@@ -1000,9 +992,10 @@ function fmt12(hhmm){
   return h+':'+m+' '+ap;
 }
 function calDays(){
-  if(calRange==='w1') return DAYS.filter(function(d){return d.id>=1&&d.id<=7;});
-  if(calRange==='w2') return DAYS.filter(function(d){return d.id>=8&&d.id<=14;});
-  if(calRange==='w3') return DAYS.filter(function(d){return d.id>=15&&d.id<=16;});
+  if(calRange==='tokyo') return DAYS.filter(function(d){return d.id>=1&&d.id<=6;});
+  if(calRange==='fuji') return DAYS.filter(function(d){return d.id===7;});
+  if(calRange==='kyoto') return DAYS.filter(function(d){return d.id>=8&&d.id<=10;});
+  if(calRange==='osaka') return DAYS.filter(function(d){return d.id>=11&&d.id<=16;});
   return DAYS;
 }
 function hotelIdxForDay(id){
@@ -1049,12 +1042,8 @@ function renderCalendar(){
   var days=calDays();
   var gridWrap=document.getElementById('calGridWrap');
   var agendaEl=document.getElementById('calAgenda');
-  var staysEl=document.getElementById('calStays');
-  var bookingsEl=document.getElementById('calBookings');
   gridWrap.classList.toggle('hidden', calMode!=='grid');
   agendaEl.classList.toggle('open', calMode==='agenda');
-  staysEl.classList.toggle('open', calMode==='stays');
-  bookingsEl.classList.toggle('open', calMode==='bookings');
   if(calMode==='grid'){
     var totalH=(CAL_END_HR-CAL_START_HR)*CAL_PX_PER_HR;
     var headHtml='<div class="calHeaderRow"><div class="calGutterHead"></div>'+days.map(function(d){
@@ -1128,49 +1117,6 @@ function renderCalendar(){
       var stayCtrl=hIdx>=0?'<button class="agStayBtn" type="button" data-hotelidx="'+hIdx+'">🏨 '+((HOTELS[hIdx][6]&&HOTELS[hIdx][6].checkinDay===d.id)?'Check-in: ':'Stay: ')+esc(hotelForDay(d.id))+'</button>':'<div class="agDayMeta">✈️ Flying home</div>';
       return '<div class="agDay"><div class="agDayHead"><div class="agDayLeft"><span class="chip" style="background:'+d.color+'"></span><h3>'+esc(d.date)+' — '+esc(d.title)+'</h3>'+loadBadge(d.load)+'</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">'+stayCtrl+'<button class="btn" type="button" data-mapday="'+d.id+'">📍 Go to Map</button></div></div><ul class="agList">'+rows+'</ul></div>';
     }).join('');
-  } else if(calMode==='stays'){
-    var stayColors=['#3b82f6','#06b6d4','#911eb4','#e8590c'];
-    var stayTransit=[
-      '• <b>Haneda → Takasago (Nov 26):</b> Keikyu/Asakusa/Keisei direct ~1h · ~¥1,040 pp (Suica/IC)<br>• <b>Local Tokyo (Nov 27–30):</b> Asakusa line direct to Asakusa (~20m, ¥380) &amp; Higashi-Ginza (~30m, ¥440); Shibuya/Shinjuku ~55m (¥550)<br>• <b>DisneySea (Dec 1):</b> Keisei + JR + Resort Line ~70m · ~¥700 each way (Suica/IC)<br>• <b>Bag shipping (Nov 30):</b> Yamato Takasago → JR Nijo pickup · ~¥3,000/bag',
-      '• <b>Tokyo → Fuji (Dec 2, 09:05):</b> Highway Bus Busta Shinjuku → Kawaguchiko (~2h10m) · <b>Book Highwaybus.com · ¥2,200 pp</b><br>• <b>Fuji → Kyoto (Dec 3, 09:05):</b> Walk 10–15m to Fuji-Q Highland → Mishima Liner bus (arr 10:15) · <b>Book Fujikyu/Sekisho · ¥2,500 pp</b>',
-      '• <b>Mishima → Kyoto (Dec 3, 11:46):</b> Hikari Shinkansen (arr 13:37) · <b>Book SmartEX · ~¥10,780 pp</b><br>• <b>Base station:</b> JR Nijo &amp; Subway Tozai Nijo (4–5m walk)<br>• <b>Fushimi Inari (Dec 4):</b> JR Sagano + Nara (~20m, ¥240); return Higashiyama → Nijo (~10m, ¥260)<br>• <b>Arashiyama (Dec 5):</b> JR Sagano direct Nijo → Saga-Arashiyama (~11m, ¥200); Biovortex → Nijo (~6m, ¥190)',
-      '• <b>Kyoto → Osaka (Dec 6):</b> Keihan Premium Car → Hirakata · <b>Book Keihan/station · ~¥820–920 pp</b><br>• <b>Nara (Dec 8):</b> Kintetsu Ltd Express Namba ↔ Nara · <b>Book Kintetsu · ~¥1,130 out</b> (Aoniyoshi 17:36 ¥1,410)<br>• <b>Himeji (Dec 10):</b> JR Special Rapid Osaka ↔ Himeji (~1h, ¥1,520 each way, Suica/IC)<br>• <b>Home (Dec 11, 12:30):</b> Midosuji direct → Shin-Osaka (¥290) + <b>Shinkansen SmartEX Hayatoku 21 · ¥12,980 pp (closes Nov 20 08:30 CST!)</b>'
-    ];
-    staysEl.innerHTML='<div class="stayGrid">'+HOTELS.map(function(h,idx){
-      var info=h[6]||{};
-      var stayDays=DAYS.filter(function(d){ return hotelIdxForDay(d.id)===idx || (idx===3&&d.id===16); });
-      var dayChips=stayDays.map(function(d){
-        return '<button class="stayDayChip" type="button" data-calday="'+d.id+'">'+esc(d.date)+' · '+esc(d.title.split('—')[0].trim())+'</button>';
-      }).join('');
-      return '<div class="stayCard" style="--sc:'+stayColors[idx]+'">'
-        +'<div class="stayCardHead"><div><div class="stayDates">'+esc(h[3])+'</div><h3>'+esc(h[4])+'</h3></div><span class="mustTag">BOOKED</span></div>'
-        +'<div class="stayAddr">📍 '+esc(h[0])+'</div>'
-        +'<div class="stayWhy">'+esc(info.why||'')+'</div>'
-        +'<div class="stayTrains"><b>🚆 Key Trains, Buses &amp; Costs</b>'+stayTransit[idx]+'</div>'
-        +'<div class="stayDaysRow">'+dayChips+'</div>'
-        +'<div class="stayActions"><button class="btn" type="button" data-hotelidx="'+idx+'">★ Hotel Details</button><button class="btn" type="button" data-mapstay="'+idx+'">📍 Show Stay on Map</button><a class="btn" href="'+gmapsUrl(h[1],h[2])+'" target="_blank" rel="noopener" style="text-decoration:none">🧭 Google Maps</a></div>'
-        +'</div>';
-    }).join('')+'</div>';
-  } else if(calMode==='bookings'){
-    var items=[];
-    DAYS.forEach(function(d){
-      d.stops.forEach(function(s,i){
-        var sched=s[5]||{};
-        if(!sched.book) return;
-        var note=sched.bookNote||'Book ahead';
-        var isBooked=note.indexOf('BOOKED')!==-1;
-        items.push({day:d,idx:i,stop:s,sched:sched,note:note,isBooked:isBooked});
-      });
-    });
-    bookingsEl.innerHTML='<div class="bookList">'+items.map(function(it){
-      var timeLbl=it.sched.start?(fmt12(it.sched.start)+' – '+fmt12(it.sched.end)):'Timed';
-      return '<div class="bookRow'+(it.isBooked?' is-done':'')+'">'
-        +'<div class="agTime">'+esc(it.day.date)+'<br><span style="font-weight:500;color:var(--muted)">'+esc(timeLbl)+'</span></div>'
-        +'<div><div class="agTitle">'+esc(it.stop[0])+(it.isBooked?' <span class="mustTag">🎟 BOOKED</span>':' <span class="bookTag">BOOK AHEAD</span>')+'</div>'
-        +'<div class="agNote">'+esc(it.note)+(it.sched.transit?' · '+esc(it.sched.transit):'')+'</div></div>'
-        +'<div style="display:flex;gap:6px"><button class="btn" type="button" data-calday="'+it.day.id+'">📋 Day List</button><button class="btn" type="button" data-evday="'+it.day.id+'" data-evidx="'+it.idx+'">📍 Map</button></div>'
-        +'</div>';
-    }).join('')+'</div>';
   }
 }
 function openHotelModal(hIdx){
@@ -1250,13 +1196,10 @@ document.getElementById('tabCal').addEventListener('click',function(){ switchApp
 document.querySelectorAll('[data-calrange]').forEach(function(b){ b.addEventListener('click',function(){
   calRange=b.dataset.calrange;
   calFocusDay=null;
+  if(calMode!=='grid') calMode='grid';
   document.querySelectorAll('[data-calrange]').forEach(function(x){ x.classList.toggle('active',x===b); });
   savePrefs();
   renderCalendar();
-}); });
-document.querySelectorAll('[data-calmode]').forEach(function(b){ b.addEventListener('click',function(){
-  setCalMode(b.dataset.calmode, null);
-  savePrefs();
 }); });
 document.getElementById('mustFilterBtn').addEventListener('click',function(){
   calOnlyMust=!calOnlyMust;
@@ -1286,21 +1229,11 @@ document.getElementById('hideFoodCalBtn').addEventListener('click',function(){
   savePrefs();
   renderCalendar();
 });
-document.getElementById('compactGridBtn').addEventListener('click',function(){
-  calCompact=!calCompact;
-  CAL_PX_PER_HR=calCompact?36:52;
-  this.classList.toggle('active',calCompact);
-  this.setAttribute('aria-pressed',calCompact?'true':'false');
-  savePrefs();
-  renderCalendar();
-});
 document.getElementById('calendarView').addEventListener('click',function(ev){
   if(ev.target.closest('#backToGridBtn')){ setCalMode('grid',null); return; }
   if(ev.target.closest('#showAllAgendaBtn')){ setCalMode('agenda',null); return; }
   var mDay=ev.target.closest('[data-mapday]');
   if(mDay){ ev.stopPropagation(); jumpToDayOnMap(Number(mDay.getAttribute('data-mapday'))); return; }
-  var mStay=ev.target.closest('[data-mapstay]');
-  if(mStay){ jumpToHotelOnMap(Number(mStay.getAttribute('data-mapstay'))); return; }
   var hBtn=ev.target.closest('[data-hotelidx]');
   if(hBtn){ ev.stopPropagation(); openHotelModal(Number(hBtn.getAttribute('data-hotelidx'))); return; }
   var head=ev.target.closest('[data-calday]');
@@ -1319,8 +1252,7 @@ document.getElementById('evModalMapBtn').addEventListener('click',function(){
 });
 loadPrefs();
 document.querySelectorAll('[data-calrange]').forEach(function(x){ x.classList.toggle('active',x.dataset.calrange===calRange); });
-document.querySelectorAll('[data-calmode]').forEach(function(x){ x.classList.toggle('active',x.dataset.calmode===calMode); });
-[['mustFilterBtn',calOnlyMust],['bookFilterBtn',calOnlyBook],['hideTransitCalBtn',calHideTransit],['hideFoodCalBtn',calHideFood],['compactGridBtn',calCompact]].forEach(function(pair){
+[['mustFilterBtn',calOnlyMust],['bookFilterBtn',calOnlyBook],['hideTransitCalBtn',calHideTransit],['hideFoodCalBtn',calHideFood]].forEach(function(pair){
   var b=document.getElementById(pair[0]); if(b){ b.classList.toggle('active',pair[1]); b.setAttribute('aria-pressed',pair[1]?'true':'false'); }
 });
 updateBookCount();
