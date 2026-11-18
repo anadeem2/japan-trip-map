@@ -254,8 +254,10 @@
       <button class="btn panelToggle" id="expandBtn" aria-pressed="false">Expand list</button>
     </div>
     <div class="toggleRow">
-      <label><input type="checkbox" id="hotelsToggle" checked> ★ Hotel areas</label>
+      <label><input type="checkbox" id="hotelsToggle" checked> ★ Booked stays</label>
       <label><input type="checkbox" id="routeToggle" checked> Intercity route</label>
+      <label><input type="checkbox" id="roadPathsToggle" checked> Road-following paths</label>
+      <label><input type="checkbox" id="hideTransitPinsToggle"> Hide transit pins</label>
     </div>
     <div class="days" id="dayList"></div>
     <div class="legendWrap" id="legendWrap">
@@ -263,7 +265,7 @@
       <div class="legend" id="legendBody">
         <div><span class="sampleNum">1</span> <b>Numbered circle</b> — order of stops that day</div>
         <div><span class="legendFood">1</span> <b>🍜 = halal food rec (optional)</b> — orange pin with a 🍜 badge, kept in the day's numbered order</div>
-        <div><span class="starSample">★</span> <b>Gold star</b> — ideal hotel area (not booked)</div>
+        <div><span class="starSample">★</span> <b>Gold star</b> — your booked stay for that leg</div>
         <div><span class="sampleNum" style="background:#1c1a17">12</span> <b>Dark badge</b> — stops grouped at this zoom; tap it to zoom in to them</div>
         <div><span class="dashSample"></span> <b>Dashed line</b> — intercity travel</div>
         <div>Arrows on each line point the way you're travelling. Drag, pinch, or use + / − to explore freely.</div>
@@ -288,6 +290,9 @@
     <div class="calGroup">
       <button class="calBtn" id="mustFilterBtn" type="button" aria-pressed="false">★ Must-do only</button>
       <button class="calBtn bookFilter" id="bookFilterBtn" type="button" aria-pressed="false">🎫 Needs booking (<span id="bookCount">0</span>)</button>
+      <button class="calBtn" id="hideTransitCalBtn" type="button" aria-pressed="false">🚆 Hide transit</button>
+      <button class="calBtn" id="hideFoodCalBtn" type="button" aria-pressed="false">🍜 Hide food</button>
+      <button class="calBtn" id="compactGridBtn" type="button" aria-pressed="false">Compact grid</button>
       <button class="calBtn active" data-calmode="grid" type="button">Calendar Grid</button>
       <button class="calBtn" data-calmode="agenda" type="button">List Schedule</button>
       <button class="calBtn" data-calmode="stays" type="button">🏨 By Stay</button>
@@ -596,10 +601,14 @@ function bearingDeg(a,b){
   var dx=(b[1]-a[1])*Math.cos(latRad), dy=(b[0]-a[0]);
   return Math.atan2(dx,dy)*180/Math.PI;
 }
+function isTransitStop(s){
+  return /^[🚆🚌🚅📦]/.test(s[0]);
+}
+var useRoadPaths=true, hideTransitPins=false;
 function buildDayLayer(d){
   var g=L.layerGroup();
-  var latlngs=d.stops.map(function(s){return [s[1],s[2]];});
-  var pathPts=(typeof DAY_PATHS!=='undefined'&&DAY_PATHS[d.id]&&DAY_PATHS[d.id].length>1)?DAY_PATHS[d.id]:latlngs;
+  var latlngs=d.stops.filter(function(s){ return !hideTransitPins || !isTransitStop(s); }).map(function(s){return [s[1],s[2]];});
+  var pathPts=(useRoadPaths&&typeof DAY_PATHS!=='undefined'&&DAY_PATHS[d.id]&&DAY_PATHS[d.id].length>1)?DAY_PATHS[d.id]:latlngs;
   if(pathPts.length>1){
     L.polyline(pathPts,{color:d.color,weight:3.5,opacity:.85}).addTo(g);
     var step=Math.max(1,Math.floor(pathPts.length/5));
@@ -612,6 +621,7 @@ function buildDayLayer(d){
   }
   markersByDay[d.id]=[];
   d.stops.forEach(function(s,i){
+    if(hideTransitPins&&isTransitStop(s)) return;
     var food=s[4]==='food';
     var pinHtml=food?'<div class="num-pin food-pin">'+(i+1)+'<span class="food-badge" aria-hidden="true">🍜</span></div>':'<div class="num-pin" style="background:'+d.color+'">'+(i+1)+'</div>';
     var icon=L.divIcon({className:'',html:pinHtml,iconSize:[26,26],iconAnchor:[13,13]});
@@ -649,8 +659,8 @@ function buildHotelLayer(){
 }
 function buildRouteLayer(){
   var g=L.layerGroup();
-  var rPts=(typeof ROUTE_PATH!=='undefined'&&ROUTE_PATH.length>1)?ROUTE_PATH:ROUTE_PTS;
-  var retPts=(typeof RETURN_PATH!=='undefined'&&RETURN_PATH.length>1)?RETURN_PATH:RETURN_PTS;
+  var rPts=(useRoadPaths&&typeof ROUTE_PATH!=='undefined'&&ROUTE_PATH.length>1)?ROUTE_PATH:ROUTE_PTS;
+  var retPts=(useRoadPaths&&typeof RETURN_PATH!=='undefined'&&RETURN_PATH.length>1)?RETURN_PATH:RETURN_PTS;
   L.polyline(rPts,{color:'#222222',weight:4.5,opacity:.9,dashArray:'10 7'}).addTo(g);
   L.polyline(retPts,{color:'#c0392b',weight:3.5,opacity:.9,dashArray:'3 7'}).addTo(g);
   return g;
@@ -869,9 +879,20 @@ function initMap(){
      got the page killed on iPhone. The ResizeObserver above already
      covers genuine container size changes. */
 }
+function rebuildMapPaths(){
+  if(!map) return;
+  Object.keys(dayLayers).forEach(function(k){ if(map.hasLayer(dayLayers[k])) map.removeLayer(dayLayers[k]); });
+  if(routeLayer&&map.hasLayer(routeLayer)) map.removeLayer(routeLayer);
+  markerByStop={};
+  DAYS.forEach(function(d){ dayLayers[d.id]=buildDayLayer(d); });
+  routeLayer=buildRouteLayer();
+  refreshLayers(false);
+}
 document.querySelectorAll('[data-view]').forEach(function(b){ b.addEventListener('click',function(){ setView(b.dataset.view); }); });
 document.getElementById('hotelsToggle').addEventListener('change',function(){ refreshLayers(false); });
 document.getElementById('routeToggle').addEventListener('change',function(){ refreshLayers(false); });
+document.getElementById('roadPathsToggle').addEventListener('change',function(){ useRoadPaths=this.checked; savePrefs(); rebuildMapPaths(); });
+document.getElementById('hideTransitPinsToggle').addEventListener('change',function(){ hideTransitPins=this.checked; savePrefs(); rebuildMapPaths(); });
 document.getElementById('mapRetryBtn').addEventListener('click',function(){
   document.getElementById('mapMsg').style.display='none';
   if(map){ map.eachLayer(function(l){ if(l.redraw) l.redraw(); }); setTimeout(settleMap,100); setTimeout(settleMap,600); }
@@ -938,8 +959,33 @@ document.addEventListener('keydown',function(ev){
 window.addEventListener('resize',queueSettle);
 
 /* ---------- Google Calendar-style Schedule ---------- */
-var calRange='all', calMode='grid', calOnlyBook=false, calOnlyMust=false, calFocusDay=null, modalTarget=null;
+var calRange='all', calMode='grid', calOnlyBook=false, calOnlyMust=false, calHideTransit=false, calHideFood=false, calCompact=false, calFocusDay=null, modalTarget=null;
 var CAL_START_HR=7, CAL_END_HR=22, CAL_PX_PER_HR=52;
+function savePrefs(){
+  try{
+    localStorage.setItem('japan_trip_prefs_v1', JSON.stringify({
+      roadPaths:useRoadPaths, hideTransitPins:hideTransitPins,
+      calRange:calRange, calMode:calMode, calOnlyBook:calOnlyBook, calOnlyMust:calOnlyMust,
+      calHideTransit:calHideTransit, calHideFood:calHideFood, calCompact:calCompact
+    }));
+  }catch(e){}
+}
+function loadPrefs(){
+  try{
+    var raw=localStorage.getItem('japan_trip_prefs_v1');
+    if(!raw) return;
+    var p=JSON.parse(raw);
+    if(typeof p.roadPaths==='boolean'){ useRoadPaths=p.roadPaths; document.getElementById('roadPathsToggle').checked=useRoadPaths; }
+    if(typeof p.hideTransitPins==='boolean'){ hideTransitPins=p.hideTransitPins; document.getElementById('hideTransitPinsToggle').checked=hideTransitPins; }
+    if(p.calRange) calRange=p.calRange;
+    if(p.calMode) calMode=p.calMode;
+    if(typeof p.calOnlyBook==='boolean') calOnlyBook=p.calOnlyBook;
+    if(typeof p.calOnlyMust==='boolean') calOnlyMust=p.calOnlyMust;
+    if(typeof p.calHideTransit==='boolean') calHideTransit=p.calHideTransit;
+    if(typeof p.calHideFood==='boolean') calHideFood=p.calHideFood;
+    if(typeof p.calCompact==='boolean'){ calCompact=p.calCompact; CAL_PX_PER_HR=calCompact?36:52; }
+  }catch(e){}
+}
 function parseMin(hhmm){
   if(!hhmm) return 540;
   var p=hhmm.split(':');
@@ -1027,11 +1073,14 @@ function renderCalendar(){
     }
     gutterHtml+='</div>';
     var colsHtml=days.map(function(d){
-      var items=d.stops.map(function(s,i){
+      var items=[];
+      d.stops.forEach(function(s,i){
+        if(calHideTransit&&isTransitStop(s)) return;
+        if(calHideFood&&s[4]==='food') return;
         var sched=s[5]||{start:'09:00',end:'10:30',book:false};
         var sMin=Math.max(CAL_START_HR*60, parseMin(sched.start));
         var eMin=Math.min(CAL_END_HR*60, Math.max(sMin+20, parseMin(sched.end)));
-        return {s:s,i:i,sched:sched,sMin:sMin,eMin:eMin};
+        items.push({s:s,i:i,sched:sched,sMin:sMin,eMin:eMin});
       });
       layoutOverlaps(items);
       var evHtml=items.map(function(it){
@@ -1058,6 +1107,8 @@ function renderCalendar(){
     agendaEl.innerHTML=focusBar+listDays.map(function(d){
       var rows=d.stops.map(function(s,i){
         var sched=s[5]||{start:'',end:'',book:false};
+        if(calHideTransit&&isTransitStop(s)) return '';
+        if(calHideFood&&s[4]==='food') return '';
         if(calOnlyBook&&!sched.book) return '';
         if(calOnlyMust&&sched.opt) return '';
         var food=s[4]==='food'?' 🍜':'';
@@ -1198,21 +1249,47 @@ document.querySelectorAll('[data-calrange]').forEach(function(b){ b.addEventList
   calRange=b.dataset.calrange;
   calFocusDay=null;
   document.querySelectorAll('[data-calrange]').forEach(function(x){ x.classList.toggle('active',x===b); });
+  savePrefs();
   renderCalendar();
 }); });
 document.querySelectorAll('[data-calmode]').forEach(function(b){ b.addEventListener('click',function(){
   setCalMode(b.dataset.calmode, null);
+  savePrefs();
 }); });
 document.getElementById('mustFilterBtn').addEventListener('click',function(){
   calOnlyMust=!calOnlyMust;
   this.classList.toggle('active',calOnlyMust);
   this.setAttribute('aria-pressed',calOnlyMust?'true':'false');
+  savePrefs();
   renderCalendar();
 });
 document.getElementById('bookFilterBtn').addEventListener('click',function(){
   calOnlyBook=!calOnlyBook;
   this.classList.toggle('active',calOnlyBook);
   this.setAttribute('aria-pressed',calOnlyBook?'true':'false');
+  savePrefs();
+  renderCalendar();
+});
+document.getElementById('hideTransitCalBtn').addEventListener('click',function(){
+  calHideTransit=!calHideTransit;
+  this.classList.toggle('active',calHideTransit);
+  this.setAttribute('aria-pressed',calHideTransit?'true':'false');
+  savePrefs();
+  renderCalendar();
+});
+document.getElementById('hideFoodCalBtn').addEventListener('click',function(){
+  calHideFood=!calHideFood;
+  this.classList.toggle('active',calHideFood);
+  this.setAttribute('aria-pressed',calHideFood?'true':'false');
+  savePrefs();
+  renderCalendar();
+});
+document.getElementById('compactGridBtn').addEventListener('click',function(){
+  calCompact=!calCompact;
+  CAL_PX_PER_HR=calCompact?36:52;
+  this.classList.toggle('active',calCompact);
+  this.setAttribute('aria-pressed',calCompact?'true':'false');
+  savePrefs();
   renderCalendar();
 });
 document.getElementById('calendarView').addEventListener('click',function(ev){
@@ -1237,6 +1314,12 @@ document.getElementById('evModalMapBtn').addEventListener('click',function(){
   if(!modalTarget) return;
   if(modalTarget.hotelIdx!==undefined) jumpToHotelOnMap(modalTarget.hotelIdx);
   else jumpToStopOnMap(modalTarget.dayId,modalTarget.idx);
+});
+loadPrefs();
+document.querySelectorAll('[data-calrange]').forEach(function(x){ x.classList.toggle('active',x.dataset.calrange===calRange); });
+document.querySelectorAll('[data-calmode]').forEach(function(x){ x.classList.toggle('active',x.dataset.calmode===calMode); });
+[['mustFilterBtn',calOnlyMust],['bookFilterBtn',calOnlyBook],['hideTransitCalBtn',calHideTransit],['hideFoodCalBtn',calHideFood],['compactGridBtn',calCompact]].forEach(function(pair){
+  var b=document.getElementById(pair[0]); if(b){ b.classList.toggle('active',pair[1]); b.setAttribute('aria-pressed',pair[1]?'true':'false'); }
 });
 updateBookCount();
 
