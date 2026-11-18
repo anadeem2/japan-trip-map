@@ -141,7 +141,7 @@ footer{color:var(--faint);font-size:12.5px;margin-top:26px;border-top:1px solid 
   <div class="stays">
     <div class="stay" style="--c:#3b82f6"><small>Tokyo · 6 nights</small><div>Hao Bros.Home Gemini</div><span>Takasago · Keisei-Takasago 5-min walk</span></div>
     <div class="stay" style="--c:#22d3ee"><small>Fuji · 1 night · Dec 2</small><div>Fuyo No Yado</div><span>Fujiyoshida · Fuji-Q Highland stop 10–15 min walk</span></div>
-    <div class="stay" style="--c:#a78bfa"><small>Kyoto · 3 nights</small><div>Oyado Nishishichijo</div><span>JR Nishioji / Umekoji-Kyotonishi</span></div>
+    <div class="stay" style="--c:#a78bfa"><small>Kyoto · 3 nights · Dec 3–6</small><div>Kyoto Kyo-Hiiragi</div><span>Nakagyo · JR Nijo / Tozai Nijo 4–5 min walk</span></div>
     <div class="stay" style="--c:#f472b6"><small>Osaka · 5 nights</small><div>Wolf Pack Apt 1001</div><span>Daikokucho · Midosuji line</span></div>
   </div>
 
@@ -179,7 +179,7 @@ footer{color:var(--faint);font-size:12.5px;margin-top:26px;border-top:1px solid 
     <div id="ticketList"></div>
   </section>
 
-  <footer>Built from the living itinerary (last updated Nov 16, 2026 with the four locked-in stays). If a booking changes, this calendar needs the same edit. Day totals live in the written itinerary (~$1,050 pp for hotels + tickets + big transport, plus food/local transit).</footer>
+  <footer>Built from the living itinerary (synced with upstream main &amp; updated Nov 17, 2026 with Kyoto Kyo-Hiiragi and all four locked-in stays + calendar transport blocks). If a booking changes, this calendar needs the same edit. Day totals live in the written itinerary (~$1,050 pp for hotels + tickets + big transport, plus food/local transit).</footer>
 </div>
 
 <script>
@@ -188,125 +188,152 @@ function hm(h){var hh=Math.floor(h), mm=Math.round((h-hh)*60); var ap=hh>=12?'PM
 function hm24(h){var hh=Math.floor(h), mm=Math.round((h-hh)*60); return String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0');}
 var DAYS=[
 {id:'2026-11-25',dow:'Wed',label:'Wed Nov 25',city:'Travel',ac:'#94a3b8',pace:'travel',paceLabel:'✈ Travel',title:'Travel day — Chicago → Tokyo',sleep:'In the air',total:'Flight day',range:'tokyo',transport:'Fly out 13:00 Chicago → Haneda, lands ~17:30 Thu Nov 26. Sleep plan: up late Tue, alarm 06:30–07:00, no naps.',events:[
- {s:13,e:21,t:'Flight Chicago → Haneda',k:'paid',tag:'Paid',note:'Flights already booked · 13:00 departure'}]},
+ {s:13,e:21,t:'Flight Chicago → Haneda',k:'booked',tag:'🎟 Booked',note:'Flights already booked · 13:00 departure'}]},
 {id:'2026-11-26',dow:'Thu',label:'Thu Nov 26',city:'Tokyo',ac:'#3b82f6',pace:'light',paceLabel:'🔋 Light',title:'Arrive Tokyo',sleep:'Tokyo · Gemini',total:'~$46 pp',range:'tokyo',transport:'Direct through-train Haneda → Keisei-Takasago (~1h, usually no transfer), then 5-min walk to Gemini.',events:[
  {s:17,e:18,t:'Land Haneda ~5 p.m.',k:'free',tag:'Arrival'},
- {s:18,e:19.25,t:'Airport train to Takasago',k:'paid',tag:'¥ Paid',note:'~¥1,040'},
- {s:19.25,e:20,t:'Check in: Hao Bros.Home Gemini',k:'free',tag:'Stay',note:'6 nights · self check-in'},
+ {s:18,e:19.25,t:'Keikyu/Asakusa/Keisei direct → Takasago',k:'paid',tag:'🚆 Transit',note:'~1h direct · ~¥1,040 pp · Suica/IC at gate (no booking)'},
+ {s:19.25,e:20,t:'Check in: Hao Bros.Home Gemini',k:'free',tag:'Stay',note:'6 nights (Nov 26–Dec 2) · self check-in · BOOKED'},
  {s:20,e:21.5,t:'Dinner + konbini run, early night',k:'free',tag:'Core'}]},
 {id:'2026-11-27',dow:'Fri',label:'Fri Nov 27',city:'Tokyo',ac:'#fb923c',pace:'light',paceLabel:'🔋 Light',title:'East Tokyo — easy pace',sleep:'Tokyo · Gemini',total:'~$48 pp',range:'tokyo',transport:'Gemini → Asakusa direct ~20 min (Asakusa line). Ueno minutes away; home via Keisei-Ueno direct ~25 min.',events:[
+ {s:9,e:9.45,t:'Asakusa line direct: Takasago → Asakusa',k:'paid',tag:'🚆 Transit',note:'~20m · ~¥380 pp · Suica/IC (no booking)'},
  {s:9.5,e:11,t:'Senso-ji, Asakusa + Nakamise',k:'free',tag:'Core',note:'~1.5h'},
  {s:11.08,e:12,t:'Kappabashi Kitchen Street',k:'free',tag:'Core',note:'Knives & kitchenware browsing'},
  {s:12.08,e:12.67,t:'Sumida River walk',k:'free',tag:'Must-do',note:'~30 min toward Ueno'},
  {s:12.75,e:13.75,t:'Ameyoko Market — lunch',k:'free',tag:'Core'},
  {s:14,e:15.5,t:'Tokyo National Museum, Ueno',k:'paid',tag:'¥ At door',note:'¥1,000 · ~2h',cut:1},
  {s:16,e:17.5,t:'Akihabara — only if energy is good',k:'optional',tag:'Optional'},
- {s:18,e:19.5,t:'Ikebukuro (Pokémon Center / Animate)',k:'optional',tag:'Optional',note:'Only if energy remains'}]},
+ {s:18,e:19.5,t:'Ikebukuro (Pokémon Center / Animate)',k:'optional',tag:'Optional',note:'Only if energy remains'},
+ {s:19.6,e:20.1,t:'Return train: Keisei-Ueno/Nippori → Takasago',k:'paid',tag:'🚆 Transit',note:'~25–35m · ~¥330–400 pp · Suica/IC'}]},
 {id:'2026-11-28',dow:'Sat',label:'Sat Nov 28',city:'Tokyo',ac:'#e879f9',pace:'medium',paceLabel:'⚡ Medium',title:'The bay day',sleep:'Tokyo · Gemini',total:'~$70 pp',range:'tokyo',transport:'Gemini → Higashi-Ginza direct ~30 min. Bay hops on Yurikamome: Ariake → Odaiba → Toyosu. Home from Toyosu ~50 min via Shimbashi.',events:[
+ {s:9.15,e:9.85,t:'Asakusa line direct: Takasago → Higashi-Ginza',k:'paid',tag:'🚆 Transit',note:'~30m · ~¥440 pp · Suica/IC (no booking)'},
  {s:10,e:12,t:'Tsukiji Outer Market 🍜',k:'optional',tag:'Optional 🍜',note:'Halal-simple seafood · stalls wind down ~14:00'},
  {s:12.25,e:13.5,t:'⭐ Louis Vuitton Ginza + Le Café V',k:'optional',tag:'Optional',note:'Go for the building · 2nd chance Dec 6 in Osaka'},
+ {s:13.6,e:14.2,t:'Yurikamome: Shimbashi → Ariake',k:'paid',tag:'🚆 Transit',note:'~25m · ~¥390 pp · Suica/IC'},
  {s:14.25,e:16,t:'Tokyo Rinkai Disaster Prevention Park, Ariake',k:'free',tag:'Free',note:'72h earthquake tour · last entry 16:30'},
+ {s:16.05,e:16.45,t:'Yurikamome: Ariake → Odaiba',k:'paid',tag:'🚆 Transit',note:'~10m · ~¥250 pp · Suica/IC'},
  {s:16.5,e:17.5,t:'Unicorn Gundam, Odaiba',k:'free',tag:'Free',note:'Transforms on the hour'},
- {s:19,e:21,t:'teamLab Planets, Toyosu',k:'booked',tag:'🎟 Booked',note:'¥4,400 · BOOKED · ~19:00 · barefoot, water to knees, 1.5–2h'}]},
+ {s:17.6,e:18.1,t:'Yurikamome: Odaiba → Toyosu',k:'paid',tag:'🚆 Transit',note:'~15m · ~¥260 pp · Suica/IC'},
+ {s:19,e:21,t:'teamLab Planets, Toyosu',k:'booked',tag:'🎟 Booked',note:'¥4,400 · BOOKED · ~19:00 · barefoot, water to knees, 1.5–2h'},
+ {s:21.1,e:22,t:'Yurikamome + Asakusa: Toyosu → Takasago',k:'paid',tag:'🚆 Transit',note:'~50m via Shimbashi · ~¥760 pp · Suica/IC'}]},
 {id:'2026-11-29',dow:'Sun',label:'Sun Nov 29',city:'Tokyo',ac:'#a78bfa',pace:'medium',paceLabel:'⚡ Medium',title:'West side + Shinjuku night',sleep:'Tokyo · Gemini',total:'~$64 pp',range:'tokyo',transport:'Gemini → Shimbashi direct, Yamanote to Harajuku — ~55–60 min door-to-door. Harajuku → Shinjuku is ~10 min on the Yamanote, so the evening flows west in one line. Last trains home ~23:30–00:00.',events:[
+ {s:9,e:9.95,t:'Asakusa + Yamanote: Takasago → Harajuku',k:'paid',tag:'🚆 Transit',note:'~55m via Shimbashi · ~¥550 pp · Suica/IC'},
  {s:10,e:11,t:'Meiji Shrine',k:'free',tag:'Core',note:'Sunday wedding processions likely late morning'},
  {s:11.08,e:12.25,t:'Harajuku / Takeshita St',k:'free',tag:'Core',note:'Sunday fashion crowd · then Omotesando'},
  {s:12.5,e:13.25,t:'Yoyogi Park rockabillies + Omotesando stroll',k:'free',tag:'Core',note:'Sunday-only rockabilly dancers by the park entrance'},
  {s:14,e:16,t:'Flex catch-up — Ikebukuro / Akihabara / shopping',k:'optional',tag:'Optional',note:'Squeezed in here from Nov 30 if wanted · or rest back at Takasago'},
  {s:19,e:20,t:'Golden Gai stroll, Shinjuku',k:'free',tag:'Must-do',note:'Moved from Nov 30 · evening · 30–45 min'},
- {s:20.15,e:21.25,t:'Shinjuku-tei — halal wagyu ramen 🍜',k:'optional',tag:'Optional 🍜',note:'Moved from Nov 30'}]},
-{id:'2026-11-30',dow:'Mon',label:'Mon Nov 30',city:'Tokyo',ac:'#a3b81c',pace:'medium',paceLabel:'⚡ Medium',title:'Shibuya day — Sky 17:20',sleep:'Tokyo · Gemini',total:'~$61 pp',range:'tokyo',transport:'Bags ship to Kyoto in the morning (Yamato office pickup — both stays are unstaffed). Then Gemini → Shibuya ~55 min via Shimbashi / Yamanote. SHIBU NIWA (17F Shibuya Fukuras) for the sunset, Sky entry 17:20 right after. Early night — DisneySea starts with a 07:15 departure tomorrow.',events:[
- {s:9,e:10,t:'Ship big bags to Kyoto',k:'paid',tag:'¥ Paid',note:'~¥3,000 · Yamato office drop-off'},
+ {s:20.15,e:21.25,t:'Shinjuku-tei — halal wagyu ramen 🍜',k:'optional',tag:'Optional 🍜',note:'Moved from Nov 30'},
+ {s:21.5,e:22.5,t:'JR + Keisei: Shinjuku → Takasago',k:'paid',tag:'🚆 Transit',note:'~55m via Nippori/Shimbashi · ~¥550 pp · leave by ~23:00'}]},
+{id:'2026-11-30',dow:'Mon',label:'Mon Nov 30',city:'Tokyo',ac:'#a3b81c',pace:'medium',paceLabel:'⚡ Medium',title:'Shibuya day — Sky 17:20',sleep:'Tokyo · Gemini',total:'~$61 pp',range:'tokyo',transport:'Bags ship to Kyoto in the morning (Yamato office pickup near JR Nijo — both stays are unstaffed). Then Gemini → Shibuya ~55 min via Shimbashi / Yamanote. SHIBU NIWA (17F Shibuya Fukuras) for the sunset, Sky entry 17:20 right after. Early night — DisneySea starts with a 07:15 departure tomorrow.',events:[
+ {s:9,e:10,t:'Ship big bags to Kyoto (Yamato)',k:'paid',tag:'¥ At counter',note:'~¥3,000/bag · Yamato office drop-off in Takasago → pickup near JR Nijo'},
+ {s:10.05,e:10.95,t:'Asakusa + Yamanote: Takasago → Shibuya',k:'paid',tag:'🚆 Transit',note:'~55m via Shimbashi · ~¥550 pp · Suica/IC'},
  {s:11,e:11.5,t:'Shibuya Crossing + Hachiko',k:'free',tag:'Core',note:'Moved from Nov 29'},
  {s:11.58,e:12.5,t:'Mega Don Quijote Shibuya',k:'free',tag:'Core',note:'Flagship store browsing'},
  {s:13,e:14.5,t:'Nintendo Tokyo + Pokémon Center, Shibuya Parco',k:'free',tag:'Core',note:'Moved from Nov 29 · + free 10F rooftop park'},
  {s:16,e:16.67,t:'SHIBU NIWA free rooftop — sunset',k:'free',tag:'Free',note:'17F Shibuya Fukuras — view over the Crossing · sunset ~16:28 · moved from Nov 29'},
  {s:17.33,e:18.75,t:'Shibuya Sky',k:'booked',tag:'🎟 Booked',note:'¥3,400 · BOOKED Mon Nov 30 · entry 17:20–17:39 · sunset ~16:28 → blue-hour / night lights · no exit limit · passports required at entry'},
- {s:19,e:20.5,t:'Gyumon Shibuya — halal wagyu yakiniku 🍜',k:'optional',tag:'Optional 🍜',note:'Moved from Nov 29 · courses ~¥3,000–4,000 · reserve if group wants it · Starbucks Reserve Roastery after only if energy holds — early night before DisneySea'}]},
+ {s:19,e:20.5,t:'Gyumon Shibuya — halal wagyu yakiniku 🍜',k:'optional',tag:'Optional 🍜',note:'Moved from Nov 29 · courses ~¥3,000–4,000 · reserve if group wants it · Starbucks Reserve Roastery after only if energy holds'},
+ {s:20.75,e:21.75,t:'Yamanote + Asakusa: Shibuya → Takasago',k:'paid',tag:'🚆 Transit',note:'~55m · ~¥550 pp · early night before 07:15 DisneySea'}]},
 {id:'2026-12-01',dow:'Tue',label:'Tue Dec 1',city:'Tokyo',ac:'#22d3ee',pace:'heavy',paceLabel:'🔥 Heavy',title:'DisneySea',sleep:'Tokyo · Gemini',total:'~$112 pp',range:'tokyo',transport:'Leave Gemini ~07:15. Keisei → Funabashi → JR → Maihama → Disney Resort Line: ~65–70 min, 2 changes, ~¥700 each way.',events:[
- {s:9,e:21,t:'Tokyo DisneySea',k:'booked',tag:'🎟 Booked',note:'¥10,900 · BOOKED Tue Dec 1 · 9:00–21:00 · Fantasy Springs · Believe! show 19:30'}]},
+ {s:7.25,e:8.5,t:'Keisei + JR + Resort Line → DisneySea',k:'paid',tag:'🚆 Transit',note:'Leave 07:15 · ~70m, 2 changes · ~¥700 pp · Suica/IC'},
+ {s:9,e:21,t:'Tokyo DisneySea',k:'booked',tag:'🎟 Booked',note:'¥10,900 · BOOKED Tue Dec 1 · 9:00–21:00 · Fantasy Springs · Believe! show 19:30'},
+ {s:21.1,e:22.25,t:'Return train: DisneySea → Takasago',k:'paid',tag:'🚆 Transit',note:'~70m · ~¥700 pp · Suica/IC'}]},
 {id:'2026-12-02',dow:'Wed',label:'Wed Dec 2',city:'Fuji · Fujiyoshida',ac:'#06b6d4',pace:'medium',paceLabel:'⚡ Medium',title:'Mt. Fuji overnight',sleep:'Fujiyoshida · Fuyo No Yado',total:'~$72 pp (Fuji day)',range:'tokyo',transport:'Leave Gemini ~07:30 → Busta Shinjuku for 09:05 bus → Kawaguchiko ~11:15. Ropeway + lake first, then ~10 min down to Fujiyoshida; Fuyo is a 5-min taxi from Fujisan Station, Chureito ~5 min from the house.',events:[
- {s:9.08,e:11.25,t:'Highway bus Shinjuku → Kawaguchiko',k:'paid',tag:'¥ To book',note:'09:05 from Busta Shinjuku · ¥2,200 one way'},
+ {s:7.5,e:8.85,t:'Keisei + Yamanote: Takasago → Busta Shinjuku',k:'paid',tag:'🚆 Transit',note:'Leave 07:30 · ~55m + walk · ~¥550 pp · Suica/IC'},
+ {s:9.08,e:11.25,t:'Highway bus: Busta Shinjuku → Kawaguchiko',k:'paid',tag:'🚆 Book',note:'BOOK AHEAD (Highwaybus.com) · 09:05 dep → 11:15 arr · ¥2,200 pp'},
  {s:11.5,e:12.75,t:'Mt. Fuji Panoramic Ropeway first',k:'paid',tag:'¥ At door',note:'¥1,200 · last descent ~16:20 in winter'},
  {s:13,e:14,t:'Lake Kawaguchiko',k:'free',tag:'Core'},
  {s:14.25,e:15.25,t:'Halal hōtō lunch: T&T Fujiyama (Fujiyoshida)',k:'paid',tag:'¥ At door',note:'Halal-certified hōtō · 11:00–16:00 · ~¥1,000–2,000'},
- {s:15.5,e:16.25,t:'Check in: Fuyo No Yado',k:'free',tag:'Stay',note:'Front desk 15:30–18:00 · whole log house · BOOKED'},
+ {s:15.5,e:16.25,t:'Check in: Fuyo No Yado',k:'free',tag:'Stay',note:'1 night (Dec 2–3) · front desk 15:30–18:00 · whole log house · BOOKED'},
  {s:16.5,e:17.75,t:'Chureito Pagoda at sunset',k:'free',tag:'Core',note:'~5 min from the house'},
  {s:18.5,e:20,t:'Soak: private tub + Resort Inn Fuyo public bath',k:'optional',tag:'Optional',note:'Public bath next door is free for log-house guests'}]},
-{id:'2026-12-03',dow:'Thu',label:'Thu Dec 3',city:'Kyoto',ac:'#c084fc',pace:'heavy',paceLabel:'🔥 Heavy',title:'Fujiyoshida → Kyoto + downtown',sleep:'Kyoto · Oyado',total:'~$141 pp',range:'kyoto',transport:'Walk 10–15 min to Fuji-Q Highland stop → 09:05 Mishima liner (board there) → Mishima 10:15 → Hikari 11:46 → Kyoto 13:37. Stay is 1 JR stop from Kyoto Station (Umekoji-Kyotonishi) + 14-min walk; check-in 16:00–22:00 by tablet.',events:[
+{id:'2026-12-03',dow:'Thu',label:'Thu Dec 3',city:'Kyoto',ac:'#c084fc',pace:'heavy',paceLabel:'🔥 Heavy',title:'Fujiyoshida → Kyoto + downtown',sleep:'Kyoto · Kyo-Hiiragi',total:'~$141 pp',range:'kyoto',transport:'Walk 10–15 min to Fuji-Q Highland stop → 09:05 Mishima Liner (¥2,500, book Fujikyu/Sekisho) → Mishima 10:15 → Hikari 11:46 (~¥10,780, book SmartEX) → Kyoto 13:37. Stay is Kyoto Kyo-Hiiragi, 4–5 min walk from JR Nijo (2 stops / ~6 min, ¥190 from Kyoto Station); check-in 15:00–21:00.',events:[
  {s:6.5,e:7.5,t:'Sunrise Fuji viewing — house / Chureito',k:'free',tag:'Core',note:'Chureito ~5 min from Fuyo'},
- {s:9.08,e:13.62,t:'Mishima liner bus + Hikari shinkansen',k:'paid',tag:'¥ To book',note:'09:05 from Fuji-Q Highland · ¥2,500 + ~¥10,780 = ~¥13,280 · via SmartEX'},
+ {s:9.08,e:13.62,t:'Mishima Liner bus + Hikari Shinkansen → Kyoto',k:'paid',tag:'🚆 Book',note:'BOOK AHEAD: 09:05 Fuji-Q Highland → Mishima 10:15 (¥2,500, Fujikyu/Sekisho) + 11:46 Hikari → Kyoto 13:37 (~¥10,780, SmartEX) · ~¥13,280 total'},
  {s:13.75,e:14.25,t:'Kyoto Station Skywalk',k:'free',tag:'Free'},
- {s:14.5,e:15.75,t:'Nishiki Market',k:'free',tag:'Must-do',note:'1–1.5h'},
+ {s:14.5,e:15.75,t:'Nishiki Market',k:'free',tag:'Must-do',note:'Subway Karasuma Kyoto → Shijo (~4m, ¥220) · 1–1.5h'},
  {s:16,e:17.25,t:'Samurai & Ninja Museum',k:'paid',tag:'¥ Book ahead',note:'~¥3,300 online (door ~¥4,400) · shuriken, blowgun, armor'},
  {s:17.5,e:19,t:'Kimono keepsake: Hoippo → Chicago Kyoto',k:'optional',tag:'Optional',note:'Hoippo closes 19:00 · kimono from ¥8,800'},
- {s:19.25,e:20.5,t:'Pontocho Alley + Kamo River at dusk',k:'free',tag:'Core'}]},
-{id:'2026-12-04',dow:'Fri',label:'Fri Dec 4',city:'Kyoto',ac:'#f472b6',pace:'heavy',paceLabel:'🔥 Heavy',title:'Kyoto temples — Fushimi & Higashiyama',sleep:'Kyoto · Oyado',total:'~$42 pp',range:'kyoto',transport:'Leave ~07:00: JR Nishioji → Kyoto Station → Nara line to Inari (~20 min). Home from Gion ~35–40 min via Keihan + JR.',events:[
+ {s:19.25,e:20.25,t:'Pontocho Alley + Kamo River at dusk',k:'free',tag:'Core'},
+ {s:20.35,e:21,t:'Tozai line + Check in: Kyoto Kyo-Hiiragi',k:'paid',tag:'Stay / 🚆',note:'Subway Tozai Shiyakusho-mae → Nijo (~6m, ¥220) + 5m walk · 3 nights (Dec 3–6) · BOOKED'}]},
+{id:'2026-12-04',dow:'Fri',label:'Fri Dec 4',city:'Kyoto',ac:'#f472b6',pace:'heavy',paceLabel:'🔥 Heavy',title:'Kyoto temples — Fushimi & Higashiyama',sleep:'Kyoto · Kyo-Hiiragi',total:'~$42 pp',range:'kyoto',transport:'Leave Kyo-Hiiragi ~07:20: walk 4–5 min to JR Nijo → Kyoto Station (~6 min) → JR Nara line to Inari (~5 min, ¥240 total). Home from Gion / Higashiyama: Subway Tozai direct from Higashiyama or Sanjo-Keihan → Nijo (~10 min, ¥260).',events:[
+ {s:7.33,e:7.9,t:'JR Sagano + Nara: Nijo → Inari',k:'paid',tag:'🚆 Transit',note:'Leave ~07:20 · ~20m · ¥240 pp · Suica/IC (no booking)'},
  {s:8,e:10,t:'Fushimi Inari',k:'free',tag:'Core',note:'08:00 start, before the worst crowds'},
- {s:10.5,e:11.75,t:'Kiyomizu-dera',k:'paid',tag:'¥ At door',note:'¥500'},
+ {s:10.5,e:11.75,t:'Kiyomizu-dera',k:'paid',tag:'¥ At door',note:'¥500 · Keihan Fushimi-Inari → Kiyomizu-Gojo (¥220) + walk'},
  {s:11.75,e:13,t:'Sannenzaka / Ninenzaka + tatami Starbucks',k:'free',tag:'Core'},
  {s:13.25,e:14.25,t:'Tea ceremony (~1h)',k:'optional',tag:'Optional',note:'+¥4,000'},
  {s:14.5,e:15.5,t:'Kimono rental',k:'optional',tag:'Optional',note:'+~¥3,100'},
  {s:17,e:18.5,t:'Yasaka Shrine at dusk + Gion / Kennin-ji',k:'free',tag:'Core'},
- {s:18.75,e:20,t:'Kodai-ji night illumination',k:'paid',tag:'¥ At door',note:'¥800'}]},
-{id:'2026-12-05',dow:'Sat',label:'Sat Dec 5',city:'Kyoto',ac:'#a78bfa',pace:'heavy',paceLabel:'🔥 Heavy',title:'Arashiyama + teamLab Biovortex 17:30',sleep:'Kyoto · Oyado',total:'~$82 pp',range:'kyoto',transport:'Best base day: Umekoji-Kyotonishi is on the JR Sagano line — direct ~15 min to Saga-Arashiyama. Biovortex is 7 min from Kyoto Station; home is a 3-min JR hop.',events:[
+ {s:18.75,e:20,t:'Kodai-ji night illumination',k:'paid',tag:'¥ At door',note:'¥800'},
+ {s:20.1,e:20.5,t:'Subway Tozai: Higashiyama → Nijo',k:'paid',tag:'🚆 Transit',note:'~10m direct + 5m walk · ¥260 pp · Suica/IC'}]},
+{id:'2026-12-05',dow:'Sat',label:'Sat Dec 5',city:'Kyoto',ac:'#a78bfa',pace:'heavy',paceLabel:'🔥 Heavy',title:'Arashiyama + teamLab Biovortex 17:30',sleep:'Kyoto · Kyo-Hiiragi',total:'~$82 pp',range:'kyoto',transport:'Direct from JR Nijo (4–5 min walk from Kyo-Hiiragi) on JR Sagano line → Saga-Arashiyama (~11 min, ¥200). Kinkaku-ji → Kyoto Station by bus/taxi; Biovortex is 7 min from Kyoto Station; home is 2 stops (~6 min, ¥190) on JR Sagano line back to Nijo.',events:[
+ {s:8,e:8.4,t:'JR Sagano direct: Nijo → Saga-Arashiyama',k:'paid',tag:'🚆 Transit',note:'~11m direct · ¥200 pp · Suica/IC (no booking)'},
  {s:8.5,e:10.5,t:'Bamboo Grove + Tenryu-ji',k:'paid',tag:'¥ At door',note:'Tenryu-ji ¥800'},
  {s:10.75,e:11.75,t:'Okochi Sanso villa garden',k:'paid',tag:'¥ At door',note:'¥1,000 · matcha + wafer included'},
  {s:12,e:13,t:'Lunch: Shigetsu (shojin) or Yoshiya (halal) 🍜',k:'optional',tag:'Optional 🍜',note:'Yoshiya halal sets from ~¥1,350'},
  {s:13.25,e:14,t:'Togetsukyo Bridge + riverside',k:'free',tag:'Core'},
- {s:14.5,e:15.75,t:'Kinkaku-ji (Golden Pavilion)',k:'paid',tag:'¥ At door',note:'¥500 · taxi hop from Arashiyama'},
+ {s:14.5,e:15.75,t:'Kinkaku-ji (Golden Pavilion)',k:'paid',tag:'¥ At door',note:'¥500 · taxi/Randen hop from Arashiyama'},
  {s:16,e:17,t:'Sagano Romantic Train (Torokko)',k:'optional',tag:'Optional — sold out',note:'¥880 · SOLD OUT Dec 5 — only if a cancellation opens 4 seats',soldout:1},
- {s:17.5,e:20.5,t:'teamLab Biovortex Kyoto — 17:30 entry',k:'booked',tag:'🎟 Booked',note:'~¥5,200 Sat band · BOOKED 17:30 · ~3h, closes 21:00'}]},
-{id:'2026-12-06',dow:'Sun',label:'Sun Dec 6',city:'Osaka',ac:'#fb7185',pace:'heavy',paceLabel:'🔥 Heavy',title:'Kyoto → Osaka via Evangelion',sleep:'Osaka · Wolf Pack',total:'~$78 pp (Blake)',range:'kyoto',transport:'Eikan-do ~40 min from Oyado (taxi split 4 ways worth it). Keihan Premium Car south; Yodoyabashi → Daikokucho 4 stops. Bags ship to Yamato Kizuichiba Center pickup (arrive Dec 7).',events:[
- {s:9,e:10.5,t:'Eikan-do (last autumn day)',k:'paid',tag:'¥ At door',note:'¥1,500'},
+ {s:17.5,e:20.5,t:'teamLab Biovortex Kyoto — 17:30 entry',k:'booked',tag:'🎟 Booked',note:'~¥5,200 Sat band · BOOKED 17:30 · ~3h, closes 21:00 · 7m walk from Kyoto Station'},
+ {s:20.6,e:21,t:'JR Sagano direct: Kyoto → Nijo',k:'paid',tag:'🚆 Transit',note:'~6m direct + 5m walk · ¥190 pp · Suica/IC'}]},
+{id:'2026-12-06',dow:'Sun',label:'Sun Dec 6',city:'Osaka',ac:'#fb7185',pace:'heavy',paceLabel:'🔥 Heavy',title:'Kyoto → Osaka via Evangelion',sleep:'Osaka · Wolf Pack',total:'~$78 pp (Blake)',range:'kyoto',transport:'Subway Tozai direct Nijo → Keage (~12 min, ¥260) + 10 min walk to Eikan-do (or 4-way taxi). Keihan Premium Car south via Hirakata; Yodoyabashi → Daikokucho 4 Midosuji stops. Bags ship to Yamato Kizuichiba Center pickup (arrive Dec 7).',events:[
+ {s:8.25,e:8.9,t:'Subway Tozai: Nijo → Keage (Eikan-do)',k:'paid',tag:'🚆 Transit',note:'~12m direct + 10m walk · ¥260 pp · Suica/IC (or 4-way taxi ~¥2,000)'},
+ {s:9,e:10.5,t:'Eikan-do (last autumn day)',k:'paid',tag:'¥ At door',note:'¥1,500 · bags shipped ahead from Yamato near Nijo'},
  {s:10.75,e:12,t:'Nanzen-ji + aqueduct + Philosopher\u2019s Path',k:'free',tag:'Free'},
- {s:12.5,e:13.25,t:'Keihan Premium Car to Hirakata',k:'paid',tag:'¥ Paid',note:'+¥400–500 supplement'},
+ {s:12.5,e:13.25,t:'Keihan Premium Car: Sanjo/Demachiyanagi → Hirakata',k:'paid',tag:'🚆 Book',note:'BOOK AHEAD (Keihan / station) · ~¥420 fare + ¥400–500 Premium seat = ~¥820–920 pp'},
  {s:13.5,e:15,t:'ALL OF EVANGELION exhibition',k:'paid',tag:'¥ Paid',note:'¥2,400 door / ¥2,200 advance · friend\u2019s pick · last day before Dec 7–11 closure'},
- {s:15.25,e:16.25,t:'Blake instead: Osaka Science Museum + planetarium',k:'paid',tag:'¥ Book Nov 29',note:'Runs parallel — Blake splits from the group · ¥400 + ¥600 · planetarium tickets on sale 7 days ahead, buy morning of Nov 29'},
- {s:16.5,e:17.25,t:'Check in: Wolf Pack Apartment 1001',k:'free',tag:'Stay',note:'~16:30 · Daikokucho'},
+ {s:15.1,e:16.25,t:'Keihan + Midosuji: Hirakata → Daikokucho',k:'paid',tag:'🚆 Transit',note:'~45m via Yodoyabashi · ~¥600 pp · Suica/IC (Blake: Science Museum + Planetarium in parallel, ¥1,000, book Nov 29)'},
+ {s:16.5,e:17.25,t:'Check in: Wolf Pack Apartment 1001',k:'free',tag:'Stay',note:'5 nights (Dec 6–11) · ~16:30 · Daikokucho · BOOKED'},
  {s:17.5,e:19,t:'Dotonbori / Shinsaibashi night',k:'free',tag:'Must-do'},
  {s:19.25,e:19.75,t:'Tombori River Cruise',k:'paid',tag:'¥ Paid',note:'¥2,000 · 20-min boat · evening boats fill first'},
  {s:20,e:21,t:'Louis Vuitton Maison Osaka + Le Café V',k:'optional',tag:'Optional',note:'2nd chance if Ginza was missed Nov 28'}]},
-{id:'2026-12-07',dow:'Mon',label:'Mon Dec 7',city:'Osaka',ac:'#fbbf24',pace:'medium',paceLabel:'⚡ Medium',title:'Osaka Castle, markets & Round1',sleep:'Osaka · Wolf Pack',total:'~$45 pp',range:'kyoto',transport:'All local from Daikokucho. Castle ~20 min via Hommachi. Morning errand: pick up shipped bags at Yamato Kizuichiba Center (~10-min walk, passport + waybill).',events:[
- {s:9,e:9.75,t:'Pick up bags — Yamato Kizuichiba Center',k:'free',tag:'Errand',note:'~10-min walk · passport + waybill'},
+{id:'2026-12-07',dow:'Mon',label:'Mon Dec 7',city:'Osaka',ac:'#fbbf24',pace:'medium',paceLabel:'⚡ Medium',title:'Osaka Castle, markets & Round1',sleep:'Osaka · Wolf Pack',total:'~$45 pp',range:'kyoto',transport:'All local from Daikokucho. Castle ~20 min via Hommachi (¥240). Morning errand: pick up shipped bags at Yamato Kizuichiba Center (~10-min walk, passport + waybill).',events:[
+ {s:9,e:9.6,t:'Pick up bags — Yamato Kizuichiba Center',k:'free',tag:'Errand',note:'~10-min walk · passport + waybill'},
+ {s:9.65,e:9.95,t:'Midosuji + Chuo: Daikokucho → Osaka Castle',k:'paid',tag:'🚆 Transit',note:'~20m via Hommachi · ¥240 pp · Suica/IC'},
  {s:10,e:12,t:'Osaka Castle (park + museum)',k:'paid',tag:'¥ At door',note:'¥1,200'},
  {s:12.25,e:13.5,t:'Kuromon Market lunch',k:'free',tag:'Must-do'},
  {s:14,e:16,t:'Shinsekai / Tsutenkaku + Den Den Town',k:'free',tag:'Core'},
  {s:18,e:21,t:'Round1 Stadium Sennichimae — Spo-Cha 3h',k:'paid',tag:'¥ At door',note:'~¥2,690 · open 24h, no booking'}]},
-{id:'2026-12-08',dow:'Tue',label:'Tue Dec 8',city:'Nara',ac:'#34d399',pace:'medium',paceLabel:'⚡ Medium',title:'Nara day trip',sleep:'Osaka · Wolf Pack',total:'~$42 pp',range:'kyoto',transport:'Daikokucho → Namba 1 stop, Kintetsu to Nara ~35 min. Aoniyoshi 09:10 outbound is sold out; 17:36 return Twin booths were still open — decision pending.',events:[
- {s:9,e:9.75,t:'Kintetsu limited express to Nara',k:'paid',tag:'¥ Paid',note:'~¥1,130 outbound'},
+{id:'2026-12-08',dow:'Tue',label:'Tue Dec 8',city:'Nara',ac:'#34d399',pace:'medium',paceLabel:'⚡ Medium',title:'Nara day trip',sleep:'Osaka · Wolf Pack',total:'~$42 pp',range:'kyoto',transport:'Daikokucho → Namba 1 stop (¥190), Kintetsu to Nara ~35 min (~¥1,130 ltd exp / ¥680 rapid). Aoniyoshi 09:10 outbound is sold out; 17:36 return Twin booths were still open — decision pending.',events:[
+ {s:9,e:9.75,t:'Kintetsu Limited Express: Namba → Nara',k:'paid',tag:'🚆 Book',note:'BOOK / STATION MACHINE: ~35m · ~¥1,130 pp (¥680 fare + ¥520 ltd exp seat)'},
  {s:10,e:10.5,t:'Nakatanidou mochi-pounding',k:'free',tag:'Core'},
  {s:10.75,e:13,t:'Deer park + Todai-ji / Great Buddha',k:'paid',tag:'¥ At door',note:'Todai-ji ¥800'},
  {s:13.25,e:14.25,t:'Nara Halal Restaurant lunch 🍜',k:'optional',tag:'Optional 🍜',note:'Fully halal · curries/kebabs ~¥2,000 · A5 wagyu ramen ¥4,500 is a splurge, not default'},
  {s:14.5,e:16,t:'Kasuga Taisha',k:'free',tag:'Core'},
- {s:17.6,e:18.25,t:'Aoniyoshi 17:36 return',k:'optional',tag:'Optional',note:'¥1,410 · Twin booths if booked — decision pending'}]},
-{id:'2026-12-09',dow:'Wed',label:'Wed Dec 9',city:'Osaka',ac:'#60a5fa',pace:'medium',paceLabel:'⚡ Medium',title:'Osaka must-dos: aquarium + sky',sleep:'Osaka · Wolf Pack',total:'~$56 pp',range:'kyoto',transport:'Kaiyukan: Daikokucho → Hommachi → Osakako ~30 min. Umeda Sky: Midosuji direct ~12 min to Umeda.',events:[
+ {s:17.6,e:18.35,t:'Return: Aoniyoshi 17:36 or Kintetsu Express → Namba',k:'paid',tag:'🚆 Book',note:'Aoniyoshi ¥1,410 (book Twin booths if open) or regular Kintetsu ~¥680–1,130'}]},
+{id:'2026-12-09',dow:'Wed',label:'Wed Dec 9',city:'Osaka',ac:'#60a5fa',pace:'medium',paceLabel:'⚡ Medium',title:'Osaka must-dos: aquarium + sky',sleep:'Osaka · Wolf Pack',total:'~$56 pp',range:'kyoto',transport:'Kaiyukan: Daikokucho → Hommachi → Osakako ~30 min (¥290). Umeda Sky: Midosuji direct ~12 min to Umeda (¥240).',events:[
+ {s:9.3,e:9.9,t:'Midosuji + Chuo: Daikokucho → Osakako',k:'paid',tag:'🚆 Transit',note:'~30m via Hommachi · ¥290 pp · Suica/IC'},
  {s:10,e:12.5,t:'Kaiyukan Aquarium — 10:00 entry',k:'paid',tag:'¥ Book ahead',note:'~¥2,700 (dynamic to ¥3,200) · date/time e-ticket'},
  {s:12.75,e:13.5,t:'Tempozan Ferris wheel',k:'paid',tag:'¥ At door',note:'¥900 · same complex'},
  {s:14,e:15.5,t:'America-mura',k:'optional',tag:'Optional',note:'If energy holds'},
+ {s:15.6,e:16.1,t:'Midosuji direct → Umeda',k:'paid',tag:'🚆 Transit',note:'~12m · ¥240 pp · Suica/IC'},
  {s:16.25,e:18,t:'Umeda Sky Building — sunset',k:'paid',tag:'¥ At door',note:'¥2,000 · up ~16:15'},
  {s:18.5,e:19.75,t:'Ali\u2019s Kitchen — halal, Bib Gourmand 🍜',k:'optional',tag:'Optional 🍜',note:'Shinsaibashi, on the way back'}]},
-{id:'2026-12-10',dow:'Thu',label:'Thu Dec 10',city:'Himeji',ac:'#facc15',pace:'light',paceLabel:'🔋 Light',title:'Himeji Castle + free evening',sleep:'Osaka · Wolf Pack',total:'~$52 pp',range:'home',transport:'Out ~08:00: Daikokucho → Umeda, JR Special Rapid ~1h to Himeji (¥1,520 each way). Kobe is ~40 min back toward Osaka. Osaka teamLab Botanical was dropped — evening is free for packing.',events:[
- {s:8,e:9.25,t:'JR Special Rapid Osaka → Himeji',k:'paid',tag:'¥ Paid',note:'Part of ~¥3,040 round trip'},
+{id:'2026-12-10',dow:'Thu',label:'Thu Dec 10',city:'Himeji',ac:'#facc15',pace:'light',paceLabel:'🔋 Light',title:'Himeji Castle + free evening',sleep:'Osaka · Wolf Pack',total:'~$52 pp',range:'home',transport:'Out ~08:00: Daikokucho → Umeda (¥240), JR Special Rapid ~1h to Himeji (¥1,520 each way). Kobe is ~40 min back toward Osaka (¥990 Himeji→Sannomiya + ¥420→Osaka). Osaka teamLab Botanical was dropped.',events:[
+ {s:8,e:9.25,t:'Midosuji + JR Special Rapid: Osaka → Himeji',k:'paid',tag:'🚆 Transit',note:'~1h15m total · ¥1,760 pp (¥240 + ¥1,520) · Suica/IC (no booking)'},
  {s:9.25,e:11.5,t:'Himeji Castle',k:'paid',tag:'¥ At door',note:'¥1,000 · Kokoen combo ¥1,050 · 09:15–11:30'},
- {s:13,e:16.5,t:'Kobe add-on: Kitano, Mosque, Meriken Park',k:'optional',tag:'Optional',note:'Only if energy holds · ~¥800 transit · be back ~17:00'},
+ {s:11.75,e:12.85,t:'JR Special Rapid: Himeji → Kobe / Osaka',k:'paid',tag:'🚆 Transit',note:'¥990 to Sannomiya (~40m) or ¥1,520 direct to Osaka (~1h) · Suica/IC'},
+ {s:13,e:16.5,t:'Kobe add-on: Kitano, Mosque, Meriken Park',k:'optional',tag:'Optional',note:'Only if energy holds · +¥420 back to Osaka · be back ~17:00'},
  {s:18,e:20,t:'Free evening — laundry, packing, souvenirs',k:'free',tag:'Core',note:'Osaka teamLab Botanical: DROPPED'}]},
-{id:'2026-12-11',dow:'Fri',label:'Fri Dec 11',city:'Travel',ac:'#94a3b8',pace:'travel',paceLabel:'✈ Travel',title:'Home — Osaka → Haneda → Chicago',sleep:'Home',total:'~$86 pp',range:'home',transport:'Check out 10:00. Midosuji Daikokucho → Shin-Osaka direct ~25 min, no transfer — with all 6 checked bags. Shinkansen ~12:30 → Shinagawa ~14:45 → Keikyu to Haneda ~15:15 for the ~6 p.m. flight.',events:[
- {s:10,e:10.5,t:'Check out — Wolf Pack',k:'free',tag:'Stay',note:'10:00 checkout'},
- {s:12.5,e:14.75,t:'Shinkansen Shin-Osaka → Shinagawa ~12:30',k:'paid',tag:'¥ Book now',note:'¥12,980 Hayatoku 21 · discount closes Fri Nov 20, 08:30 CST · SmartEX, oversized-bag seats'},
- {s:15,e:15.5,t:'Keikyu Shinagawa → Haneda',k:'paid',tag:'¥ Paid',note:'~¥300'},
- {s:18,e:20,t:'Flight home ~6 p.m.',k:'free',tag:'Departure'}]}
+{id:'2026-12-11',dow:'Fri',label:'Fri Dec 11',city:'Travel',ac:'#94a3b8',pace:'travel',paceLabel:'✈ Travel',title:'Home — Osaka → Haneda → Chicago',sleep:'Home',total:'~$86 pp',range:'home',transport:'Check out 10:00. Midosuji Daikokucho → Shin-Osaka direct ~25 min (¥290), no transfer — with all 6 checked bags. Shinkansen ~12:30 → Shinagawa ~14:45 (¥12,980 Hayatoku 21 via SmartEX) → Keikyu to Haneda ~15:15 (~¥300) for the ~6 p.m. flight.',events:[
+ {s:10,e:10.5,t:'Check out — Wolf Pack Apartment 1001',k:'free',tag:'Stay',note:'10:00 checkout'},
+ {s:10.6,e:11.3,t:'Midosuji direct: Daikokucho → Shin-Osaka',k:'paid',tag:'🚆 Transit',note:'~25m direct, no transfer (all 6 bags) · ¥290 pp · Suica/IC'},
+ {s:12.5,e:14.75,t:'Shinkansen: Shin-Osaka → Shinagawa ~12:30',k:'paid',tag:'🚆 Book',note:'BOOK NOW (SmartEX): ¥12,980 Hayatoku 21 · discount closes Fri Nov 20, 08:30 CST · reserve oversized-bag seats'},
+ {s:15,e:15.5,t:'Keikyu Airport Line: Shinagawa → Haneda',k:'paid',tag:'🚆 Transit',note:'~20m · ~¥300 pp · Suica/IC'},
+ {s:18,e:20,t:'Flight home ~6 p.m.',k:'booked',tag:'🎟 Booked',note:'Haneda → Chicago · flights already booked'}]}
 ];
 var TICKETS=[
  {date:'Sat Nov 28',name:'teamLab Planets, Tokyo',sub:'Evening slot ~19:00 · Toyosu · barefoot, water to knees',price:'¥4,400',status:'booked',label:'🎟 Booked'},
  {date:'Mon Nov 30',name:'Shibuya Sky',sub:'Entry 17:20–17:39 · sunset ~16:28 → blue-hour / night lights · no exit limit · passports required at entry',price:'¥3,400',status:'booked',label:'🎟 Booked'},
  {date:'Tue Dec 1',name:'DisneySea',sub:'Booked for Tue Dec 1 — exactly as planned · 9:00–21:00',price:'¥10,900',status:'booked',label:'🎟 Booked'},
  {date:'Sat Dec 5',name:'teamLab Biovortex, Kyoto',sub:'17:30 entry · 7 min from Kyoto Station · closes 21:00',price:'~¥5,200',status:'booked',label:'🎟 Booked 17:30'},
- {date:'Wed Dec 2',name:'Fuji highway bus',sub:'09:05 Busta Shinjuku → Kawaguchiko · one way',price:'¥2,200',status:'tobook',label:'Book ahead'},
- {date:'Thu Dec 3',name:'Mishima liner + Hikari to Kyoto',sub:'08:55 bus + shinkansen via SmartEX',price:'~¥13,280',status:'tobook',label:'Book ahead'},
- {date:'Thu Dec 3',name:'Samurai & Ninja Museum',sub:'Online beats door price (~¥4,400)',price:'~¥3,300',status:'tobook',label:'Book ahead'},
- {date:'Wed Dec 9',name:'Kaiyukan Aquarium',sub:'10:00 entry · date/time e-ticket, on sale ~30 days ahead',price:'~¥2,700',status:'tobook',label:'Book ahead'},
- {date:'Fri Dec 11',name:'Shinkansen Shin-Osaka → Shinagawa',sub:'Hayatoku 21 discount closes Fri Nov 20, 08:30 CST',price:'¥12,980',status:'tobook',label:'Book now'},
+ {date:'Wed Dec 2',name:'Fuji Highway Bus (Busta Shinjuku → Kawaguchiko)',sub:'Book on Highwaybus.com · 09:05 departure → 11:15 arrival · one way',price:'¥2,200',status:'tobook',label:'Book ahead'},
+ {date:'Thu Dec 3',name:'Mishima Liner Bus + Hikari Shinkansen → Kyoto',sub:'Book 09:05 bus (Fujikyu/Sekisho, ¥2,500) + 11:46 Hikari (SmartEX, ~¥10,780)',price:'~¥13,280',status:'tobook',label:'Book ahead'},
+ {date:'Thu Dec 3',name:'Samurai & Ninja Museum, Kyoto',sub:'Online beats door price (~¥4,400)',price:'~¥3,300',status:'tobook',label:'Book ahead'},
+ {date:'Sun Dec 6',name:'Keihan Premium Car → Hirakata (Evangelion)',sub:'Book online or at Keihan station · ¥420 fare + ¥400–500 reserved seat',price:'~¥820–920',status:'tobook',label:'Book ahead'},
+ {date:'Tue Dec 8',name:'Kintetsu Limited Express (Namba ↔ Nara)',sub:'Book at Kintetsu / station machine · 09:00 out (~¥1,130) + return (Aoniyoshi 17:36 ¥1,410 if Twin open)',price:'~¥2,260–2,540',status:'tobook',label:'Book ahead'},
+ {date:'Wed Dec 9',name:'Kaiyukan Aquarium, Osaka',sub:'10:00 entry · date/time e-ticket, on sale ~30 days ahead',price:'~¥2,700',status:'tobook',label:'Book ahead'},
+ {date:'Fri Dec 11',name:'Shinkansen Shin-Osaka → Shinagawa (~12:30)',sub:'Book via SmartEX · Hayatoku 21 discount closes Fri Nov 20, 08:30 CST · reserve oversized-bag seats',price:'¥12,980',status:'tobook',label:'Book now'},
  {date:'Various',name:'Temples, museums, ropeway, Round1, Umeda Sky, Tombori Cruise, Evangelion…',sub:'Pay at the door / walk-up — see each day for its price',price:'¥400–2,690',status:'door',label:'At door'},
  {date:'Sat Dec 5',name:'Sagano Romantic Train (Torokko)',sub:'Every departure sold out both directions (checked Nov 10)',price:'¥880',status:'soldout',label:'Sold out'},
  {date:'Thu Dec 10',name:'teamLab Botanical Garden, Osaka',sub:'Dropped Nov 15 — final teamLabs are Planets + Biovortex only',price:'¥2,200',status:'dropped',label:'Dropped'}
